@@ -175,7 +175,7 @@ class _ProductListState extends State<ProductList> {
                                       ),
                                       child: DropdownButton(
                                           style: GoogleFonts.oxygen(fontSize: 13, color: AppColor.primary),
-                                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                                          // padding: const EdgeInsets.symmetric(horizontal: 10),
                                           underline: const SizedBox(),
                                           value: dropDown,
                                           isDense: false,

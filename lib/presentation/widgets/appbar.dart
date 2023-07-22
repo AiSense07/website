@@ -207,7 +207,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
                   "Login ",
                   style: GoogleFonts.oxygen(fontSize: 14, fontWeight: FontWeight.w600, color: AppColor.primary),
                 ),
-                const Icon(Icons.person_2_outlined)
+                 Icon(Icons.person_outline_sharp)
               ],
             ),
           ),
