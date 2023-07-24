@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,8 +25,9 @@ class _CommonAppbarState extends State<CommonAppbar> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 0), () {
+      String path = Uri.base.path.split("/").last;
       setState(() {
-        route = Uri.base.path == "/" ? "Home" : Uri.base.path.replaceAll("/", "").replaceAll("%20", " ");
+        route = path == "" ? "Home" : Uri.base.path.replaceAll("%20", " ").replaceAll("/", "");
       });
     });
     super.initState();
@@ -126,7 +129,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
         padding: const EdgeInsets.all(12),
         child: Text(
           text,
-          style: GoogleFonts.oxygen(
+          style: GoogleFonts.poppins(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             color: Colors.white,
@@ -205,9 +208,9 @@ class _CommonAppbarState extends State<CommonAppbar> {
               children: [
                 Text(
                   "Login ",
-                  style: GoogleFonts.oxygen(fontSize: 14, fontWeight: FontWeight.w600, color: AppColor.primary),
+                  style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w600, color: AppColor.primary),
                 ),
-                 Icon(Icons.person_outline_sharp)
+                const Icon(Icons.person_2_outlined)
               ],
             ),
           ),

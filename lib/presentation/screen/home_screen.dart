@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,12 +6,8 @@ import 'package:three_connects/presentation/screen/custom_widgets/home_gridview.
 import 'package:three_connects/presentation/widgets/appbar.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
 import 'package:three_connects/presentation/widgets/footer.dart';
-import 'package:three_connects/presentation/widgets/product_container.dart';
-import 'package:three_connects/presentation/widgets/rating_star.dart';
 import 'package:three_connects/utils/app_image.dart';
-
 import '../../utils/app_color.dart';
-import '../widgets/custom_image.dart';
 import '../widgets/loader/image_loader.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -86,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         _current = index;
                       });
                     }),
-                items: [0, 1, 3].map(
+                items: [0, 1, 2].map(
                   (index) {
                     return Container(
                       margin: const EdgeInsets.only(bottom: 5, right: 15, left: 15),
@@ -145,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(horizontal: sizes(size, 20, 15), vertical: 10),
                 child: Text(
                   "Deals of the week",
-                  style: GoogleFonts.oxygen(fontSize: 22, fontWeight: FontWeight.w700),
+                  style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.w700),
                 ),
               ),
               const HomeGrid()
@@ -178,7 +172,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Subscribe now to stay informed and updated about exclusive offers and new products.",
+                        "Subscribe now to stay informed and updated "
+                        "about exclusive offers and new products.",
                         style: GoogleFonts.poppins(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -203,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   decoration: InputDecoration(
                                     hintText: "Enter your email...",
                                     border: InputBorder.none,
-                                    hintStyle: GoogleFonts.oxygen(color: Colors.white),
+                                    hintStyle: GoogleFonts.poppins(color: Colors.white),
                                     isDense: true,
                                     contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                                   ),
@@ -213,12 +208,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 40,
                               padding: const EdgeInsets.symmetric(horizontal: 10),
                               decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(6),
+                                  bottomRight: Radius.circular(6),
+                                ),
                                 color: Colors.white,
                               ),
                               child: Text(
                                 size.width > 500 ? "Subscribe" : "📨",
-                                style: GoogleFonts.poppins(fontSize: 14, color: AppColor.primary, fontWeight: FontWeight.bold),
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  color: AppColor.primary,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ],
@@ -238,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(horizontal: sizes(size, 20, 15), vertical: 10),
                 child: Text(
                   "New in the shop",
-                  style: GoogleFonts.oxygen(fontSize: 22, fontWeight: FontWeight.w700),
+                  style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.w700),
                 ),
               ),
               const HomeGrid()

@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:number_paginator/number_paginator.dart';
+import 'package:three_connects/presentation/widgets/filter_container.dart';
 import 'package:three_connects/presentation/widgets/footer.dart';
 import 'package:three_connects/presentation/widgets/product_container.dart';
 import 'package:three_connects/utils/app_color.dart';
@@ -19,11 +21,14 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
   String dropDown = "Relevance";
+  final NumberPaginatorController _controller = NumberPaginatorController();
+
+  int initial = 1;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    log("==>> ${size.width}");
+    log("==>>>> ${size.width}");
     return Scaffold(
       body: ListView(
         children: [
@@ -41,77 +46,25 @@ class _ProductListState extends State<ProductList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (size.width > 1000)
-                        SizedBox(
-                          width: 250,
-                          height: 500,
+                        const SizedBox(
+                          width: 230,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Manufacturers",
-                                style: GoogleFonts.oxygen(
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColor.primary,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Container(
-                                width: 250,
-                                height: 1,
-                                color: Colors.black,
-                                margin: const EdgeInsets.only(bottom: 10),
-                              ),
-                              SizedBox(
-                                height: 300,
-                                child: ListView.builder(
-
-                                  itemCount: 15,
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      hoverColor: Colors.transparent,
-                                      splashColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () {},
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(bottom: 5),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 15,
-                                              height: 15,
-                                              margin: const EdgeInsets.only(right: 10),
-                                              decoration: BoxDecoration(
-                                                border: Border.all(color: AppColor.primary),
-                                                borderRadius: BorderRadius.circular(3),
-                                                color: index % 2 == 0 ? AppColor.primary : Colors.transparent,
-                                              ),
-                                            ),
-                                            Text(
-                                              "PLA + ( ${index + 2} )",
-                                              style: GoogleFonts.oxygen(
-                                                color: AppColor.primary,
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
+                              FilterContainer(),
+                              FilterContainer(),
                             ],
                           ),
                         ),
                       SizedBox(
-                        width: contentSize(size, 900, size.width > 1000 ? size.width - 350 : size.width - 30),
+                        width: contentSize(size, 900, size.width > 1000 ? size.width - 300 : size.width - 30),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             if (size.width < 1000)
                               Text(
                                 "${widget.path}: 150 products",
-                                style: GoogleFonts.oxygen(
+                                style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w600,
                                   color: AppColor.primary,
                                   fontSize: 15,
@@ -125,7 +78,7 @@ class _ProductListState extends State<ProductList> {
                                 if (size.width > 1000)
                                   Text(
                                     "${widget.path}: 150 products",
-                                    style: GoogleFonts.oxygen(
+                                    style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w600,
                                       color: AppColor.primary,
                                       fontSize: 15,
@@ -153,7 +106,7 @@ class _ProductListState extends State<ProductList> {
                                           if (size.width > 310)
                                             Text(
                                               "Filter",
-                                              style: GoogleFonts.oxygen(color: AppColor.primary, fontSize: 12),
+                                              style: GoogleFonts.poppins(color: AppColor.primary, fontSize: 12),
                                             ),
                                         ],
                                       ),
@@ -165,7 +118,7 @@ class _ProductListState extends State<ProductList> {
                                     if (size.width > 310)
                                       Text(
                                         "Sort by ",
-                                        style: GoogleFonts.oxygen(color: AppColor.primary, fontSize: 12),
+                                        style: GoogleFonts.poppins(color: AppColor.primary, fontSize: 12),
                                       ),
                                     Container(
                                       height: 40,
@@ -174,8 +127,8 @@ class _ProductListState extends State<ProductList> {
                                         border: Border.all(color: AppColor.primary),
                                       ),
                                       child: DropdownButton(
-                                          style: GoogleFonts.oxygen(fontSize: 13, color: AppColor.primary),
-                                          // padding: const EdgeInsets.symmetric(horizontal: 10),
+                                          style: GoogleFonts.poppins(fontSize: 13, color: AppColor.primary),
+                                          padding: const EdgeInsets.symmetric(horizontal: 10),
                                           underline: const SizedBox(),
                                           value: dropDown,
                                           isDense: false,
@@ -207,10 +160,10 @@ class _ProductListState extends State<ProductList> {
                               color: AppColor.primary,
                               margin: const EdgeInsets.only(top: 10, bottom: 20),
                               height: 1,
-                              width: contentSize(size, 900, size.width > 1000 ? size.width - 280 : size.width - 30),
+                              width: contentSize(size, 900, size.width > 1000 ? size.width - 230 : size.width - 30),
                             ),
                             GridView.builder(
-                              itemCount: 10,
+                              itemCount: 12,
                               padding: EdgeInsets.zero,
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
@@ -221,11 +174,11 @@ class _ProductListState extends State<ProductList> {
                                         ? 2
                                         : 1,
                                 childAspectRatio: size.width > 1250
-                                    ? 0.64
+                                    ? 0.68
                                     : size.width > 1150
-                                        ? size.width * 0.0005
+                                        ? size.width * 0.00052
                                         : size.width > 1000
-                                            ? size.width * 0.000468
+                                            ? size.width * 0.000505
                                             : size.width > 620
                                                 ? size.width * 0.00068
                                                 : size.width > 350
@@ -233,9 +186,25 @@ class _ProductListState extends State<ProductList> {
                                                     : size.width * 0.00194,
                               ),
                               itemBuilder: (context, index) {
-                                return ProductContainer(index: index);
+                                return ProductContainer(index: index, path: widget.path);
                               },
-                            )
+                            ),
+                            Container(
+                              color: AppColor.primary,
+                              margin: const EdgeInsets.only(top: 20, bottom: 20),
+                              height: 1,
+                              width: contentSize(size, 900, size.width > 1000 ? size.width - 230 : size.width - 30),
+                            ),
+                            NumberPaginator(
+                              numberPages: (150 / 12).round(),
+                              controller: _controller,
+                              initialPage: initial,
+                              onPageChange: (int index) {
+                                setState(() {
+                                  initial = index;
+                                });
+                              },
+                            ),
                           ],
                         ),
                       ),

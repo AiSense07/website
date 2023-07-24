@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:three_connects/presentation/widgets/custom_btn.dart';
 import 'package:three_connects/utils/app_color.dart';
 
 import '../../widgets/custom_widgets.dart';
@@ -59,43 +60,31 @@ class _HomeGridState extends State<HomeGrid> {
               crossAxisSpacing: 20,
             ),
             itemBuilder: (context, index) {
-              return ProductContainer(index: index);
+              return ProductContainer(index: index, path: '');
             },
           ),
           if (!isMax)
             Align(
               alignment: Alignment.centerRight,
-              child: InkWell(
-                hoverColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () {
-                  setState(() {
-                    scroll += size.width > 640 ? 630 : 315;
-                  });
-                  controller.animateTo(
-                    scroll,
-                    duration: const Duration(milliseconds: 350),
-                    curve: Curves.linear,
-                  );
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(right: 15),
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.primary),
-                  width: 50,
-                  height: 50,
-                  child: const Icon(Icons.arrow_forward_ios_outlined, color: Colors.white),
-                ),
-              ),
+              child: SlidingBtn(
+                  size: size,
+                  onTap: () {
+                    setState(() {
+                      scroll += size.width > 640 ? 630 : 315;
+                    });
+                    controller.animateTo(
+                      scroll,
+                      duration: const Duration(milliseconds: 350),
+                      curve: Curves.linear,
+                    );
+                  },
+                  icon: Icons.arrow_forward_ios_rounded),
             ),
           if (!isMin)
             Align(
               alignment: Alignment.centerLeft,
-              child: InkWell(
-                hoverColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
+              child: SlidingBtn(
+                size: size,
                 onTap: () {
                   setState(() {
                     scroll -= size.width > 640 ? 630 : 315;
@@ -106,14 +95,8 @@ class _HomeGridState extends State<HomeGrid> {
                     curve: Curves.linear,
                   );
                 },
-                child: Container(
-                  margin: const EdgeInsets.only(left: 15),
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.primary),
-                  width: 50,
-                  height: 50,
-                  child: const Icon(Icons.arrow_back_ios, color: Colors.white),
-                ),
+                icon: Icons.arrow_back_ios_new,
+                isRight: true,
               ),
             )
         ],

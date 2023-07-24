@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:three_connects/presentation/widgets/rating_star.dart';
@@ -7,8 +8,9 @@ import 'custom_image.dart';
 
 class ProductContainer extends StatefulWidget {
   final int index;
+  final String path;
 
-  const ProductContainer({Key? key, required this.index}) : super(key: key);
+  const ProductContainer({Key? key, required this.index, required this.path}) : super(key: key);
 
   @override
   State<ProductContainer> createState() => _ProductContainerState();
@@ -21,7 +23,9 @@ class _ProductContainerState extends State<ProductContainer> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.beamToNamed("/Home?product=Product-name");
+      },
       onHover: (value) {
         setState(() {
           if (value) {
@@ -45,18 +49,65 @@ class _ProductContainerState extends State<ProductContainer> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            CustomNetworkImage(
-              onTap: () {},
-              src: "https://www.3dnatives.com/en/wp-content/uploads/sites/2/2021/06/filamentcove.jpeg",
-              fit: BoxFit.cover,
-              width: 280,
-              height: 260,
-              placeholder: Image.asset(
-                "assets/sabjiwaala.jpeg",
-                width: 280,
-                height: 260,
-                fit: BoxFit.fill,
-              ),
+            Stack(
+              children: [
+                CustomNetworkImage(
+                  onTap: () {
+                    context.beamToNamed("/Home?product=Product-name");
+                  },
+                  src: "https://www.3dnatives.com/en/wp-content/"
+                      "uploads/sites/2/2021/06/filamentcove.jpeg",
+                  fit: BoxFit.cover,
+                  width: 280,
+                  height: 260,
+                  placeholder: Image.asset(
+                    "assets/sabjiwaala.jpeg",
+                    width: 280,
+                    height: 260,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: InkWell(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    onTap: () {},
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: AppColor.primary,
+                      ),
+                      child: const Icon(Icons.add_shopping_cart, color: Colors.white, size: 16),
+                    ),
+                  ),
+                ),
+                if (widget.index % 3 != 1)
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                      padding: const EdgeInsets.all(2),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: widget.index % 3 == 0 ? Colors.orange : Colors.red),
+                        ),
+                        child: Text(
+                          widget.index % 3 == 0 ? "Bestseller" : "-${widget.index * 3} %",
+                          style: GoogleFonts.poppins(
+                            color: widget.index % 3 == 0 ? Colors.orange : Colors.red,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
             const SizedBox(height: 10),
             Column(
@@ -71,7 +122,7 @@ class _ProductContainerState extends State<ProductContainer> {
                       child: Text(
                         "3.5 ( ${widget.index} )",
                         maxLines: 1,
-                        style: GoogleFonts.oxygen(
+                        style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w800,
                           fontSize: 13,
                           letterSpacing: 0.7,
@@ -85,7 +136,7 @@ class _ProductContainerState extends State<ProductContainer> {
                   "Company Name big is there",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.oxygen(
+                  style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w700,
                     fontSize: size.width > 615 ? 18 : 16,
                     letterSpacing: 0.7,
@@ -95,7 +146,7 @@ class _ProductContainerState extends State<ProductContainer> {
                   "product small title",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.oxygen(fontSize: 13),
+                  style: GoogleFonts.poppins(fontSize: 13),
                 ),
                 const SizedBox(height: 8),
                 const Text(
@@ -116,7 +167,7 @@ class _ProductContainerState extends State<ProductContainer> {
                       "₹ 1200",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.oxygen(
+                      style: GoogleFonts.poppins(
                         fontWeight: FontWeight.bold,
                         color: AppColor.btnColor,
                         fontSize: size.width > 615 ? 18 : 16,
@@ -127,7 +178,7 @@ class _ProductContainerState extends State<ProductContainer> {
                       "₹ 1350",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.oxygen(
+                      style: GoogleFonts.poppins(
                         color: Colors.black54,
                         fontSize: size.width > 615 ? 15 : 13,
                         decoration: TextDecoration.lineThrough,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 /// Horizontal padding of the whole app
 const double appPaddingX = 10;
 
@@ -28,11 +27,7 @@ pop(BuildContext context) {
 }
 
 void commonToast(BuildContext context, String msg, {Color? color}) {
-  Fluttertoast.showToast(
-      toastLength: Toast.LENGTH_LONG,
-      msg: msg,
-      backgroundColor: color ?? Colors.black,
-      textColor: Colors.white);
+  Fluttertoast.showToast(toastLength: Toast.LENGTH_LONG, msg: msg, backgroundColor: color ?? Colors.black, textColor: Colors.white);
 }
 
 void logLongString(String s) {
@@ -48,8 +43,7 @@ void logLongString(String s) {
   }
 }
 
-double responsivePaddingWidth(
-    BoxConstraints constraints, BuildContext context) {
+double responsivePaddingWidth(BoxConstraints constraints, BuildContext context) {
   if (constraints.maxWidth <= 500) {
     return appPaddingX;
   } else {
@@ -57,8 +51,7 @@ double responsivePaddingWidth(
   }
 }
 
-double responsivePaddingWidthAppBar(
-    BoxConstraints constraints, BuildContext context) {
+double responsivePaddingWidthAppBar(BoxConstraints constraints, BuildContext context) {
   if (constraints.maxWidth <= 500) {
     return appPaddingX;
   } else {
@@ -66,8 +59,7 @@ double responsivePaddingWidthAppBar(
   }
 }
 
-double responsivePaddingWidthForCategory(
-    BoxConstraints constraints, BuildContext context) {
+double responsivePaddingWidthForCategory(BoxConstraints constraints, BuildContext context) {
   if (constraints.maxWidth <= 500) {
     return appPaddingX;
   } else {
@@ -75,8 +67,7 @@ double responsivePaddingWidthForCategory(
   }
 }
 
-double responsivePaddingWidthForSafety(
-    BoxConstraints constraints, BuildContext context) {
+double responsivePaddingWidthForSafety(BoxConstraints constraints, BuildContext context) {
   if (constraints.maxWidth <= 500) {
     return appPaddingX;
   } else {
@@ -96,3 +87,12 @@ double footerHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
+List<String> images = [
+  "https://c-3d.niceshops.com/upload/image/product/large/default/6766_771aaeea.512x512.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/6767_800196d5.512x512.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/6814_561c87b7.512x512.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/6815_05ede6bb.512x512.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/6816_4d3d1b4a.512x512.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/6817_ffa0f748.512x512.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/6892_220548d6.512x512.jpg"
+];
