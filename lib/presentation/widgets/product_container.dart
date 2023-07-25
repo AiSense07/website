@@ -30,7 +30,7 @@ class _ProductContainerState extends State<ProductContainer> {
     Size size = MediaQuery.of(context).size;
     return CustomInkWell(
       onTap: () {
-        context.beamToNamed("/Home?product=Product-name");
+        context.beamToNamed("/Filaments?product=Product-name");
       },
       onHover: (value) {
         setState(() {
