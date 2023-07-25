@@ -36,7 +36,6 @@ class Texts {
           color: color,
           fontWeight: fontWeight,
           fontSize: 13,
-          letterSpacing: 0.7,
         ),
       );
 
@@ -58,7 +57,7 @@ class Texts {
         ),
       );
 
-  static big24Text({
+  static big26Text({
     required String text,
     FontWeight? fontWeight,
     int? maxLine,
@@ -72,7 +71,7 @@ class Texts {
           color: color,
           height: 1,
           fontWeight: fontWeight,
-          fontSize: 24,
+          fontSize: 26,
           letterSpacing: 0.7,
         ),
       );

@@ -92,9 +92,9 @@ class _CommonAppbarState extends State<CommonAppbar> {
             scrollDirection: Axis.horizontal,
             children: [
               textButton(page: "/", text: "Home"),
-              textButton(page: Routes.spare, text: "Spare Parts & Accessories"),
+              textButton(page: Routes.parts, text: "3d Printed Models"),
               textButton(page: Routes.filament, text: "Filaments"),
-              textButton(page: Routes.nozzles, text: "Nozzles"),
+              textButton(page: Routes.spare, text: "Spare Parts & Accessories"),
               textButton(page: Routes.design, text: "Design"),
             ],
           ),

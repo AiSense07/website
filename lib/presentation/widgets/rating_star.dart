@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:three_connects/utils/app_color.dart';
 
 class RatingStar extends StatelessWidget {
   final double rating;
@@ -8,6 +9,7 @@ class RatingStar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         star(index: 1),
         star(index: 2),
@@ -25,7 +27,7 @@ class RatingStar extends StatelessWidget {
           : rating > (index - 1)
               ? Icons.star_half
               : Icons.star_border,
-      color: Colors.yellow.shade600,
+      color: AppColor.btnColor,
       size: 18,
     );
   }

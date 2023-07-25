@@ -10,7 +10,11 @@ class ProductContainer extends StatefulWidget {
   final int index;
   final String path;
 
-  const ProductContainer({Key? key, required this.index, required this.path}) : super(key: key);
+  const ProductContainer({
+    Key? key,
+    required this.index,
+    required this.path,
+  }) : super(key: key);
 
   @override
   State<ProductContainer> createState() => _ProductContainerState();
@@ -24,7 +28,7 @@ class _ProductContainerState extends State<ProductContainer> {
     Size size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
-        context.beamToNamed("/Home?product=Product-name");
+        context.beamToNamed("/Filaments?product=Product-name");
       },
       onHover: (value) {
         setState(() {
