@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:three_connects/utils/app_color.dart';
 
 class Texts {
   static commonText({
@@ -14,7 +15,7 @@ class Texts {
         maxLines: maxLine,
         overflow: TextOverflow.ellipsis,
         style: GoogleFonts.poppins(
-          color: color,
+          color: color ?? AppColor.primary,
           fontWeight: fontWeight,
           fontSize: size.width > 615 ? 15 : 15,
           letterSpacing: 0.7,
@@ -26,22 +27,27 @@ class Texts {
     required String text,
     FontWeight? fontWeight,
     int? maxLine,
+    double? fontSize,
+    double? height,
     Color? color,
   }) =>
       Text(
         text,
         maxLines: maxLine,
         overflow: TextOverflow.ellipsis,
-        style: GoogleFonts.poppins(
-          color: color,
+        style: TextStyle(
+          fontFamily: "oxy",
+          color: color ?? AppColor.primary,
           fontWeight: fontWeight,
-          fontSize: 13,
-          letterSpacing: 0.7,
+          fontSize: fontSize ?? 13,
+          height: height,
         ),
       );
 
   static headingText({
     required String text,
+    double? fontSize,
+    String? fontFamily,
     FontWeight? fontWeight,
     int? maxLine,
     Color? color,
@@ -50,16 +56,18 @@ class Texts {
         text,
         maxLines: maxLine,
         overflow: TextOverflow.ellipsis,
-        style: GoogleFonts.poppins(
-          color: color,
+        style: TextStyle(
+          fontFamily: fontFamily ?? "pts",
+          color: color ?? AppColor.primary,
           fontWeight: fontWeight,
-          fontSize: 18,
-          letterSpacing: 0.7,
+          fontSize: fontSize ?? 18,
+          height: 1.1,
         ),
       );
 
-  static big24Text({
+  static big26Text({
     required String text,
+    String? fontFamily,
     FontWeight? fontWeight,
     int? maxLine,
     Color? color,
@@ -68,12 +76,12 @@ class Texts {
         text,
         maxLines: maxLine,
         overflow: TextOverflow.ellipsis,
-        style: GoogleFonts.poppins(
-          color: color,
+        style: TextStyle(
+          fontFamily: fontFamily ?? "pts",
+          color: color ?? AppColor.primary,
           height: 1,
           fontWeight: fontWeight,
-          fontSize: 24,
-          letterSpacing: 0.7,
+          fontSize: 26,
         ),
       );
 }

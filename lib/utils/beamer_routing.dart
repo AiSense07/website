@@ -17,9 +17,9 @@ final routerDelegate = BeamerDelegate(
             Routes.filament,
             const ProductList(path: Routes.filament),
           ),
-      '/${Routes.nozzles}': (context, state, data) => beamPage(
-            Routes.nozzles,
-            const ProductList(path: Routes.nozzles),
+      '/${Routes.parts}': (context, state, data) => beamPage(
+            Routes.parts,
+            const ProductList(path: Routes.parts),
           ),
       '/${Routes.design}': (context, state, data) => beamPage(
             Routes.design,
@@ -42,3 +42,21 @@ BeamPage beamPage(String path, Widget page) {
     child: page,
   );
 }
+/*
+      '/${Routes.design}?product=id': (context, state, data) => beamPage(
+            Routes.design,
+            ProductScreen(productId: state.queryParameters['product'] ?? ""),
+          ),
+      '/${Routes.spare}?product=id': (context, state, data) => beamPage(
+        Routes.spare,
+        ProductScreen(productId: state.queryParameters['product'] ?? ""),
+      ),
+      '/${Routes.filament}?product=id': (context, state, data) => beamPage(
+        Routes.filament,
+        ProductScreen(productId: state.queryParameters['product'] ?? ""),
+      ),
+      '/${Routes.parts}?product=id': (context, state, data) => beamPage(
+        Routes.parts,
+        ProductScreen(productId: state.queryParameters['product'] ?? ""),
+      ),
+ */

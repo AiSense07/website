@@ -1,14 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_network/image_network.dart';
 import 'package:three_connects/presentation/screen/custom_widgets/home_gridview.dart';
 import 'package:three_connects/presentation/widgets/appbar.dart';
+import 'package:three_connects/presentation/widgets/cached_imge.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
 import 'package:three_connects/presentation/widgets/footer.dart';
 import 'package:three_connects/utils/app_image.dart';
 import '../../utils/app_color.dart';
-import '../widgets/loader/image_loader.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -86,17 +85,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: const EdgeInsets.only(bottom: 5, right: 15, left: 15),
                       width: size.width,
                       color: AppColor.background,
-                      child: ImageNetwork(
-                        fitWeb: BoxFitWeb.cover,
+                      child: CacheImage(
                         height: sizes(size, 500, size.width * 0.7),
                         width: size.width,
-                        image: "https://www.3dnatives.com/en/wp-content/uploads/sites/2/2021/06/filamentcove.jpeg",
-                        onLoading: ImageLoader(
-                          height: sizes(size, 500, size.width * 0.7),
-                          width: size.width,
-                          radius: 15,
-                        ),
-                        onError: const Icon(Icons.image_not_supported_outlined),
+                        img: "https://www.3dnatives.com/en/wp-content/uploads/"
+                            "sites/2/2021/06/filamentcove.jpeg",
                       ),
                     );
                   },

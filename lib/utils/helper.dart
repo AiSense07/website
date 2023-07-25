@@ -96,3 +96,20 @@ List<String> images = [
   "https://c-3d.niceshops.com/upload/image/product/large/default/6817_ffa0f748.512x512.jpg",
   "https://c-3d.niceshops.com/upload/image/product/large/default/6892_220548d6.512x512.jpg"
 ];
+List<String> color = [
+  "https://c-3d.niceshops.com/upload/image/product/original/default/19880_5d4ec8b0.128x128.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/19863_61946e10.128x128.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/28238_220097ca.128x128.webp",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/28235_b8c757bd.128x128.webp",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/28237_73d895c4.128x128.webp",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/28239_d6c7619d.128x128.webp",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/19855_a4dbfd73.128x128.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/28240_e2139371.128x128.webp",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/28232_6bf67e72.128x128.webp",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/19872_37a1d15d.128x128.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/28080_5d65a09c.128x128.png",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/19884_5789b194.128x128.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/19876_7c3d94fa.128x128.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/21693_66aea7ae.128x128.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/original/default/23619_411f64e4.128x128.jpg",
+];

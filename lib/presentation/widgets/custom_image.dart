@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_network/image_network.dart';
-
-import 'loader/image_loader.dart';
+import 'package:three_connects/presentation/widgets/cached_imge.dart';
 
 class CustomNetworkImage extends StatelessWidget {
   const CustomNetworkImage({
@@ -10,12 +8,11 @@ class CustomNetworkImage extends StatelessWidget {
     required this.width,
     required this.height,
     this.fit = BoxFit.cover,
-    this.placeholder, this.onTap,
+    this.placeholder,
   }) : super(key: key);
   final String src;
   final BoxFit fit;
   final Widget? placeholder;
-  final Function? onTap;
   final double width, height;
 
   @override
@@ -29,18 +26,11 @@ class CustomNetworkImage extends StatelessWidget {
                 width: width,
                 height: height,
               )
-          : ImageNetwork(
-              onTap: () {
-                if (onTap != null) {
-                  onTap!();
-                }
-              },
-              fitWeb: BoxFitWeb.cover,
+          : CacheImage(
+              img: src,
               height: height,
               width: width,
-              image: src,
-              onLoading: ImageLoader(height: height, width: width, radius: 15),
-              onError: placeholder ?? Image.asset("assets/placeholder2.jpeg"),
+              error: placeholder ?? Image.asset("assets/placeholder2.jpeg"),
             ),
     );
   }

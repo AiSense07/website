@@ -1,16 +1,22 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/presentation/widgets/rating_star.dart';
 
 import '../../utils/app_color.dart';
 import 'custom_image.dart';
+import 'custom_widgets.dart';
 
 class ProductContainer extends StatefulWidget {
   final int index;
   final String path;
 
-  const ProductContainer({Key? key, required this.index, required this.path}) : super(key: key);
+  const ProductContainer({
+    Key? key,
+    required this.index,
+    required this.path,
+  }) : super(key: key);
 
   @override
   State<ProductContainer> createState() => _ProductContainerState();
@@ -22,7 +28,7 @@ class _ProductContainerState extends State<ProductContainer> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return InkWell(
+    return CustomInkWell(
       onTap: () {
         context.beamToNamed("/Home?product=Product-name");
       },
@@ -35,9 +41,6 @@ class _ProductContainerState extends State<ProductContainer> {
           }
         });
       },
-      highlightColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      hoverColor: Colors.transparent,
       child: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(12),
@@ -52,9 +55,6 @@ class _ProductContainerState extends State<ProductContainer> {
             Stack(
               children: [
                 CustomNetworkImage(
-                  onTap: () {
-                    context.beamToNamed("/Home?product=Product-name");
-                  },
                   src: "https://www.3dnatives.com/en/wp-content/"
                       "uploads/sites/2/2021/06/filamentcove.jpeg",
                   fit: BoxFit.cover,
@@ -69,10 +69,7 @@ class _ProductContainerState extends State<ProductContainer> {
                 ),
                 Align(
                   alignment: Alignment.topRight,
-                  child: InkWell(
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
+                  child: CustomInkWell(
                     onTap: () {},
                     child: Container(
                       margin: const EdgeInsets.all(5),
@@ -97,13 +94,8 @@ class _ProductContainerState extends State<ProductContainer> {
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(color: widget.index % 3 == 0 ? Colors.orange : Colors.red),
                         ),
-                        child: Text(
-                          widget.index % 3 == 0 ? "Bestseller" : "-${widget.index * 3} %",
-                          style: GoogleFonts.poppins(
-                            color: widget.index % 3 == 0 ? Colors.orange : Colors.red,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        child: Texts.small13Text(
+                            size: size, text: widget.index % 3 == 0 ? "Bestseller" : "-${widget.index * 3} %", color: widget.index % 3 == 0 ? Colors.orange : Colors.red, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -119,28 +111,19 @@ class _ProductContainerState extends State<ProductContainer> {
                     const SizedBox(width: 7),
                     SizedBox(
                       width: size.width > 380 ? null : size.width * 0.1,
-                      child: Text(
-                        "3.5 ( ${widget.index} )",
-                        maxLines: 1,
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 13,
-                          letterSpacing: 0.7,
-                        ),
+                      child: Texts.small13Text(
+                        size: size,
+                        text: "3.5 ( ${widget.index} )",
+                        fontWeight: FontWeight.w800,
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 5),
-                Text(
-                  "Company Name big is there",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w700,
-                    fontSize: size.width > 615 ? 18 : 16,
-                    letterSpacing: 0.7,
-                  ),
+                Texts.headingText(
+                  text: "Company Name big is there",
+                  fontWeight: FontWeight.w700,
+                  fontSize: size.width > 615 ? 22 : 19,
                 ),
                 Text(
                   "product small title",
@@ -149,36 +132,30 @@ class _ProductContainerState extends State<ProductContainer> {
                   style: GoogleFonts.poppins(fontSize: 13),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Product full description with all details of products and customer can easily understand',
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 13,
-                    letterSpacing: 0.7,
-                  ),
-                ),
+                Texts.small13Text(
+                    size: size,
+                    text: "Product full description with all details of "
+                        "products and customer can easily understand",
+                    maxLine: 3,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w800),
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Text(
-                      "₹ 1200",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.poppins(
+                    Texts.headingText(
+                      text: "₹ 1200",
+                        fontFamily: "oxy",
                         fontWeight: FontWeight.bold,
                         color: AppColor.btnColor,
                         fontSize: size.width > 615 ? 18 : 16,
-                      ),
                     ),
                     const SizedBox(width: 5),
                     Text(
                       "₹ 1350",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.poppins(
+                      style: TextStyle(
+                        fontFamily: "oxy",
                         color: Colors.black54,
                         fontSize: size.width > 615 ? 15 : 13,
                         decoration: TextDecoration.lineThrough,

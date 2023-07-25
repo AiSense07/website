@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -88,13 +86,14 @@ class _CommonAppbarState extends State<CommonAppbar> {
             color: AppColor.primary,
           ),
           child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 10),
             scrollDirection: Axis.horizontal,
             children: [
               textButton(page: "/", text: "Home"),
-              textButton(page: Routes.spare, text: "Spare Parts & Accessories"),
+              textButton(page: Routes.parts, text: "3d Printed Models"),
               textButton(page: Routes.filament, text: "Filaments"),
-              textButton(page: Routes.nozzles, text: "Nozzles"),
+              textButton(page: Routes.spare, text: "Spare Parts & Accessories"),
               textButton(page: Routes.design, text: "Design"),
             ],
           ),
@@ -129,7 +128,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
         padding: const EdgeInsets.all(12),
         child: Text(
           text,
-          style: GoogleFonts.poppins(
+          style: GoogleFonts.oxygen(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             color: Colors.white,
@@ -208,7 +207,11 @@ class _CommonAppbarState extends State<CommonAppbar> {
               children: [
                 Text(
                   "Login ",
-                  style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w600, color: AppColor.primary),
+                  style: GoogleFonts.oxygen(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: AppColor.primary,
+                  ),
                 ),
                 const Icon(Icons.person_2_outlined)
               ],
