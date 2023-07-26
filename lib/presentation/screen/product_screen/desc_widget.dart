@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:three_connects/presentation/screen/product_screen/widgtes/color_container.dart';
 import 'package:three_connects/presentation/widgets/custom_btn.dart';
@@ -18,6 +19,8 @@ class DescWidget extends StatefulWidget {
 
 class _DescWidgetState extends State<DescWidget> {
   bool isExpand = false;
+  bool isMaxError = false;
+  bool isFav = false;
   ScrollController controller = ScrollController();
   TextEditingController count = TextEditingController(text: "1");
   int counts = 1;
@@ -176,7 +179,7 @@ class _DescWidgetState extends State<DescWidget> {
                   style: TextStyle(
                     fontFamily: "oxy",
                     fontWeight: FontWeight.w100,
-                    color: AppColor.primary.withOpacity(0.5),
+                    color: AppColor.primary.withOpacity(0.8),
                     fontSize: 16,
                   ),
                 )
@@ -193,6 +196,9 @@ class _DescWidgetState extends State<DescWidget> {
                       setState(() {
                         count.text = (counts - 1).toString();
                         counts--;
+                        if (isMaxError) {
+                          isMaxError = false;
+                        }
                       });
                     }
                   },
@@ -215,15 +221,32 @@ class _DescWidgetState extends State<DescWidget> {
                       if (int.parse(count.text) > 100) {
                         counts = 100;
                         count.text = "100";
+                        isMaxError = true;
                       } else if (int.parse(count.text) <= 0) {
-                        counts = 0;
-                        count.text = "0";
+                        counts = 1;
+                        count.text = "1";
                       } else {
                         counts = int.parse(count.text);
                       }
                       focus.unfocus();
                     });
                   },
+                  onSubmitted: (_) {
+                    setState(() {
+                      if (int.parse(count.text) > 100) {
+                        counts = 100;
+                        count.text = "100";
+                        isMaxError = true;
+                      } else if (int.parse(count.text) <= 0) {
+                        counts = 1;
+                        count.text = "1";
+                      } else {
+                        counts = int.parse(count.text);
+                      }
+                      focus.unfocus();
+                    });
+                  },
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     isDense: true,
@@ -238,14 +261,112 @@ class _DescWidgetState extends State<DescWidget> {
                         count.text = (counts + 1).toString();
                         counts++;
                       });
+                      if (isMaxError) {
+                        isMaxError = false;
+                      }
+                    } else {
+                      isMaxError = true;
                     }
                   },
                   icon: Icons.add,
                   isLow: counts >= 100),
             ],
-          )
+          ),
+          if (isMaxError)
+            Container(
+              margin: const EdgeInsets.only(top: 25),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColor.primary),
+                borderRadius: BorderRadius.circular(10),
+                color: const Color(0xFFD7D7F6),
+              ),
+              child: Texts.headingText(
+                  text: "There are only 100 items of this product "
+                      "left in our warehouse. More are on the "
+                      "way! The delivery date could be affected"
+                      " if you order more than this quantity.",
+                  maxLine: 100),
+            ),
+          Row(
+            children: [
+              CustomInkWell(
+                onTap: () {},
+                child: Container(
+                  alignment: Alignment.center,
+                  width: contentSize(size, 500, sizes(size, size.width * 0.35, size.width * 0.5)),
+                  height: 40,
+                  margin: const EdgeInsets.only(top: 10, bottom: 25, right: 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColor.primary,
+                  ),
+                  child: Texts.small13Text(
+                    size: size,
+                    text: "Add to Cart",
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+              CustomInkWell(
+                onTap: () {},
+                onHover: (value) {
+                  setState(() {
+                    isFav = value;
+                  });
+                },
+                child: Container(
+                  height: 40,
+                  width: 40,
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 10, bottom: 25),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: !isFav ? Colors.white : AppColor.primary,
+                    border: Border.all(color: AppColor.primary),
+                  ),
+                  child: Icon(
+                    Icons.favorite_outline,
+                    color: isFav ? Colors.white : AppColor.primary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(15),
+              margin: const EdgeInsets.only(top: 10, bottom: 25),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: const Color(0xFFD7D7F6),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Texts.headingText(
+                    text: "Features & Advantages",
+                    fontWeight: FontWeight.bold,
+                  ),
+                  featuresText(text: "More environmentally friendly", size: size),
+                ],
+              )),
         ],
       ),
+    );
+  }
+
+  featuresText({required String text, required Size size}) {
+    return Row(
+      children: [
+        const Icon(Icons.circle, size: 8, color: AppColor.primary),
+        const SizedBox(width: 8),
+        SizedBox(
+          width: contentSize(size, 500, sizes(size, size.width * 0.35, size.width * 0.5)),
+          child: Texts.headingText(text: text, color: AppColor.primary, fontSize: 16),
+        ),
+      ],
     );
   }
 }

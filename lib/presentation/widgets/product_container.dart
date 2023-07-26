@@ -30,7 +30,7 @@ class _ProductContainerState extends State<ProductContainer> {
     Size size = MediaQuery.of(context).size;
     return CustomInkWell(
       onTap: () {
-        context.beamToNamed("/Filaments?product=Product-name");
+        context.beamToNamed("/Home?product=Product-name");
       },
       onHover: (value) {
         setState(() {
@@ -95,7 +95,11 @@ class _ProductContainerState extends State<ProductContainer> {
                           border: Border.all(color: widget.index % 3 == 0 ? Colors.orange : Colors.red),
                         ),
                         child: Texts.small13Text(
-                            size: size, text: widget.index % 3 == 0 ? "Bestseller" : "-${widget.index * 3} %", color: widget.index % 3 == 0 ? Colors.orange : Colors.red, fontWeight: FontWeight.bold),
+                          size: size,
+                          text: widget.index % 3 == 0 ? "Bestseller" : "-${widget.index * 3} %",
+                          color: widget.index % 3 == 0 ? Colors.orange : Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -144,10 +148,10 @@ class _ProductContainerState extends State<ProductContainer> {
                   children: [
                     Texts.headingText(
                       text: "₹ 1200",
-                        fontFamily: "oxy",
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.btnColor,
-                        fontSize: size.width > 615 ? 18 : 16,
+                      fontFamily: "oxy",
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.btnColor,
+                      fontSize: size.width > 615 ? 18 : 16,
                     ),
                     const SizedBox(width: 5),
                     Text(

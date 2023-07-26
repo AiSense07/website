@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/utils/app_color.dart';
 
 import '../../utils/helper.dart';
@@ -49,18 +49,19 @@ class _FooterBoardState extends State<FooterBoard> {
             horizontal: responsivePaddingWidth(constraints, context),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 50),
-              Center(
-                child: Text(
-                  "Welcome to 3D Connects!",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white,
-                        fontSize: constraints.maxWidth <= 900 ? 25 : 32,
-                      ),
-                ),
+
+              Text(
+                "Welcome to 3D Connects!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "oxy",
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: constraints.maxWidth <= 900 ? 25 : 32,
+                    ),
               ),
               const SizedBox(height: 15),
               Padding(
@@ -72,14 +73,18 @@ class _FooterBoardState extends State<FooterBoard> {
                             : MediaQuery.of(context).size.width * 0.1),
                 child: Text(
                   "We take pride in offering"
-                  " a wide range of top-notch 3D printer parts, "
-                  "carefully selected to meet the needs of both "
-                  "professionals and hobbyists. Our extensive collection "
-                  "includes everything from essential components to "
-                  "upgrade kits, ensuring you have the tools necessary to"
-                  " bring your creative ideas to life.",
+                      " a wide range of top-notch 3D printer parts, "
+                      "carefully selected to meet the needs of both "
+                      "professionals and hobbyists. Our extensive collection "
+                      "includes everything from essential components to "
+                      "upgrade kits, ensuring you have the tools necessary to"
+                      " bring your creative ideas to life.",
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(color: Colors.white, letterSpacing: 1, fontSize: constraints.maxWidth <= 900 ? 12 : 15),
+                  style: TextStyle(
+                    fontFamily:  "oxy",
+                    color: Colors.white70,
+                    fontSize: constraints.maxWidth <= 900 ? 12 : 15,
+                  ),
                 ),
               ),
               const SizedBox(height: 30),
@@ -136,12 +141,23 @@ class _FooterBoardState extends State<FooterBoard> {
                                   children: [
                                     Text(
                                       "3D Connects",
-                                      style: GoogleFonts.poppins(fontWeight: FontWeight.w900, color: Colors.white, fontSize: constraints.maxWidth <= 900 ? 25 : 32),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: "oxy",
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: constraints.maxWidth <= 900 ? 25 : 32,
+                                      ),
                                     ),
                                     const SizedBox(height: 20),
                                     Text(
-                                      "2nd Floor, SBR CV Towers, HUDA Techno Enclave, Madhapur, Hyderabad. 500081. ",
-                                      style: GoogleFonts.poppins(color: Colors.white.withOpacity(0.8), letterSpacing: 1, fontSize: constraints.maxWidth <= 900 ? 13 : 13),
+                                      "2nd Floor, SBR CV Towers, HUDA Techno "
+                                          "Enclave, Madhapur, Hyderabad. 500081. ",
+                                      style: TextStyle(
+                                        fontFamily:  "oxy",
+                                        color: Colors.white70,
+                                        fontSize: constraints.maxWidth <= 900 ? 12 : 15,
+                                      ),
                                     ),
                                     const SizedBox(height: 20),
                                   ],
@@ -153,9 +169,11 @@ class _FooterBoardState extends State<FooterBoard> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    "Company",
-                                    style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                                  Texts.headingText(
+                                   text: "Company",
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
                                   ),
                                   const SizedBox(height: 35),
                                   Column(
@@ -175,7 +193,7 @@ class _FooterBoardState extends State<FooterBoard> {
                                             }
                                           },
                                           onHover: (value) {
-                                            if(value){
+                                            if (value) {
                                               setState(() {
                                                 company = index;
                                               });
@@ -187,7 +205,8 @@ class _FooterBoardState extends State<FooterBoard> {
                                           },
                                           child: Text(
                                             companyFooterList[index],
-                                            style: GoogleFonts.poppins(
+                                            style: TextStyle(
+                                              fontFamily: "oxy",
                                               fontSize: 14,
                                               color: Colors.white.withOpacity(0.8),
                                               decoration: company == index ? TextDecoration.underline : TextDecoration.none,
@@ -206,9 +225,11 @@ class _FooterBoardState extends State<FooterBoard> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    "Informations",
-                                    style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                                  Texts.headingText(
+                                    text: "Information",
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
                                   ),
                                   const SizedBox(height: 35),
                                   Column(
@@ -236,7 +257,7 @@ class _FooterBoardState extends State<FooterBoard> {
                                             }
                                           },
                                           onHover: (value) {
-                                            if(value){
+                                            if (value) {
                                               setState(() {
                                                 info = index;
                                               });
@@ -248,9 +269,9 @@ class _FooterBoardState extends State<FooterBoard> {
                                           },
                                           child: Text(
                                             informationFooterList[index],
-                                            style: GoogleFonts.poppins(
+                                            style: TextStyle(
+                                              fontFamily: "oxy",
                                               fontSize: 14,
-                                              fontWeight: FontWeight.bold,
                                               color: Colors.white.withOpacity(0.8),
                                               decoration: info == index ? TextDecoration.underline : TextDecoration.none,
                                               decorationColor: Colors.white,
@@ -277,17 +298,23 @@ class _FooterBoardState extends State<FooterBoard> {
                                 children: [
                                   Text(
                                     "3D Connects",
-                                    style: GoogleFonts.poppins(fontSize: constraints.maxWidth <= 900 ? 25 : 30, fontWeight: FontWeight.bold, color: Colors.white),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontFamily: "oxy",
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: constraints.maxWidth <= 900 ? 25 : 32,
+                                    ),
                                   ),
                                   const SizedBox(height: 20),
                                   Text(
-                                    "2nd Floor, SBR CV Towers, HUDA Techno Enclave, Madhapur, Hyderabad. 500081. ",
-                                    style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                          letterSpacing: 1,
-                                          fontSize: constraints.maxWidth <= 900 ? 13 : 13,
-                                        ),
+                                    "2nd Floor, SBR CV Towers, HUDA Techno "
+                                        "Enclave, Madhapur, Hyderabad. 500081. ",
+                                    style: TextStyle(
+                                      fontFamily:  "oxy",
+                                      color: Colors.white70,
+                                      fontSize: constraints.maxWidth <= 900 ? 12 : 15,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -299,11 +326,10 @@ class _FooterBoardState extends State<FooterBoard> {
               widget.isHideFooter == true ? const SizedBox(height: 1) : Container(height: 1.5, color: const Color(0xFFEADACE)),
               const SizedBox(height: 5),
               // const Spacer(),
-              Center(
-                child: Text(
-                  "© 2023 3D Connects. All Rights Reserved",
-                  style: GoogleFonts.poppins(color: Colors.white),
-                ),
+              Texts.small13Text(
+                size: MediaQuery.of(context).size,
+               text:  "© 2023 3D Connects. All Rights Reserved",
+                color: Colors.white,
               ),
               // const Spacer(),
             ],
