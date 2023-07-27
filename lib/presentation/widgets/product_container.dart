@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/presentation/widgets/rating_star.dart';
+import 'package:three_connects/utils/helper.dart';
 
 import '../../utils/app_color.dart';
 import 'custom_image.dart';
@@ -55,15 +56,14 @@ class _ProductContainerState extends State<ProductContainer> {
             Stack(
               children: [
                 CustomNetworkImage(
-                  src: "https://www.3dnatives.com/en/wp-content/"
-                      "uploads/sites/2/2021/06/filamentcove.jpeg",
+                  src: product[widget.index],
                   fit: BoxFit.cover,
-                  width: 280,
-                  height: 260,
+                  width: size500(size, 280, 180),
+                  height: size500(size, 260, 150) ,
                   placeholder: Image.asset(
                     "assets/sabjiwaala.jpeg",
-                    width: 280,
-                    height: 260,
+                    width: size500(size, 280, 180),
+                    height: size500(size, 260, 150),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -95,11 +95,11 @@ class _ProductContainerState extends State<ProductContainer> {
                           border: Border.all(color: widget.index % 3 == 0 ? Colors.orange : Colors.red),
                         ),
                         child: Texts.small13Text(
-                          size: size,
-                          text: widget.index % 3 == 0 ? "Bestseller" : "-${widget.index * 3} %",
-                          color: widget.index % 3 == 0 ? Colors.orange : Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            size: size,
+                            text: widget.index % 3 == 0 ? "Bestseller" : "-${widget.index * 3} %",
+                            color: widget.index % 3 == 0 ? Colors.orange : Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: size.width > 500 ? 13 : 10),
                       ),
                     ),
                   ),
@@ -114,7 +114,7 @@ class _ProductContainerState extends State<ProductContainer> {
                     const RatingStar(rating: 3.5),
                     const SizedBox(width: 7),
                     SizedBox(
-                      width: size.width > 380 ? null : size.width * 0.1,
+                      width: size.width > 380 ? null : size.width * 0.15,
                       child: Texts.small13Text(
                         size: size,
                         text: "3.5 ( ${widget.index} )",
@@ -127,13 +127,13 @@ class _ProductContainerState extends State<ProductContainer> {
                 Texts.headingText(
                   text: "Company Name big is there",
                   fontWeight: FontWeight.w700,
-                  fontSize: size.width > 615 ? 22 : 19,
+                  fontSize: size.width > 615 ? 22 : size500(size, 19, 15),
                 ),
-                Text(
-                  "product small title",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.poppins(fontSize: 13),
+                Texts.small13Text(
+                  text: "product small title",
+                  maxLine: 2,
+                  size: size,
+                  fontSize: size500(size, 14, 12)
                 ),
                 const SizedBox(height: 8),
                 Texts.small13Text(
@@ -142,6 +142,7 @@ class _ProductContainerState extends State<ProductContainer> {
                         "products and customer can easily understand",
                     maxLine: 3,
                     color: Colors.black54,
+                    fontSize: size500(size, 13, 10),
                     fontWeight: FontWeight.w800),
                 const SizedBox(height: 8),
                 Row(
@@ -151,7 +152,7 @@ class _ProductContainerState extends State<ProductContainer> {
                       fontFamily: "oxy",
                       fontWeight: FontWeight.bold,
                       color: AppColor.btnColor,
-                      fontSize: size.width > 615 ? 18 : 16,
+                      fontSize: size.width > 615 ? 18 : size500(size, 16, 13),
                     ),
                     const SizedBox(width: 5),
                     Text(
@@ -161,7 +162,7 @@ class _ProductContainerState extends State<ProductContainer> {
                       style: TextStyle(
                         fontFamily: "oxy",
                         color: Colors.black54,
-                        fontSize: size.width > 615 ? 15 : 13,
+                        fontSize: size.width > 615 ? 15 : size500(size, 13, 10),
                         decoration: TextDecoration.lineThrough,
                       ),
                     ),

@@ -91,7 +91,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
             scrollDirection: Axis.horizontal,
             children: [
               textButton(page: "/", text: "Home"),
-              textButton(page: Routes.parts, text: "3d Printed Models"),
+              textButton(page: Routes.parts, text: "3D Printed Models"),
               textButton(page: Routes.filament, text: "Filaments"),
               textButton(page: Routes.spare, text: "Spare Parts & Accessories"),
               textButton(page: Routes.design, text: "Design"),
@@ -128,9 +128,10 @@ class _CommonAppbarState extends State<CommonAppbar> {
         padding: const EdgeInsets.all(12),
         child: Text(
           text,
-          style: GoogleFonts.oxygen(
+          style: const TextStyle(
+            fontFamily: "oxy",
             fontSize: 12,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             color: Colors.white,
           ),
         ),

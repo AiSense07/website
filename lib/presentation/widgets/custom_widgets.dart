@@ -8,6 +8,10 @@ double contentSize(Size size, double size1, double size2) {
   return size.width > 1300 ? size1 : size2;
 }
 
+double size500(Size size, double size1, double size2) {
+  return size.width > 500 ? size1 : size2;
+}
+
 double productCarouselSize(Size size) {
   return contentSize(size, 60, sizes(size, size.width * 0.05, size.width * 0.08));
 }
