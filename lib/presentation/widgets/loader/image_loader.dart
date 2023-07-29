@@ -3,14 +3,14 @@ import 'package:shimmer/shimmer.dart';
 import 'package:three_connects/utils/app_color.dart';
 
 class ImageLoader extends StatelessWidget {
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   final double radius;
 
   const ImageLoader({
     Key? key,
-    required this.height,
-    required this.width,
+     this.height,
+     this.width,
     required this.radius,
   }) : super(key: key);
 

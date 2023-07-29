@@ -7,8 +7,9 @@ import '../../../widgets/custom_widgets.dart';
 class ColorContainer extends StatelessWidget {
   final String img;
   final String? toolTip;
+  final Size size;
 
-  const ColorContainer({Key? key, required this.img, this.toolTip}) : super(key: key);
+  const ColorContainer({Key? key, required this.img, this.toolTip, required this.size}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

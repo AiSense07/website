@@ -31,7 +31,7 @@ class _DescWidgetState extends State<DescWidget> {
     Size size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-      width: contentSize(size, 650, sizes(size, size.width * 0.45, size.width)),
+      width: contentSize(size, 600, sizes(size, size.width * 0.45, size.width)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -103,18 +103,16 @@ class _DescWidgetState extends State<DescWidget> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: size.width > 1300
-                        ? 8
-                        : size.width > 1150
-                            ? 7
-                            : size.width > 950
-                                ? 6
-                                : 5,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
+                    crossAxisCount: size.width > 950 ? 6 : 5,
+                    crossAxisSpacing: size.width > 950 ? 10 : 5,
+                    mainAxisSpacing: size.width > 950 ? 10 : 5,
                   ),
                   itemBuilder: (context, index) {
-                    return ColorContainer(img: color[index], toolTip: "White Marble ${index + 1}");
+                    return ColorContainer(
+                      img: color[index],
+                      toolTip: "White Marble ${index + 1}",
+                      size: size,
+                    );
                   },
                 )
               : SizedBox(
@@ -131,7 +129,10 @@ class _DescWidgetState extends State<DescWidget> {
                       scrollDirection: Axis.horizontal,
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return ColorContainer(img: color[index]);
+                        return ColorContainer(
+                          img: color[index],
+                          size: size,
+                        );
                       },
                     ),
                   ),
@@ -222,7 +223,7 @@ class _DescWidgetState extends State<DescWidget> {
                         counts = 100;
                         count.text = "100";
                         isMaxError = true;
-                      } else if (int.parse(count.text) <= 0) {
+                      } else if (count.text == "" || int.parse(count.text) <= 0) {
                         counts = 1;
                         count.text = "1";
                       } else {
@@ -237,7 +238,7 @@ class _DescWidgetState extends State<DescWidget> {
                         counts = 100;
                         count.text = "100";
                         isMaxError = true;
-                      } else if (int.parse(count.text) <= 0) {
+                      } else if (count.text == "" || int.parse(count.text) <= 0) {
                         counts = 1;
                         count.text = "1";
                       } else {
@@ -294,7 +295,7 @@ class _DescWidgetState extends State<DescWidget> {
                 onTap: () {},
                 child: Container(
                   alignment: Alignment.center,
-                  width: contentSize(size, 500, sizes(size, size.width * 0.35, size.width * 0.5)),
+                  width: contentSize(size, 500, sizes(size, size.width * 0.34, size.width * 0.5)),
                   height: 40,
                   margin: const EdgeInsets.only(top: 10, bottom: 25, right: 15),
                   decoration: BoxDecoration(
@@ -349,7 +350,11 @@ class _DescWidgetState extends State<DescWidget> {
                     text: "Features & Advantages",
                     fontWeight: FontWeight.bold,
                   ),
+                  const SizedBox(height: 8),
                   featuresText(text: "More environmentally friendly", size: size),
+                  featuresText(text: "Easy processing", size: size),
+                  featuresText(text: "Good rigidity", size: size),
+                  featuresText(text: "Good mechanical properties", size: size),
                 ],
               )),
         ],
@@ -359,12 +364,16 @@ class _DescWidgetState extends State<DescWidget> {
 
   featuresText({required String text, required Size size}) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Icon(Icons.circle, size: 8, color: AppColor.primary),
+        const Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: Icon(Icons.circle, size: 8, color: AppColor.primary),
+        ),
         const SizedBox(width: 8),
         SizedBox(
-          width: contentSize(size, 500, sizes(size, size.width * 0.35, size.width * 0.5)),
-          child: Texts.headingText(text: text, color: AppColor.primary, fontSize: 16),
+          width: contentSize(size, 500, sizes(size, size.width * 0.35, size.width * 0.85)),
+          child: Texts.headingText(text: text, color: AppColor.primary, fontSize: 16, maxLine: 10),
         ),
       ],
     );

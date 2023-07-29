@@ -15,6 +15,8 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  final GlobalKey _productDescriptionKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -23,29 +25,33 @@ class _ProductScreenState extends State<ProductScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const CommonAppbar(),
-          const SizedBox(height: 15),
           Expanded(
             child: SingleChildScrollView(
-              child: SizedBox(
-                width: contentSize(size, 1250, size.width),
-                child: size.width > 730
-                    ? const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ImageWidget(),
-                          DescWidget(),
-                        ],
-                      )
-                    : const Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ImageWidget(),
-                          DescWidget(),
-                        ],
-                      ),
+              child: Column(
+                children: [
+                  const CommonAppbar(),
+                  const SizedBox(height: 15),
+                  SizedBox(
+                    width: contentSize(size, 1250, size.width),
+                    child: size.width > 730
+                        ? const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ImageWidget(),
+                              DescWidget(),
+                            ],
+                          )
+                        : const Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ImageWidget(),
+                              DescWidget(),
+                            ],
+                          ),
+                  ),
+                ],
               ),
             ),
           )

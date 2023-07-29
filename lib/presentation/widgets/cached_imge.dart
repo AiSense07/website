@@ -19,14 +19,15 @@ class CacheImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return CachedNetworkImage(
       imageUrl: img,
       height: height,
       width: width,
       fit: BoxFit.cover,
       placeholder: (context, url) => ImageLoader(
-        height: height ?? 50,
-        width: width ?? 50,
+        height: height ?? (size.width > 760 ? 48 : 46),
+        width: width ?? (size.width > 760 ? 48 : 46),
         radius: 5,
       ),
       errorWidget: (context, url, error) => error ?? const Icon(Icons.image_not_supported_outlined),
