@@ -1,14 +1,23 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:three_connects/presentation/screen/home_screen.dart';
 import 'package:three_connects/presentation/screen/product_list_screen.dart';
+import 'package:three_connects/presentation/screen/sign_up_modual/signup_screen.dart';
 import 'package:three_connects/utils/navigation_string.dart';
-import '../presentation/screen/home_screen.dart';
 import '../presentation/screen/product_screen/product_screen.dart';
 
 final routerDelegate = BeamerDelegate(
   locationBuilder: RoutesLocationBuilder(
     routes: {
       '/': (context, state, data) => beamPage("", const HomeScreen()),
+      '/${Routes.login}': (context, state, data) => beamPage(
+            Routes.login,
+            const SignUpScreen(),
+          ),
+      '/${Routes.registration}': (context, state, data) => beamPage(
+            Routes.registration,
+            const SignUpScreen(),
+          ),
       '/${Routes.spare}': (context, state, data) => beamPage(
             Routes.spare,
             const ProductList(path: Routes.spare),

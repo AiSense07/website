@@ -202,7 +202,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onTap: () {
-            push(context, SignUpScreen());
+            context.beamToNamed("/${Routes.login}");
             onTap();
           },
           child: Container(
@@ -225,7 +225,9 @@ class _CommonAppbarState extends State<CommonAppbar> {
             ),
           ),
         ),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_outline)),
+        IconButton(onPressed: () {
+          showAboutDialog(context: context);
+        }, icon: const Icon(Icons.favorite_outline)),
         const SizedBox(width: 8),
         IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart_outlined)),
         const SizedBox(width: 8),

@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_timer_button/otp_timer_button.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:three_connects/presentation/widgets/cached_imge.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
 
 import '../../../utils/app_color.dart';
@@ -60,6 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: AppColor.primary.withOpacity(0.1),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Expanded(
                             flex: 2,
@@ -125,13 +125,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ),
                           ),
-                          constraints.maxWidth < 650
-                              ? Container()
-                              : Expanded(
+                          if(constraints.maxWidth > 650)
+                               Expanded(
                                   flex: 2,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset("assets/login.jpg"),
+                                  child: Container(
+                                    color: Colors.black,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.asset("assets/login.jpg"),
+                                    ),
                                   ),
                                 ),
                         ],
