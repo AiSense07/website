@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:three_connects/presentation/widgets/custom_btn.dart';
 import 'package:three_connects/utils/app_color.dart';
+import 'package:three_connects/utils/helper.dart';
 
 import '../../widgets/custom_widgets.dart';
 import '../../widgets/product_container.dart';
@@ -44,18 +45,19 @@ class _HomeGridState extends State<HomeGrid> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 950,
+      height: size.width > 500 ? 950 : 680,
       width: contentSize(size, 1250, size.width),
       child: Stack(
         children: [
           GridView.builder(
-            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.symmetric(horizontal: size500(size, 25, 15)),
+            physics: const AlwaysScrollableScrollPhysics(),
             controller: controller,
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            itemCount: product.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 1.55,
+              childAspectRatio: size.width > 500 ?1.55 : 1.8,
               mainAxisSpacing: 15,
               crossAxisSpacing: 20,
             ),

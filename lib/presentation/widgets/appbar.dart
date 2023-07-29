@@ -1,8 +1,12 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:three_connects/presentation/screen/sign_up_modual/signup_screen.dart';
+import 'package:three_connects/presentation/widgets/common_text.dart';
+import 'package:three_connects/presentation/widgets/custom_widgets.dart';
 import 'package:three_connects/utils/app_color.dart';
 import 'package:three_connects/utils/app_image.dart';
+import 'package:three_connects/utils/helper.dart';
 import 'package:three_connects/utils/navigation_string.dart';
 
 class CommonAppbar extends StatefulWidget {
@@ -49,7 +53,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-          child: size.width > 750
+          child: size.width > 820
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -91,7 +95,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
             scrollDirection: Axis.horizontal,
             children: [
               textButton(page: "/", text: "Home"),
-              textButton(page: Routes.parts, text: "3d Printed Models"),
+              textButton(page: Routes.parts, text: "3D Printed Models"),
               textButton(page: Routes.filament, text: "Filaments"),
               textButton(page: Routes.spare, text: "Spare Parts & Accessories"),
               textButton(page: Routes.design, text: "Design"),
@@ -128,9 +132,10 @@ class _CommonAppbarState extends State<CommonAppbar> {
         padding: const EdgeInsets.all(12),
         child: Text(
           text,
-          style: GoogleFonts.oxygen(
+          style: const TextStyle(
+            fontFamily: "oxy",
             fontSize: 12,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             color: Colors.white,
           ),
         ),
@@ -197,30 +202,52 @@ class _CommonAppbarState extends State<CommonAppbar> {
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onTap: () {
+            context.beamToNamed("/${Routes.login}");
             onTap();
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             margin: const EdgeInsets.only(right: 8),
             color: Colors.transparent,
-            child: Row(
+            child: const Row(
               children: [
                 Text(
                   "Login ",
-                  style: GoogleFonts.oxygen(
+                  style: TextStyle(
+                    fontFamily: "oxy",
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                     color: AppColor.primary,
                   ),
                 ),
-                const Icon(Icons.person_2_outlined)
+                Icon(Icons.person_2_outlined)
               ],
             ),
           ),
         ),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_outline)),
+        IconButton(onPressed: () {
+          showAboutDialog(context: context);
+        }, icon: const Icon(Icons.favorite_outline)),
         const SizedBox(width: 8),
         IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart_outlined)),
+        const SizedBox(width: 8),
+        CustomInkWell(
+          onTap: () {},
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: AppColor.primary, width: 2),
+              color: const Color(0xFFD7D7F6),
+            ),
+            child: Texts.headingText(
+              text: "+ SELL",
+              color: AppColor.primary,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
       ],
     );
   }

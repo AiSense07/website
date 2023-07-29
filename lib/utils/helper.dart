@@ -15,13 +15,6 @@ pushReplacement(BuildContext context, Widget destination) {
   );
 }
 
-push(BuildContext context, Widget destination) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => destination),
-  );
-}
-
 pop(BuildContext context) {
   Navigator.pop(context);
 }
@@ -95,6 +88,21 @@ List<String> images = [
   "https://c-3d.niceshops.com/upload/image/product/large/default/6816_4d3d1b4a.512x512.jpg",
   "https://c-3d.niceshops.com/upload/image/product/large/default/6817_ffa0f748.512x512.jpg",
   "https://c-3d.niceshops.com/upload/image/product/large/default/6892_220548d6.512x512.jpg"
+];
+List<String> product = [
+  "https://c-3d.niceshops.com/upload/image/product/large/default/23783_.256x256.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/30155_a9ec5c37.256x256.webp",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/4641_bfd3f562.256x256.jpg",
+  "https://c-3d.niceshops.com/upload/image/banner_element/original/default/27499_3943cd44.363x0.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/23996_d99798e7.256x256.jpg",
+  "https://c-3d.niceshops.com/upload/image/banner_element/original/default/22810_b0d71d74.363x0.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/17465_f939d6e4.256x256.jpg",
+  "https://c-3d.niceshops.com/upload/image/product/large/default/8028_e388a5c2.256x256.jpg",
+  "https://danhaive.com/assets/img/05_shoe3.png",
+  "https://prototypeinfo.com/wp-content/uploads/sites/75/2021/07/5-3d-printed-products-qualities-of-3D-printing.jpg",
+  "https://3dprintingindustry.com/wp-content/uploads/2014/11/SUPER3DM_Designed-Products.jpg",
+  "https://images.squarespace-cdn.com/content/v1/54d135aae4b0553df777d404/143205"
+      "2394765-PL9655XZNX0S59LUM1KS/iphone-3d-printed-heels-3.jpg?format=1000w",
 ];
 List<String> color = [
   "https://c-3d.niceshops.com/upload/image/product/original/default/19880_5d4ec8b0.128x128.jpg",
