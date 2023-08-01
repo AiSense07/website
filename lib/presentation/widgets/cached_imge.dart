@@ -30,7 +30,11 @@ class CacheImage extends StatelessWidget {
         width: width ?? (size.width > 760 ? 48 : 46),
         radius: 5,
       ),
-      errorWidget: (context, url, error) => error ?? const Icon(Icons.image_not_supported_outlined),
+      errorWidget: (context, url, error) =>
+          error ??
+          const Icon(
+            Icons.image_not_supported_outlined,
+          ),
     );
   }
 }

@@ -38,418 +38,199 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: size.width <= 700
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {});
-                                },
-                                icon: const Icon(
-                                  Icons.arrow_back_ios_new,
-                                  color: AppColor.primary,
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              const Text(
-                                "Create Account",
-                                style: TextStyle(color: AppColor.primary, letterSpacing: 0, fontSize: 16),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                          textField(
-                            controller: fnameController,
-                            name: "First Name",
-                          ),
-                          textField(
-                            controller: lnameController,
-                            name: "last Name",
-                          ),
-                          textField(
-                            controller: emailController,
-                            name: "Email",
-                          ),
-                          textField(
-                            controller: dobController,
-                            name: "Date of Birth",
-                            onTap: () async {
-                              await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      builder: (context, child) {
-                                        return Theme(
-                                          data: ThemeData.light().copyWith(
-                                            colorScheme: const ColorScheme.light(
-                                                // change the border color
-
-                                                primary: AppColor.primary,
-                                                // change the text color
-                                                onSurface: Colors.black,
-                                                background: Color(0xFFF5F1EE)),
-                                            // button colors
-                                            buttonTheme: const ButtonThemeData(
-                                              colorScheme: ColorScheme.light(
-                                                // change the border color
-
-                                                primary: AppColor.primary,
-                                                // change the text color
-                                                onSurface: Colors.black,
-                                              ),
-                                            ),
-                                          ),
-                                          child: child!,
-                                        );
-                                      },
-                                      firstDate: DateTime.now().subtract(const Duration(days: 27275)),
-                                      lastDate: DateTime.now()) //what will be the up to supported date in picker
-                                  .then((pickedDate) {
-                                //then usually do the future job
-                                if (pickedDate == null) {
-                                  //if user tap cancel then this function will stop
-                                  return;
-                                }
-                                setState(() {
-
-                                  var startdate0 = DateFormat('dd-MM-yyyy').format(pickedDate);
-
-                                  dobController.text = startdate0;
-                                });
-                              });
-                            },
-                          ),
-                          textField(
-                            controller: cityController,
-                            name: "City",
-                          ),
-                          textField(
-                              controller: stateController,
-                              name: "State",
-                              onTap: () {
-                                _showListState(context);
-                              }),
-                          textField(
-                            controller: pincodeController,
-                            name: "Pincode",
-                          ),
-                          const SizedBox(height: 30),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Checkbox(
-                                  value: agreeCheckboxValue,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      agreeCheckboxValue = value ?? false;
-                                    });
-                                  }),
-                              Expanded(
-                                child: Text.rich(TextSpan(children: [
-                                  const TextSpan(
-                                    text: "By signing up you agree our ",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                      text: "Conditions",
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: AppColor.primary,
-                                      ),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          // commonLaunchURL(Uri.parse(
-                                          //     "https://makeupcentral.in/terms-and-conditions.php"));
-                                          // Navigator.pushNamed(context, "/terms-and-conditions");
-                                        }),
-                                  const TextSpan(
-                                    text: " and ",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                      text: " Privacy Policy.",
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: AppColor.primary,
-                                      ),
-                                      recognizer: TapGestureRecognizer()..onTap = () {}),
-                                ])),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Center(
-                            child: InkWell(
-                              onTap: !agreeCheckboxValue
-                                  ? () {
-                                      commonToast(context,
-                                          "You must agree our Terms & Conditions and Privacy Policy before signing up");
-                                    }
-                                  : () {
-                                      if (!_formKey.currentState!.validate()) {
-                                        commonToast(context, "Please fix the errors above!!");
-                                        return;
-                                      }
-
-                                      if (_formKey.currentState!.validate()) {
-                                        EasyLoading.show();
-                                      }
-                                    },
-                              child: Container(
-                                height: 50,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    color: !agreeCheckboxValue ? Colors.grey.shade500 : AppColor.primary,
-                                    borderRadius: const BorderRadius.all(Radius.circular(15))),
-                                child: Center(
-                                  child: Text(
-                                    ("Sign Up"),
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: !agreeCheckboxValue ? Colors.grey.shade300 : Colors.white,
-                                        letterSpacing: 0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 30)
-                        ],
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            width: size.width / 1.5 + 45,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    setState(() {});
-                                  },
-                                  icon: const Icon(
-                                    Icons.arrow_back_ios_new,
-                                    color: AppColor.primary,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                const Text(
-                                  "Create Account",
-                                  style: TextStyle(color: AppColor.primary, letterSpacing: 0, fontSize: 16),
-                                ),
-                              ],
+                          IconButton(
+                            onPressed: () {
+                              setState(() {});
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios_new,
+                              color: AppColor.primary,
                             ),
                           ),
-                          const SizedBox(height: 30),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              textField(
-                                controller: fnameController,
-                                name: "First Name",
-                                width: size.width / 3,
-                              ),
-                              const SizedBox(width: 20),
-                              textField(
-                                controller: lnameController,
-                                name: "last Name",
-                                width: size.width / 3,
-                              ),
-                            ],
+                          const SizedBox(width: 10),
+                          const Text(
+                            "Create Account",
+                            style: TextStyle(color: AppColor.primary, letterSpacing: 0, fontSize: 16),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              textField(
-                                controller: emailController,
-                                name: "Email",
-                                width: size.width / 3,
-                              ),
-                              const SizedBox(width: 20),
-                              textField(
-                                controller: dobController,
-                                name: "Date of Birth",
-                                width: size.width / 3,
-                                onTap: () async {
-                                  await showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                          builder: (context, child) {
-                                            return Theme(
-                                              data: ThemeData.light().copyWith(
-                                                colorScheme: const ColorScheme.light(
-                                                    // change the border color
-
-                                                    primary: AppColor.primary,
-                                                    // change the text color
-                                                    onSurface: Colors.black,
-                                                    background: Color(0xFFF5F1EE)),
-                                                // button colors
-                                                buttonTheme: const ButtonThemeData(
-                                                  colorScheme: ColorScheme.light(
-                                                    // change the border color
-
-                                                    primary: AppColor.primary,
-                                                    // change the text color
-                                                    onSurface: Colors.black,
-                                                  ),
-                                                ),
-                                              ),
-                                              child: child!,
-                                            );
-                                          },
-                                          firstDate: DateTime.now().subtract(const Duration(days: 27275)),
-                                          lastDate: DateTime.now()) //what will be the up to supported date in picker
-                                      .then((pickedDate) {
-                                    //then usually do the future job
-                                    if (pickedDate == null) {
-                                      //if user tap cancel then this function will stop
-                                      return;
-                                    }
-                                    setState(() {
-                                      var startdate = DateFormat('dd-MM-yyyy').format(pickedDate);
-
-                                      dobController.text = startdate;
-                                    });
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              textField(
-                                controller: cityController,
-                                name: "City",
-                                width: size.width / 3,
-                              ),
-                              const SizedBox(width: 20),
-                              textField(
-                                  controller: stateController,
-                                  name: "State",
-                                  width: size.width / 3,
-                                  onTap: () {
-                                    _showListState(context);
-                                  }),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              textField(
-                                controller: pincodeController,
-                                name: "Pincode",
-                                width: size.width / 3,
-                              ),
-                              SizedBox(width: size.width / 3 + 20)
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Checkbox(
-                                  value: agreeCheckboxValue,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      agreeCheckboxValue = value ?? false;
-                                    });
-                                  }),
-                              Text.rich(TextSpan(children: [
-                                const TextSpan(
-                                  text: "By signing up you agree our ",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                TextSpan(
-                                    text: "Conditions",
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: AppColor.primary,
-                                    ),
-                                    recognizer: TapGestureRecognizer()..onTap = () {}),
-                                const TextSpan(
-                                  text: " and ",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                TextSpan(
-                                    text: " Privacy Policy.",
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: AppColor.primary,
-                                    ),
-                                    recognizer: TapGestureRecognizer()..onTap = () {}),
-                              ])),
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomInkWell(
-                                onTap: (){},
-                                child: Container(
-                                  height: 50,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                      color: !agreeCheckboxValue ? Colors.grey.shade500 : AppColor.primary,
-                                      borderRadius: const BorderRadius.all(Radius.circular(15))),
-                                  child: Center(
-                                    child: Text(
-                                      ("Sign Up"),
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: !agreeCheckboxValue ? Colors.grey.shade300 : Colors.white,
-                                          letterSpacing: 0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 30)
                         ],
                       ),
-              ),
-              const SizedBox(
-                height: 450,
-                child: FooterBoard(true),
-              )
-            ],
+                      const SizedBox(height: 30),
+                      textField(
+                        controller: fnameController,
+                        name: "First Name",
+                      ),
+                      textField(
+                        controller: lnameController,
+                        name: "last Name",
+                      ),
+                      textField(
+                        controller: emailController,
+                        name: "Email",
+                      ),
+                      textField(
+                        controller: dobController,
+                        name: "Date of Birth",
+                        onTap: () async {
+                          await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  builder: (context, child) {
+                                    return Theme(
+                                      data: ThemeData.light().copyWith(
+                                        colorScheme: const ColorScheme.light(
+                                            // change the border color
+
+                                            primary: AppColor.primary,
+                                            // change the text color
+                                            onSurface: Colors.black,
+                                            background: Color(0xFFF5F1EE)),
+                                        // button colors
+                                        buttonTheme: const ButtonThemeData(
+                                          colorScheme: ColorScheme.light(
+                                            // change the border color
+
+                                            primary: AppColor.primary,
+                                            // change the text color
+                                            onSurface: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                      child: child!,
+                                    );
+                                  },
+                                  firstDate: DateTime.now().subtract(const Duration(days: 27275)),
+                                  lastDate: DateTime.now()) //what will be the up to supported date in picker
+                              .then((pickedDate) {
+                            //then usually do the future job
+                            if (pickedDate == null) {
+                              //if user tap cancel then this function will stop
+                              return;
+                            }
+                            setState(() {
+                              var startdate0 = DateFormat('dd-MM-yyyy').format(pickedDate);
+
+                              dobController.text = startdate0;
+                            });
+                          });
+                        },
+                      ),
+                      textField(
+                        controller: cityController,
+                        name: "City",
+                      ),
+                      textField(
+                          controller: stateController,
+                          name: "State",
+                          onTap: () {
+                            _showListState(context);
+                          }),
+                      textField(
+                        controller: pincodeController,
+                        name: "Pincode",
+                      ),
+                      const SizedBox(height: 30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Checkbox(
+                              value: agreeCheckboxValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  agreeCheckboxValue = value ?? false;
+                                });
+                              }),
+                          Expanded(
+                            child: Text.rich(TextSpan(children: [
+                              const TextSpan(
+                                text: "By signing up you agree our ",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              TextSpan(
+                                  text: "Conditions",
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: AppColor.primary,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      // commonLaunchURL(Uri.parse(
+                                      //     "https://makeupcentral.in/terms-and-conditions.php"));
+                                      // Navigator.pushNamed(context, "/terms-and-conditions");
+                                    }),
+                              const TextSpan(
+                                text: " and ",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              TextSpan(
+                                  text: " Privacy Policy.",
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: AppColor.primary,
+                                  ),
+                                  recognizer: TapGestureRecognizer()..onTap = () {}),
+                            ])),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Center(
+                        child: InkWell(
+                          onTap: !agreeCheckboxValue
+                              ? () {
+                                  commonToast(context, "You must agree our Terms & Conditions and Privacy Policy before signing up");
+                                }
+                              : () {
+                                  if (!_formKey.currentState!.validate()) {
+                                    commonToast(context, "Please fix the errors above!!");
+                                    return;
+                                  }
+
+                                  if (_formKey.currentState!.validate()) {
+                                    EasyLoading.show();
+                                  }
+                                },
+                          child: Container(
+                            height: 50,
+                            width: 150,
+                            decoration:
+                                BoxDecoration(color: !agreeCheckboxValue ? Colors.grey.shade500 : AppColor.primary, borderRadius: const BorderRadius.all(Radius.circular(15))),
+                            child: Center(
+                              child: Text(
+                                ("Sign Up"),
+                                style: TextStyle(fontSize: 18, color: !agreeCheckboxValue ? Colors.grey.shade300 : Colors.white, letterSpacing: 0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 30)
+                    ],
+                  )
+           ,
           ),
-        ),
+        ],
       ),
     );
   }
@@ -506,13 +287,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   textField(
-      {required TextEditingController controller,
-      String? hint,
-      required String name,
-      TextInputType? keyboard,
-      Function? onTap,
-      double? width,
-      Function(String value)? onChange}) {
+      {required TextEditingController controller, String? hint, required String name, TextInputType? keyboard, Function? onTap, double? width, Function(String value)? onChange}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -613,6 +388,7 @@ class UpperCaseTextFormatter extends TextInputFormatter {
       selection: newValue.selection,
     );
   }
+
   String capitalize(String value) {
     if (value.trim().isEmpty) return "";
     return "${value[0].toUpperCase()}${value.substring(1).toLowerCase()}";

@@ -1,14 +1,14 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_timer_button/otp_timer_button.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:three_connects/presentation/screen/sign_up_modual/register_screen.dart';
+import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
 
 import '../../../utils/app_color.dart';
 import '../../../utils/app_validators.dart';
 import '../../widgets/custom_btn.dart';
-import '../../widgets/footer.dart';
 
 class SignUpScreen extends StatefulWidget {
   final bool isLogout;
@@ -25,6 +25,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool iosOtpSend = false;
 
+  String screen = "Login";
+
   requestOtp() {
     controller.loading();
     Future.delayed(const Duration(seconds: 1), () {
@@ -32,156 +34,148 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
   }
 
-  final _formKey = GlobalKey<FormState>();
   TextEditingController mobile = TextEditingController();
   bool isMobileValid = false;
   bool isOTPScreen = true;
-  FocusNode focusNode = FocusNode();
-  final FocusNode _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.primary.withOpacity(0.1),
-      body: GestureDetector(
-          onDoubleTap: () {},
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return Scaffold(
-                backgroundColor: Colors.white,
-                body: ListView(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(25),
-                      color: AppColor.primary.withOpacity(0.1),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset("assets/logo.png", height: 80),
-                                  const SizedBox(height: 40),
-                                  Row(
-                                    children: [
-                                      if (!isOTPScreen) const SizedBox(width: 5),
-                                      if (!isOTPScreen)
-                                        IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                isOTPScreen = true;
-                                              });
-                                            },
-                                            icon: const Icon(
-                                              Icons.arrow_back_ios_new,
-                                              color: AppColor.primary,
-                                            )),
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(horizontal: isOTPScreen ? 20 : 8),
-                                        child: Text(
-                                          isOTPScreen ? "Welcome!" : "OTP Verification",
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                              color: AppColor.primary,
-                                              letterSpacing: 0),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                                    child: Text(
-                                      isOTPScreen
-                                          ? "Please enter mobile number to Login yourself."
-                                          : "Please enter the OTP received to your mobile number +91 ${mobile.text}",
-                                      textAlign: TextAlign.start,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16,
-                                          color: Colors.black45,
-                                          letterSpacing: 0),
-                                    ),
-                                  ),
-                                  Container(
-                                    // height: isRegisterScreen ? 650 : 250,
-                                    width: 350,
-                                    decoration: const BoxDecoration(color: Colors.transparent),
-                                    child: isOTPScreen ? phoneNumberScreen() : verifyOTPScreen(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          if(constraints.maxWidth > 650)
-                               Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    color: Colors.black,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.asset("assets/login.jpg"),
-                                    ),
-                                  ),
-                                ),
-                        ],
-                      ),
-                    ),
-                    const FooterBoard(true)
-                  ],
+    Size size = MediaQuery.of(context).size;
+    return SizedBox(
+      height: size.height > 450 ? 432 : size.height * 0.7,
+      width: 450,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+        children: [
+          const Text(
+            "Welcome to 3D Connect!",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: AppColor.primary,
+              letterSpacing: 0,
+            ),
+          ),
+          const SizedBox(height: 5),
+          const Text(
+            "We take pride in offering"
+            " a wide range of top-notch 3D printer parts, "
+            "carefully selected to meet the needs of both "
+            "professionals and hobbyists.",
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.black45,
+            ),
+          ),
+          const SizedBox(height: 15),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              btnContainer(size, "Signup"),
+              btnContainer(size, "Login"),
+            ],
+          ),
+          Row(
+            children: [
+              if (!isOTPScreen) const SizedBox(width: 5),
+              if (!isOTPScreen)
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isOTPScreen = true;
+                      });
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: AppColor.primary,
+                    )),
+              Container(
+                width: size.height > 450 ? 300 : size.height * 0.5,
+                margin: const EdgeInsets.only(top: 10),
+                child: Text(
+                  isOTPScreen
+                      ? "Please enter mobile number to Login yourself."
+                      : "Please enter the OTP received to "
+                          "your mobile number +91 ${mobile.text}",
+                  textAlign: TextAlign.start,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: Colors.black45,
+                    letterSpacing: 0,
+                  ),
                 ),
-              );
-            },
-          )),
+              ),
+            ],
+          ),
+          const SizedBox(height: 15),
+          Container(
+            // height: isRegisterScreen ? 650 : 250,
+            width: 350,
+            decoration: const BoxDecoration(color: Colors.transparent),
+            child: screen == "Signup" ? RegisterScreen(mobile: "mobile") : isOTPScreen ? phoneNumberScreen() : verifyOTPScreen(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget btnContainer(Size size, String text) {
+    return CustomInkWell(
+      onTap: () {
+        setState(() {
+          screen = text;
+        });
+      },
+      child: Column(
+        children: [
+          Texts.headingText(
+            text: text,
+            fontWeight: FontWeight.w600,
+            fontFamily: "oxy",
+            fontSize: 14,
+          ),
+          const SizedBox(height: 5),
+          Container(
+            height: 1.5,
+            color: screen == text ? AppColor.primary : Colors.transparent,
+            width: size.width > 450 ? 100 : size.width / 3,
+          )
+        ],
+      ),
     );
   }
 
   bool agreeCheckboxValue = true;
 
   Widget phoneNumberScreen() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Phone No.",
-            style: TextStyle(
-              color: AppColor.primary,
-              letterSpacing: 0,
-            ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Phone No.",
+          style: TextStyle(
+            color: AppColor.primary,
+            letterSpacing: 0,
           ),
-          const SizedBox(height: 15),
-          Form(
-            key: _formKey,
-            child: TextFormField(
-                focusNode: _focusNode,
+        ),
+        const SizedBox(height: 5),
+        Stack(
+          children: [
+            SizedBox(
+              height: 45,
+              child: TextFormField(
                 controller: mobile,
                 maxLength: 10,
-                buildCounter: null,
                 validator: Validators.phoneNumber,
                 keyboardType: TextInputType.number,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 decoration: InputDecoration(
-                  hintText: _focusNode.hasFocus ? '9123123123' : '+91 9123123123',
-                  prefixText: _focusNode.hasFocus
-                      ? '+91 '
-                      : mobile.text.isNotEmpty
-                          ? '+91 '
-                          : null,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                  hintText:'9123123123',
+                  prefixText: '       ',
                   counterText: '',
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(width: 1, color: AppColor.primary),
@@ -200,68 +194,77 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                onChanged: (_) {
-                  setState(() {});
-                },
-                onTap: () {
-                  setState(() {});
-                }),
-          ),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Checkbox(
-                  value: agreeCheckboxValue,
-                  onChanged: (value) {
-                    setState(() {
-                      agreeCheckboxValue = value ?? false;
-                    });
-                  }),
-              Expanded(
-                child: Text.rich(TextSpan(children: [
-                  const TextSpan(
-                    text: "I have read and agree to the ",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                    ),
-                  ),
-                  TextSpan(
-                      text: "Terms and Conditions.",
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: AppColor.primary,
-                      ),
-                      recognizer: TapGestureRecognizer()..onTap = () {}),
-                ])),
               ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          CustomInkWell(
-            onTap: (){},
-            child: Container(
-              height: 50,
-              width: 150,
-              decoration: BoxDecoration(
-                  color: !agreeCheckboxValue ? Colors.grey.shade500 : AppColor.primary,
-                  borderRadius: const BorderRadius.all(Radius.circular(15))),
-              child: Center(
-                child: Text(
-                  "Get OTP",
-                  style: TextStyle(
-                      fontSize: 18, color: !agreeCheckboxValue ? Colors.grey.shade300 : Colors.white, letterSpacing: 0),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15,vertical: 12.2),
+              child: Text("+91"),
+            )
+          ],
+        ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Checkbox(
+                value: agreeCheckboxValue,
+                onChanged: (value) {
+                  setState(() {
+                    agreeCheckboxValue = value ?? false;
+                  });
+                }),
+            Expanded(
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    const TextSpan(
+                      text: "I have read and agree to the ",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                        text: "Terms and Conditions.",
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: AppColor.primary,
+                        ),
+                        recognizer: TapGestureRecognizer()..onTap = () {}),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        CustomInkWell(
+          onTap: () {},
+          child: Container(
+            height: 40,
+            width: 150,
+            decoration: BoxDecoration(
+              color: !agreeCheckboxValue ? Colors.grey.shade500 : AppColor.primary,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+            child: Center(
+              child: Text(
+                "Get OTP",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: !agreeCheckboxValue ? Colors.grey.shade300 : Colors.white,
                 ),
               ),
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+      ],
     );
   }
 
@@ -326,13 +329,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           duration: 30,
         ),
-          CustomBtn(
-            radius: 10,
-            btnColor: AppColor.primary,
-            size: MediaQuery.of(context).size,
-            title:  "Submit",
-            onTap: () {},
-          )
+        CustomBtn(
+          radius: 10,
+          btnColor: AppColor.primary,
+          size: MediaQuery.of(context).size,
+          title: "Submit",
+          onTap: () {},
+        )
       ],
     );
   }
