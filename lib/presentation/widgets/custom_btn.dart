@@ -155,7 +155,7 @@ class CustomBtn extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: width ?? double.infinity,
-        padding: EdgeInsets.symmetric(vertical: padding ?? 15),
+        height: 40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius ?? 0),
           color: btnColor,

@@ -6,7 +6,6 @@ import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
 import 'package:three_connects/utils/app_color.dart';
 import 'package:three_connects/utils/app_image.dart';
-import 'package:three_connects/utils/helper.dart';
 import 'package:three_connects/utils/navigation_string.dart';
 
 class CommonAppbar extends StatefulWidget {
@@ -57,9 +56,9 @@ class _CommonAppbarState extends State<CommonAppbar> {
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(AppImage.logo, width: 80),
+                    if(size.width > 290)Image.asset(AppImage.logo, width: 80),
                     searchTextField(400),
-                    loginBtn(() {}),
+                    loginBtn(() {},size),
                   ],
                 )
               : Column(
@@ -67,8 +66,8 @@ class _CommonAppbarState extends State<CommonAppbar> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(AppImage.logo, width: 60),
-                        loginBtn(() {}),
+                        if(size.width > 290)Image.asset(AppImage.logo, width: 60),
+                        loginBtn(() {},size),
                       ],
                     ),
                     const SizedBox(height: 15),
@@ -184,7 +183,8 @@ class _CommonAppbarState extends State<CommonAppbar> {
             height: 40,
             padding: const EdgeInsets.symmetric(horizontal: 7),
             decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
+              borderRadius:
+                  BorderRadius.only(topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
               color: AppColor.primary,
             ),
             child: const Icon(Icons.search, color: Colors.white),
@@ -194,7 +194,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
     );
   }
 
-  Widget loginBtn(Function onTap) {
+  Widget loginBtn(Function onTap,Size size) {
     return Row(
       children: [
         InkWell(
@@ -206,11 +206,9 @@ class _CommonAppbarState extends State<CommonAppbar> {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                   contentPadding: EdgeInsets.zero,
-                  content: SignUpScreen(),
+                  content: const SignUpScreen(),
                 );
               },
             );
@@ -245,7 +243,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
         const SizedBox(width: 8),
         IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart_outlined)),
         const SizedBox(width: 8),
-        CustomInkWell(
+        if(size.width > 370)CustomInkWell(
           onTap: () {},
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),

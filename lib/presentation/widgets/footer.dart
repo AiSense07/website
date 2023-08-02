@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/utils/app_color.dart';
@@ -185,6 +186,7 @@ class _FooterBoardState extends State<FooterBoard> {
                                         child: InkWell(
                                           onTap: () async {
                                             if (index == 0) {
+                                              context.beamToNamed("/");
                                               // pushReplacement(context, const HomeScreen("Home"));
                                             } else if (index == 1) {
                                               // await AppDialog.aboutUs(context);

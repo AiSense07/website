@@ -5,6 +5,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:three_connects/presentation/screen/sign_up_modual/register_screen.dart';
 import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
+import 'package:three_connects/utils/helper.dart';
 
 import '../../../utils/app_color.dart';
 import '../../../utils/app_validators.dart';
@@ -79,35 +80,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           Row(
             children: [
-              if (!isOTPScreen) const SizedBox(width: 5),
-              if (!isOTPScreen)
-                IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isOTPScreen = true;
-                      });
-                    },
-                    icon: const Icon(
+              if (!isOTPScreen && screen != "Signup")
+                CustomInkWell(
+                  onTap: () {
+                    setState(() {
+                      isOTPScreen = true;
+                    });
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Icon(
                       Icons.arrow_back_ios_new,
                       color: AppColor.primary,
-                    )),
-              Container(
-                width: size.height > 450 ? 300 : size.height * 0.5,
-                margin: const EdgeInsets.only(top: 10),
-                child: Text(
-                  isOTPScreen
-                      ? "Please enter mobile number to Login yourself."
-                      : "Please enter the OTP received to "
-                          "your mobile number +91 ${mobile.text}",
-                  textAlign: TextAlign.start,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: Colors.black45,
-                    letterSpacing: 0,
+                    ),
                   ),
                 ),
-              ),
+              if (screen != "Signup")
+                Container(
+                  width: size.width > 450 ? 300 : size.width * 0.5,
+                  margin: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    isOTPScreen
+                        ? "Please enter mobile number to Login yourself."
+                        : "Please enter the OTP received to "
+                            "your mobile number +91 ${mobile.text}",
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Colors.black45,
+                      letterSpacing: 0,
+                    ),
+                  ),
+                ),
             ],
           ),
           const SizedBox(height: 15),
@@ -115,7 +120,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             // height: isRegisterScreen ? 650 : 250,
             width: 350,
             decoration: const BoxDecoration(color: Colors.transparent),
-            child: screen == "Signup" ? RegisterScreen(mobile: "mobile") : isOTPScreen ? phoneNumberScreen() : verifyOTPScreen(),
+            child: screen == "Signup"
+                ? const RegisterScreen(mobile: "mobile")
+                : isOTPScreen
+                    ? phoneNumberScreen()
+                    : verifyOTPScreen(),
           ),
         ],
       ),
@@ -141,7 +150,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Container(
             height: 1.5,
             color: screen == text ? AppColor.primary : Colors.transparent,
-            width: size.width > 450 ? 100 : size.width / 3,
+            width: size.width > 450 ? 100 : size.width * 0.25,
           )
         ],
       ),
@@ -174,7 +183,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                  hintText:'9123123123',
+                  hintText: '9123123123',
                   prefixText: '       ',
                   counterText: '',
                   enabledBorder: OutlineInputBorder(
@@ -197,7 +206,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15,vertical: 12.2),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12.2),
               child: Text("+91"),
             )
           ],
@@ -240,7 +249,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         const SizedBox(height: 8),
         CustomInkWell(
-          onTap: () {},
+          onTap: () {
+            setState(() {
+              isOTPScreen = false;
+            });
+          },
           child: Container(
             height: 40,
             width: 150,
@@ -270,12 +283,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget verifyOTPScreen() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 30),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
           child: PinCodeTextField(
-            controller: otp,
+            // controller: otp,
             appContext: context,
             pastedTextStyle: TextStyle(
               color: Colors.green.shade600,
@@ -291,8 +304,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               selectedFillColor: AppColor.primary.withOpacity(0.1),
               selectedColor: AppColor.primary,
               shape: PinCodeFieldShape.box,
-              fieldHeight: 64,
-              fieldWidth: 50,
+              fieldHeight: 50,
+              fieldWidth: 40,
               activeFillColor: Colors.black12,
               borderRadius: BorderRadius.circular(10),
             ),
@@ -303,38 +316,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
             onChanged: (String value) {},
           ),
         ),
-        const SizedBox(height: 15),
-        Text(
-          "Haven't received the verification code?",
-          style: TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.6)),
+        Center(
+          child: Text(
+            "Haven't received the verification code?",
+            style: TextStyle(fontSize: 13, color: Colors.black.withOpacity(0.6)),
+          ),
         ),
         // const Spacer(),
-        OtpTimerButton(
-          loadingIndicatorColor: AppColor.primary,
-          backgroundColor: AppColor.primary,
-          buttonType: ButtonType.text_button,
-          controller: controller,
-          onPressed: () async {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text("Otp sent successfully"),
-              backgroundColor: AppColor.primary,
-            ));
-            requestOtp();
-          },
-          text: const Text(
-            "Resend Otp",
-            style: TextStyle(
-              fontSize: 18,
+        Center(
+          child: OtpTimerButton(
+            loadingIndicatorColor: AppColor.primary,
+            backgroundColor: AppColor.primary,
+            buttonType: ButtonType.text_button,
+            controller: controller,
+            onPressed: () async {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("Otp sent successfully"),
+                backgroundColor: AppColor.primary,
+              ));
+              requestOtp();
+            },
+            text: const Text(
+              "Resend Otp",
+              style: TextStyle(
+                fontSize: 15,
+              ),
             ),
+            duration: 30,
           ),
-          duration: 30,
         ),
         CustomBtn(
+          width: 150,
           radius: 10,
           btnColor: AppColor.primary,
           size: MediaQuery.of(context).size,
           title: "Submit",
-          onTap: () {},
+          onTap: () {
+            pop(context);
+          },
         )
       ],
     );
