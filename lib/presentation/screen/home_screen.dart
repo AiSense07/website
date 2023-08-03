@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:three_connects/presentation/screen/custom_widgets/home_gridview.dart';
 import 'package:three_connects/presentation/widgets/appbar.dart';
 import 'package:three_connects/presentation/widgets/cached_imge.dart';
@@ -112,10 +112,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         shape: BoxShape.circle,
                         color: Colors.grey.shade200,
                         border: Border.all(color: Colors.black26),
-                        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2, spreadRadius: 2)],
+                        boxShadow: const [
+                          BoxShadow(color: Colors.black12, blurRadius: 2, spreadRadius: 2)
+                        ],
                       ),
                       child: CircleAvatar(
-                        backgroundColor: _current == entry.key ? AppColor.primary : Colors.grey.shade200,
+                        backgroundColor:
+                            _current == entry.key ? AppColor.primary : Colors.grey.shade200,
                       ),
                     ),
                   );
@@ -132,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(horizontal: sizes(size, 20, 15), vertical: 10),
                 child: Text(
                   "Deals of the week",
-                  style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.w700),
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                 ),
               ),
               const HomeGrid()
@@ -143,7 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
             color: AppColor.btnColor,
             margin: EdgeInsets.symmetric(vertical: sizes(size, 60, 30)),
             padding: EdgeInsets.symmetric(
-              horizontal: contentSize(size, (size.width - 1250) / 2, sizes(size, 25, size.width > 450 ? 30 : 10)),
+              horizontal: contentSize(
+                  size, (size.width - 1250) / 2, sizes(size, 25, size.width > 450 ? 30 : 10)),
               vertical: sizes(size, 25, 15),
             ),
             child: Row(
@@ -167,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text(
                         "Subscribe now to stay informed and updated "
                         "about exclusive offers and new products.",
-                        style: GoogleFonts.poppins(
+                        style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -184,16 +188,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             SizedBox(
-                                width: sizes(size, 400, size.width > 450 ? size.width - 250 : size.width - 70),
+                                width: sizes(size, 400,
+                                    size.width > 450 ? size.width - 250 : size.width - 70),
                                 height: 50,
                                 child: TextField(
                                   controller: controller,
                                   decoration: InputDecoration(
                                     hintText: "Enter your email...",
                                     border: InputBorder.none,
-                                    hintStyle: GoogleFonts.poppins(color: Colors.white),
+                                    hintStyle: TextStyle(color: Colors.white),
                                     isDense: true,
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                    contentPadding:
+                                        const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                                   ),
                                 )),
                             Container(
@@ -209,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: Text(
                                 size.width > 500 ? "Subscribe" : "📨",
-                                style: GoogleFonts.poppins(
+                                style: TextStyle(
                                   fontSize: 14,
                                   color: AppColor.primary,
                                   fontWeight: FontWeight.bold,
@@ -233,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(horizontal: sizes(size, 20, 15), vertical: 10),
                 child: Text(
                   "New in the shop",
-                  style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.w700),
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                 ),
               ),
               const HomeGrid()

@@ -20,7 +20,11 @@ pop(BuildContext context) {
 }
 
 void commonToast(BuildContext context, String msg, {Color? color}) {
-  Fluttertoast.showToast(toastLength: Toast.LENGTH_LONG, msg: msg, backgroundColor: color ?? Colors.black, textColor: Colors.white);
+  Fluttertoast.showToast(
+      toastLength: Toast.LENGTH_LONG,
+      msg: msg,
+      backgroundColor: color ?? Colors.black,
+      textColor: Colors.white);
 }
 
 void logLongString(String s) {
@@ -120,4 +124,43 @@ List<String> color = [
   "https://c-3d.niceshops.com/upload/image/product/original/default/19876_7c3d94fa.128x128.jpg",
   "https://c-3d.niceshops.com/upload/image/product/original/default/21693_66aea7ae.128x128.jpg",
   "https://c-3d.niceshops.com/upload/image/product/original/default/23619_411f64e4.128x128.jpg",
+];
+
+List<Map<String, String>> tech = [
+  {
+    "title": "Item no.",
+    "text": "PM-70820",
+  },
+  {
+    "title": "Manufacturer no.",
+    "text": "PM70820",
+  },
+  {
+    "title": "Manufacturers",
+    "text": "Polymaker",
+  },
+  {
+    "title": "Product types",
+    "text": "PLA Filaments",
+  },
+  {
+    "title": "Filament colour",
+    "text": "Black",
+  },
+  {
+    "title": "Net weight",
+    "text": "1000 g",
+  },
+  {
+    "title": "Recommended heating temperature",
+    "text": "25 - 60 °C",
+  },
+  {
+    "title": "Recommended processing temperature",
+    "text": "190 - 230 °C",
+  },
+  {
+    "title": "Diameter",
+    "text": "1,75 mm",
+  },
 ];

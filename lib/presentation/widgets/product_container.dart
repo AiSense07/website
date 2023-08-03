@@ -1,6 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/presentation/widgets/rating_star.dart';
 import 'package:three_connects/utils/helper.dart';
@@ -126,8 +126,8 @@ class _ProductContainerState extends State<ProductContainer> {
                 const SizedBox(height: 5),
                 Texts.headingText(
                   text: "Company Name big is there",
-                  fontWeight: FontWeight.w700,
-                  fontSize: size.width > 615 ? 22 : size500(size, 19, 15),
+                  fontWeight: FontWeight.w600,
+                  fontSize: size.width > 615 ? 18 : size500(size, 19, 15),
                 ),
                 Texts.small13Text(
                   text: "product small title",
@@ -143,13 +143,12 @@ class _ProductContainerState extends State<ProductContainer> {
                     maxLine: 3,
                     color: Colors.black54,
                     fontSize: size500(size, 13, 10),
-                    fontWeight: FontWeight.w800),
+                    fontWeight: FontWeight.w600),
                 const SizedBox(height: 8),
                 Row(
                   children: [
                     Texts.headingText(
                       text: "₹ 1200",
-                      fontFamily: "oxy",
                       fontWeight: FontWeight.bold,
                       color: AppColor.btnColor,
                       fontSize: size.width > 615 ? 18 : size500(size, 16, 13),
@@ -160,7 +159,7 @@ class _ProductContainerState extends State<ProductContainer> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontFamily: "oxy",
+                        fontFamily: "pop",
                         color: Colors.black54,
                         fontSize: size.width > 615 ? 15 : size500(size, 13, 10),
                         decoration: TextDecoration.lineThrough,

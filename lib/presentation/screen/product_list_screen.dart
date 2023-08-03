@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:number_paginator/number_paginator.dart';
 import 'package:three_connects/presentation/widgets/filter_container.dart';
 import 'package:three_connects/presentation/widgets/footer.dart';
@@ -64,7 +64,7 @@ class _ProductListState extends State<ProductList> {
                             if (size.width < 1000)
                               Text(
                                 "${widget.path}: 150 products",
-                                style: GoogleFonts.poppins(
+                                style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: AppColor.primary,
                                   fontSize: 15,
@@ -78,7 +78,7 @@ class _ProductListState extends State<ProductList> {
                                 if (size.width > 1000)
                                   Text(
                                     "${widget.path}: 150 products",
-                                    style: GoogleFonts.poppins(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       color: AppColor.primary,
                                       fontSize: 15,
@@ -106,7 +106,7 @@ class _ProductListState extends State<ProductList> {
                                           if (size.width > 310)
                                             Text(
                                               "Filter",
-                                              style: GoogleFonts.poppins(color: AppColor.primary, fontSize: 12),
+                                              style: TextStyle(color: AppColor.primary, fontSize: 12),
                                             ),
                                         ],
                                       ),
@@ -118,7 +118,7 @@ class _ProductListState extends State<ProductList> {
                                     if (size.width > 310)
                                       Text(
                                         "Sort by ",
-                                        style: GoogleFonts.poppins(color: AppColor.primary, fontSize: 12),
+                                        style: TextStyle(color: AppColor.primary, fontSize: 12),
                                       ),
                                     Container(
                                       height: 40,
@@ -127,7 +127,7 @@ class _ProductListState extends State<ProductList> {
                                         border: Border.all(color: AppColor.primary),
                                       ),
                                       child: DropdownButton(
-                                          style: GoogleFonts.poppins(fontSize: 13, color: AppColor.primary),
+                                          style: TextStyle(fontSize: 13, color: AppColor.primary),
                                           underline: const SizedBox(),
                                           value: dropDown,
                                           isDense: false,

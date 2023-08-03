@@ -48,27 +48,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
         children: [
-          const Text(
-            "Welcome to 3D Connect!",
+          Texts.headingText(
+            text: "Welcome to 3D Connect!",
+            fontWeight: FontWeight.bold,
+            fontFamily: "bold",
+            fontSize: 22,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              color: AppColor.primary,
-              letterSpacing: 0,
-            ),
           ),
           const SizedBox(height: 5),
-          const Text(
-            "We take pride in offering"
-            " a wide range of top-notch 3D printer parts, "
-            "carefully selected to meet the needs of both "
-            "professionals and hobbyists.",
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.black45,
-            ),
+          Texts.small13Text(
+            size: size,
+            text: "We take pride in offering"
+                " a wide range of top-notch 3D printer parts, "
+                "carefully selected to meet the needs of both "
+                "professionals and hobbyists.",
+            maxLine: 10,
+            color: Colors.black45,
           ),
           const SizedBox(height: 15),
           Row(
@@ -143,8 +138,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Texts.headingText(
             text: text,
             fontWeight: FontWeight.w600,
-            fontFamily: "oxy",
-            fontSize: 14,
+            fontSize: 16,
           ),
           const SizedBox(height: 5),
           Container(
@@ -286,7 +280,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: PinCodeTextField(
             // controller: otp,
             appContext: context,

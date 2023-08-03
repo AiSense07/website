@@ -8,6 +8,7 @@ import 'package:three_connects/utils/helper.dart';
 import '../../../utils/app_color.dart';
 import '../../widgets/common_text.dart';
 import '../../widgets/custom_widgets.dart';
+import '../../widgets/loader/image_loader.dart';
 import '../../widgets/rating_star.dart';
 
 class DescWidget extends StatefulWidget {
@@ -38,12 +39,13 @@ class _DescWidgetState extends State<DescWidget> {
         children: [
           Texts.small13Text(size: size, text: "Company name"),
           Texts.big26Text(text: "Product small name", fontWeight: FontWeight.bold),
-          const SizedBox(height: 2),
+          const SizedBox(height: 5),
           Texts.headingText(
             text: "Allround PLA filament at an unbeatable price in Black",
             maxLine: 2,
             fontWeight: FontWeight.w500,
             color: Colors.black54,
+            fontSize: 15,
           ),
           const SizedBox(height: 15),
           Row(
@@ -59,7 +61,6 @@ class _DescWidgetState extends State<DescWidget> {
             children: [
               Texts.big26Text(
                 text: "₹ 1200",
-                fontFamily: "oxy",
                 fontWeight: FontWeight.bold,
               ),
               const SizedBox(width: 5),
@@ -68,7 +69,7 @@ class _DescWidgetState extends State<DescWidget> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontFamily: "oxy",
+                  fontFamily: "pop",
                   color: Colors.black54,
                   fontSize: size.width > 615 ? 15 : 13,
                   decoration: TextDecoration.lineThrough,
@@ -92,6 +93,14 @@ class _DescWidgetState extends State<DescWidget> {
           ),
           const SizedBox(height: 25),
           Texts.headingText(text: "Colors :", fontWeight: FontWeight.bold),
+          Container(
+            color: Colors.black12,
+            child: ImageLoader(
+              height: (size.width > 760 ? contentSize(size, 60, size.width * 0.062) : 46),
+              width: (size.width > 760 ? contentSize(size, 60, size.width * 0.062) : 46),
+              radius: 5,
+            ),
+          ),
           size.width > 730
               ? GridView.builder(
                   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -137,28 +146,31 @@ class _DescWidgetState extends State<DescWidget> {
                     ),
                   ),
                 ),
-          CustomInkWell(
-            onTap: () {
-              setState(() {
-                isExpand = !isExpand;
-              });
-            },
-            child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              margin: const EdgeInsets.only(top: 10, bottom: 25),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: AppColor.primary),
-                color: AppColor.primary.withOpacity(0.1),
-              ),
-              child: Texts.small13Text(
-                size: size,
-                text: isExpand ? "Show Less" : "Show More",
-                fontSize: 15,
+          if (size.width > 730)
+            CustomInkWell(
+              onTap: () {
+                setState(() {
+                  isExpand = !isExpand;
+                });
+              },
+              child: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                margin: const EdgeInsets.only(top: 10, bottom: 25),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: AppColor.primary),
+                  color: AppColor.primary.withOpacity(0.1),
+                ),
+                child: Texts.small13Text(
+                  size: size,
+                  text: isExpand ? "Show Less" : "Show More",
+                  fontSize: 15,
+                ),
               ),
             ),
-          ),
+          if (size.width < 730)
+            const SizedBox(height: 25),
           Texts.headingText(
             text: "In Stock",
             fontWeight: FontWeight.bold,
@@ -168,6 +180,7 @@ class _DescWidgetState extends State<DescWidget> {
             text: TextSpan(
               text: "Delivery in 5 days, ",
               style: const TextStyle(
+                fontFamily: "pop",
                 fontWeight: FontWeight.bold,
                 color: AppColor.primary,
                 fontSize: 16,
@@ -178,7 +191,7 @@ class _DescWidgetState extends State<DescWidget> {
                     DateTime.now().add(const Duration(days: 5)),
                   )}.",
                   style: TextStyle(
-                    fontFamily: "oxy",
+                    fontFamily: "pop",
                     fontWeight: FontWeight.w100,
                     color: AppColor.primary.withOpacity(0.8),
                     fontSize: 16,
@@ -368,12 +381,12 @@ class _DescWidgetState extends State<DescWidget> {
       children: [
         const Padding(
           padding: EdgeInsets.only(top: 5),
-          child: Icon(Icons.circle, size: 8, color: AppColor.primary),
+          child: Icon(Icons.circle, size: 5, color: AppColor.primary),
         ),
         const SizedBox(width: 8),
         SizedBox(
           width: contentSize(size, 500, sizes(size, size.width * 0.35, size.width * 0.85)),
-          child: Texts.headingText(text: text, color: AppColor.primary, fontSize: 16, maxLine: 10),
+          child: Texts.headingText(text: text, color: AppColor.primary, fontSize: 15, maxLine: 10),
         ),
       ],
     );

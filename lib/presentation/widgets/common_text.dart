@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:three_connects/utils/app_color.dart';
 
 class Texts {
-  static commonText({
+  static normal({
     required Size size,
     required String text,
     FontWeight? fontWeight,
+    String? fontFamily,
     int? maxLine,
+    double? fontSize,
+    double? height,
     Color? color,
   }) =>
       Text(
         text,
         maxLines: maxLine,
         overflow: TextOverflow.ellipsis,
-        style: GoogleFonts.poppins(
+        style: TextStyle(
+          fontFamily: fontFamily ?? "pop",
           color: color ?? AppColor.primary,
           fontWeight: fontWeight,
-          fontSize: size.width > 615 ? 15 : 15,
-          letterSpacing: 0.7,
+          fontSize: fontSize ?? 14,
+          height: height,
         ),
       );
 
   static small13Text({
     required Size size,
     required String text,
+    String? fontFamily,
     FontWeight? fontWeight,
     int? maxLine,
     double? fontSize,
@@ -36,7 +41,7 @@ class Texts {
         maxLines: maxLine,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
-          fontFamily: "oxy",
+          fontFamily: fontFamily ?? "pop",
           color: color ?? AppColor.primary,
           fontWeight: fontWeight,
           fontSize: fontSize ?? 13,
@@ -49,6 +54,7 @@ class Texts {
     double? fontSize,
     String? fontFamily,
     FontWeight? fontWeight,
+    TextAlign? textAlign,
     int? maxLine,
     Color? color,
   }) =>
@@ -56,8 +62,9 @@ class Texts {
         text,
         maxLines: maxLine,
         overflow: TextOverflow.ellipsis,
+        textAlign: textAlign,
         style: TextStyle(
-          fontFamily: fontFamily ?? "pts",
+          fontFamily: fontFamily ?? "pop",
           color: color ?? AppColor.primary,
           fontWeight: fontWeight,
           fontSize: fontSize ?? 18,
@@ -67,8 +74,8 @@ class Texts {
 
   static big26Text({
     required String text,
-    String? fontFamily,
     FontWeight? fontWeight,
+    String? fontFamily,
     int? maxLine,
     Color? color,
   }) =>
@@ -77,10 +84,10 @@ class Texts {
         maxLines: maxLine,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
-          fontFamily: fontFamily ?? "pts",
+          fontFamily: fontFamily ?? "pop",
           color: color ?? AppColor.primary,
           height: 1,
-          fontWeight: fontWeight,
+          fontWeight: fontWeight ?? FontWeight.bold,
           fontSize: 26,
         ),
       );

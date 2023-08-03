@@ -44,7 +44,8 @@ class _FooterBoardState extends State<FooterBoard> {
         return Container(
           decoration: const BoxDecoration(
             color: AppColor.primary,
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+            borderRadius:
+                BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
           ),
           padding: EdgeInsets.symmetric(
             horizontal: responsivePaddingWidth(constraints, context),
@@ -58,11 +59,11 @@ class _FooterBoardState extends State<FooterBoard> {
                 "Welcome to 3D Connects!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontFamily: "oxy",
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: constraints.maxWidth <= 900 ? 25 : 32,
-                    ),
+                  fontFamily: "pop",
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: constraints.maxWidth <= 900 ? 25 : 32,
+                ),
               ),
               const SizedBox(height: 15),
               Padding(
@@ -74,15 +75,15 @@ class _FooterBoardState extends State<FooterBoard> {
                             : MediaQuery.of(context).size.width * 0.1),
                 child: Text(
                   "We take pride in offering"
-                      " a wide range of top-notch 3D printer parts, "
-                      "carefully selected to meet the needs of both "
-                      "professionals and hobbyists. Our extensive collection "
-                      "includes everything from essential components to "
-                      "upgrade kits, ensuring you have the tools necessary to"
-                      " bring your creative ideas to life.",
+                  " a wide range of top-notch 3D printer parts, "
+                  "carefully selected to meet the needs of both "
+                  "professionals and hobbyists. Our extensive collection "
+                  "includes everything from essential components to "
+                  "upgrade kits, ensuring you have the tools necessary to"
+                  " bring your creative ideas to life.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily:  "oxy",
+                    fontFamily: "pop",
                     color: Colors.white70,
                     fontSize: constraints.maxWidth <= 900 ? 12 : 15,
                   ),
@@ -123,7 +124,9 @@ class _FooterBoardState extends State<FooterBoard> {
                 ],
               ),
               const SizedBox(height: 30),*/
-              widget.isHideFooter == true ? const SizedBox(height: 1) : Container(height: 1.5, color: Color(0xFFEADACE)),
+              widget.isHideFooter == true
+                  ? const SizedBox(height: 1)
+                  : Container(height: 1.5, color: Color(0xFFEADACE)),
               widget.isHideFooter == true ? const SizedBox(height: 1) : const SizedBox(height: 30),
               widget.isHideFooter == true
                   ? const SizedBox(height: 1)
@@ -144,7 +147,7 @@ class _FooterBoardState extends State<FooterBoard> {
                                       "3D Connects",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontFamily: "oxy",
+                                        fontFamily: "pop",
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontSize: constraints.maxWidth <= 900 ? 25 : 32,
@@ -153,9 +156,9 @@ class _FooterBoardState extends State<FooterBoard> {
                                     const SizedBox(height: 20),
                                     Text(
                                       "2nd Floor, SBR CV Towers, HUDA Techno "
-                                          "Enclave, Madhapur, Hyderabad. 500081. ",
+                                      "Enclave, Madhapur, Hyderabad. 500081. ",
                                       style: TextStyle(
-                                        fontFamily:  "oxy",
+                                        fontFamily: "pop",
                                         color: Colors.white70,
                                         fontSize: constraints.maxWidth <= 900 ? 12 : 15,
                                       ),
@@ -171,7 +174,7 @@ class _FooterBoardState extends State<FooterBoard> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Texts.headingText(
-                                   text: "Company",
+                                    text: "Company",
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -208,10 +211,12 @@ class _FooterBoardState extends State<FooterBoard> {
                                           child: Text(
                                             companyFooterList[index],
                                             style: TextStyle(
-                                              fontFamily: "oxy",
+                                              fontFamily: "pop",
                                               fontSize: 14,
                                               color: Colors.white.withOpacity(0.8),
-                                              decoration: company == index ? TextDecoration.underline : TextDecoration.none,
+                                              decoration: company == index
+                                                  ? TextDecoration.underline
+                                                  : TextDecoration.none,
                                               decorationColor: Colors.white,
                                             ),
                                           ),
@@ -255,7 +260,8 @@ class _FooterBoardState extends State<FooterBoard> {
                                             } else if (index == 2) {
                                               Navigator.pushNamed(context, "/disclaimer");
                                             } else if (index == 3) {
-                                              Navigator.pushNamed(context, "/refund-and-cancellation");
+                                              Navigator.pushNamed(
+                                                  context, "/refund-and-cancellation");
                                             }
                                           },
                                           onHover: (value) {
@@ -272,10 +278,12 @@ class _FooterBoardState extends State<FooterBoard> {
                                           child: Text(
                                             informationFooterList[index],
                                             style: TextStyle(
-                                              fontFamily: "oxy",
+                                              fontFamily: "pop",
                                               fontSize: 14,
                                               color: Colors.white.withOpacity(0.8),
-                                              decoration: info == index ? TextDecoration.underline : TextDecoration.none,
+                                              decoration: info == index
+                                                  ? TextDecoration.underline
+                                                  : TextDecoration.none,
                                               decorationColor: Colors.white,
                                             ),
                                           ),
@@ -302,7 +310,7 @@ class _FooterBoardState extends State<FooterBoard> {
                                     "3D Connects",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      fontFamily: "oxy",
+                                      fontFamily: "pop",
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                       fontSize: constraints.maxWidth <= 900 ? 25 : 32,
@@ -311,9 +319,9 @@ class _FooterBoardState extends State<FooterBoard> {
                                   const SizedBox(height: 20),
                                   Text(
                                     "2nd Floor, SBR CV Towers, HUDA Techno "
-                                        "Enclave, Madhapur, Hyderabad. 500081. ",
+                                    "Enclave, Madhapur, Hyderabad. 500081. ",
                                     style: TextStyle(
-                                      fontFamily:  "oxy",
+                                      fontFamily: "pop",
                                       color: Colors.white70,
                                       fontSize: constraints.maxWidth <= 900 ? 12 : 15,
                                     ),
@@ -325,12 +333,14 @@ class _FooterBoardState extends State<FooterBoard> {
                           ),
                         ),
               const SizedBox(height: 30),
-              widget.isHideFooter == true ? const SizedBox(height: 1) : Container(height: 1.5, color: const Color(0xFFEADACE)),
+              widget.isHideFooter == true
+                  ? const SizedBox(height: 1)
+                  : Container(height: 1.5, color: const Color(0xFFEADACE)),
               const SizedBox(height: 5),
               // const Spacer(),
               Texts.small13Text(
                 size: MediaQuery.of(context).size,
-               text:  "© 2023 3D Connects. All Rights Reserved",
+                text: "© 2023 3D Connects. All Rights Reserved",
                 color: Colors.white,
               ),
               // const Spacer(),

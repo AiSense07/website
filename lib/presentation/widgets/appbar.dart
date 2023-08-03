@@ -1,6 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:three_connects/presentation/screen/sign_up_modual/signup_screen.dart';
 import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
@@ -47,7 +47,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
             "Welcome to 3D Connects & Get the best product",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.poppins(color: Colors.white.withOpacity(0.8), fontSize: 10),
+            style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 10),
           ),
         ),
         Padding(
@@ -132,7 +132,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
         child: Text(
           text,
           style: const TextStyle(
-            fontFamily: "oxy",
+            fontFamily: "pop",
             fontSize: 12,
             fontWeight: FontWeight.w500,
             color: Colors.white,
@@ -224,7 +224,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
                 Text(
                   "Login ",
                   style: TextStyle(
-                    fontFamily: "oxy",
+                    fontFamily: "pop",
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                     color: AppColor.primary,

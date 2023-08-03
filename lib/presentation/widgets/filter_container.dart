@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 import '../../utils/app_color.dart';
 
@@ -21,9 +21,9 @@ class _FilterContainerState extends State<FilterContainer> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Manufacturers",
-            style: GoogleFonts.poppins(
+            style: TextStyle(
               fontWeight: FontWeight.w600,
               color: AppColor.primary,
               fontSize: 18,
@@ -66,7 +66,7 @@ class _FilterContainerState extends State<FilterContainer> {
                           ),
                           Text(
                             "PLA + ( ${index + 2} )",
-                            style: GoogleFonts.poppins(
+                            style: const TextStyle(
                               color: AppColor.primary,
                               fontSize: 15,
                             ),

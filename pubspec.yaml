@@ -19,7 +19,6 @@ dependencies:
   firebase_storage: ^11.2.5
 #  file_picker: ^5.3.2
   carousel_slider: ^4.2.1
-  google_fonts:
   fluttertoast: ^8.1.2
   shimmer: ^2.0.0
   beamer: ^1.5.6
@@ -48,14 +47,16 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   fonts:
-    - family: oxy
+    - family: light
       fonts:
-        - asset: assets/fonts/oxygen/Oxygen-Bold.ttf
-        - asset: assets/fonts/oxygen/Oxygen-Light.ttf
-        - asset: assets/fonts/oxygen/Oxygen-Regular.ttf
-    - family: pts
+        - asset: assets/fonts/300.ttf
+    - family: pop
       fonts:
-        - asset: assets/fonts/pt_sans/PTSans-Bold.ttf
-        - asset: assets/fonts/pt_sans/PTSans-Italic.ttf
-        - asset: assets/fonts/pt_sans/PTSans-Regular.ttf
+        - asset: assets/fonts/400.ttf
+#        - asset: assets/fonts/500.ttf
+    - family: bold
+      fonts:
+#        - asset: assets/fonts/600.ttf
+        - asset: assets/fonts/700.ttf
+#        - asset: assets/fonts/900.ttf
 
