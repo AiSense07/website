@@ -54,9 +54,11 @@ flutter:
       fonts:
         - asset: assets/fonts/400.ttf
 #        - asset: assets/fonts/500.ttf
+    - family: w600
+      fonts:
+        - asset: assets/fonts/600.ttf
     - family: bold
       fonts:
-#        - asset: assets/fonts/600.ttf
         - asset: assets/fonts/700.ttf
 #        - asset: assets/fonts/900.ttf
 

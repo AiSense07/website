@@ -93,14 +93,6 @@ class _DescWidgetState extends State<DescWidget> {
           ),
           const SizedBox(height: 25),
           Texts.headingText(text: "Colors :", fontWeight: FontWeight.bold),
-          Container(
-            color: Colors.black12,
-            child: ImageLoader(
-              height: (size.width > 760 ? contentSize(size, 60, size.width * 0.062) : 46),
-              width: (size.width > 760 ? contentSize(size, 60, size.width * 0.062) : 46),
-              radius: 5,
-            ),
-          ),
           size.width > 730
               ? GridView.builder(
                   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -169,8 +161,7 @@ class _DescWidgetState extends State<DescWidget> {
                 ),
               ),
             ),
-          if (size.width < 730)
-            const SizedBox(height: 25),
+          if (size.width < 730) const SizedBox(height: 25),
           Texts.headingText(
             text: "In Stock",
             fontWeight: FontWeight.bold,

@@ -52,13 +52,13 @@ class _CommonAppbarState extends State<CommonAppbar> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-          child: size.width > 820
+          child: size.width > 830
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    if(size.width > 290)Image.asset(AppImage.logo, width: 80),
-                    searchTextField(400),
-                    loginBtn(() {},size),
+                    if (size.width > 290) Image.asset(AppImage.logo, width: 80),
+                    searchTextField(400,size),
+                    loginBtn(() {}, size),
                   ],
                 )
               : Column(
@@ -66,12 +66,12 @@ class _CommonAppbarState extends State<CommonAppbar> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if(size.width > 290)Image.asset(AppImage.logo, width: 60),
-                        loginBtn(() {},size),
+                        if (size.width > 290) Image.asset(AppImage.logo, width: 60),
+                        loginBtn(() {}, size),
                       ],
                     ),
                     const SizedBox(height: 15),
-                    searchTextField(size.width - 90),
+                    searchTextField(size.width - 180,size),
                   ],
                 ),
         ),
@@ -142,59 +142,65 @@ class _CommonAppbarState extends State<CommonAppbar> {
     );
   }
 
-  Widget searchTextField(double width) {
-    return Container(
-      height: 40,
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColor.primary),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-              width: width,
-              height: 50,
-              child: TextField(
-                controller: controller,
-                onChanged: (value) {
-                  setState(() {
-                    search = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: "Search Product",
-                  border: InputBorder.none,
-                  isDense: true,
-                  suffixIcon: search.isEmpty
-                      ? const SizedBox()
-                      : InkWell(
-                          onTap: () {
-                            setState(() {
-                              search = "";
-                              controller.clear();
-                            });
-                          },
-                          child: const Icon(Icons.close),
-                        ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                ),
-              )),
-          Container(
-            height: 40,
-            padding: const EdgeInsets.symmetric(horizontal: 7),
-            decoration: const BoxDecoration(
-              borderRadius:
-                  BorderRadius.only(topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
-              color: AppColor.primary,
-            ),
-            child: const Icon(Icons.search, color: Colors.white),
+  Widget searchTextField(double width,Size size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          height: 40,
+          decoration: BoxDecoration(
+            border: Border.all(color: AppColor.primary),
+            borderRadius: BorderRadius.circular(8),
           ),
-        ],
-      ),
+          child: Row(
+            children: [
+              SizedBox(
+                  width: width,
+                  height: 40,
+                  child: TextField(
+                    controller: controller,
+                    onChanged: (value) {
+                      setState(() {
+                        search = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Search Product",
+                      border: InputBorder.none,
+                      isDense: true,
+                      suffixIcon: search.isEmpty
+                          ? const SizedBox()
+                          : InkWell(
+                              onTap: () {
+                                setState(() {
+                                  search = "";
+                                  controller.clear();
+                                });
+                              },
+                              child: const Icon(Icons.close),
+                            ),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    ),
+                  )),
+              Container(
+                height: 40,
+                padding: const EdgeInsets.symmetric(horizontal: 7),
+                decoration: const BoxDecoration(
+                  borderRadius:
+                      BorderRadius.only(topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
+                  color: AppColor.primary,
+                ),
+                child: const Icon(Icons.search, color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+        if(size.width < 830) sellBtn()
+      ],
     );
   }
 
-  Widget loginBtn(Function onTap,Size size) {
+  Widget loginBtn(Function onTap, Size size) {
     return Row(
       children: [
         InkWell(
@@ -243,24 +249,28 @@ class _CommonAppbarState extends State<CommonAppbar> {
         const SizedBox(width: 8),
         IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart_outlined)),
         const SizedBox(width: 8),
-        if(size.width > 370)CustomInkWell(
-          onTap: () {},
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: AppColor.primary, width: 2),
-              color: const Color(0xFFD7D7F6),
-            ),
-            child: Texts.headingText(
-              text: "+ SELL",
-              color: AppColor.primary,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        )
+        if (size.width >= 830) sellBtn()
       ],
+    );
+  }
+
+  Widget sellBtn() {
+    return CustomInkWell(
+      onTap: () {},
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: AppColor.primary, width: 2),
+          color: const Color(0xFFD7D7F6),
+        ),
+        child: Texts.headingText(
+          text: "+ SELL",
+          color: AppColor.primary,
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

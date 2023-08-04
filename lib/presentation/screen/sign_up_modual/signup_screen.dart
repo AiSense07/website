@@ -52,6 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             text: "Welcome to 3D Connect!",
             fontWeight: FontWeight.bold,
             fontFamily: "bold",
+            maxLine: 2,
             fontSize: 22,
             textAlign: TextAlign.center,
           ),
