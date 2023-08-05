@@ -162,7 +162,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const Text(
           "Phone No.",
           style: TextStyle(
-            color: AppColor.primary,
+            color: Colors.black,
             letterSpacing: 0,
           ),
         ),
@@ -233,7 +233,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         text: "Terms and Conditions.",
                         style: const TextStyle(
                           fontSize: 12,
-                          color: AppColor.primary,
+                          color: Colors.black,
                         ),
                         recognizer: TapGestureRecognizer()..onTap = () {}),
                   ],

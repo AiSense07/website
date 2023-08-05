@@ -25,7 +25,7 @@ class _FilterContainerState extends State<FilterContainer> {
             "Manufacturers",
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              color: AppColor.primary,
+              color: Colors.black,
               fontSize: 18,
             ),
           ),
@@ -67,7 +67,7 @@ class _FilterContainerState extends State<FilterContainer> {
                           Text(
                             "PLA + ( ${index + 2} )",
                             style: const TextStyle(
-                              color: AppColor.primary,
+                              color: Colors.black,
                               fontSize: 15,
                             ),
                           ),

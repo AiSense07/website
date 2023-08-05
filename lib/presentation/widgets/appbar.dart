@@ -6,6 +6,7 @@ import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
 import 'package:three_connects/utils/app_color.dart';
 import 'package:three_connects/utils/app_image.dart';
+import 'package:three_connects/utils/helper.dart';
 import 'package:three_connects/utils/navigation_string.dart';
 
 class CommonAppbar extends StatefulWidget {
@@ -57,7 +58,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     if (size.width > 290) Image.asset(AppImage.logo, width: 80),
-                    searchTextField(400,size),
+                    searchTextField(400, size),
                     loginBtn(() {}, size),
                   ],
                 )
@@ -71,7 +72,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
                       ],
                     ),
                     const SizedBox(height: 15),
-                    searchTextField(size.width - 180,size),
+                    searchTextField(size.width - 180, size),
                   ],
                 ),
         ),
@@ -94,10 +95,9 @@ class _CommonAppbarState extends State<CommonAppbar> {
             scrollDirection: Axis.horizontal,
             children: [
               textButton(page: "/", text: "Home"),
-              textButton(page: Routes.parts, text: "3D Printed Models"),
-              textButton(page: Routes.filament, text: "Filaments"),
-              textButton(page: Routes.spare, text: "Spare Parts & Accessories"),
-              textButton(page: Routes.design, text: "Design"),
+              textButton(page: Routes.parts, text: "3D Printed Part"),
+              textButton(page: Routes.design, text: "3D Model"),
+              textButton(page: Routes.spare, text: "Spares"),
             ],
           ),
         )
@@ -142,7 +142,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
     );
   }
 
-  Widget searchTextField(double width,Size size) {
+  Widget searchTextField(double width, Size size) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -186,8 +186,8 @@ class _CommonAppbarState extends State<CommonAppbar> {
                 height: 40,
                 padding: const EdgeInsets.symmetric(horizontal: 7),
                 decoration: const BoxDecoration(
-                  borderRadius:
-                      BorderRadius.only(topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
                   color: AppColor.primary,
                 ),
                 child: const Icon(Icons.search, color: Colors.white),
@@ -195,7 +195,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
             ],
           ),
         ),
-        if(size.width < 830) sellBtn()
+        if (size.width < 830) sellBtn()
       ],
     );
   }
@@ -233,7 +233,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
                     fontFamily: "pop",
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: AppColor.primary,
+                    color: Colors.black,
                   ),
                 ),
                 Icon(Icons.person_2_outlined)
@@ -241,13 +241,14 @@ class _CommonAppbarState extends State<CommonAppbar> {
             ),
           ),
         ),
-        IconButton(
-            onPressed: () {
-              showAboutDialog(context: context);
-            },
-            icon: const Icon(Icons.favorite_outline)),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_outline)),
         const SizedBox(width: 8),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart_outlined)),
+        IconButton(
+          onPressed: () {
+            Scaffold.of(context).openEndDrawer();
+          },
+          icon: const Icon(Icons.shopping_cart_outlined),
+        ),
         const SizedBox(width: 8),
         if (size.width >= 830) sellBtn()
       ],
@@ -266,7 +267,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
         ),
         child: Texts.headingText(
           text: "+ SELL",
-          color: AppColor.primary,
+          color: Colors.black,
           fontSize: 15,
           fontWeight: FontWeight.bold,
         ),

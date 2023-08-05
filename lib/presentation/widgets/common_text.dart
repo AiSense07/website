@@ -19,7 +19,7 @@ class Texts {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontFamily: fontFamily ?? "pop",
-          color: color ?? AppColor.primary,
+          color: color ?? Colors.black,
           fontWeight: fontWeight,
           fontSize: fontSize ?? 14,
           height: height,
@@ -42,7 +42,7 @@ class Texts {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontFamily: fontFamily ?? "pop",
-          color: color ?? AppColor.primary,
+          color: color ?? Colors.black,
           fontWeight: fontWeight,
           fontSize: fontSize ?? 13,
           height: height,
@@ -66,7 +66,7 @@ class Texts {
         textAlign: textAlign,
         style: TextStyle(
           fontFamily: fontFamily ?? "pop",
-          color: color ?? AppColor.primary,
+          color: color ?? Colors.black,
           fontWeight: fontWeight,
           fontSize: fontSize ?? 18,
           height: height ?? 1.1,
@@ -86,7 +86,7 @@ class Texts {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontFamily: fontFamily ?? "pop",
-          color: color ?? AppColor.primary,
+          color: color ?? Colors.black,
           height: 1,
           fontWeight: fontWeight ?? FontWeight.bold,
           fontSize: 26,

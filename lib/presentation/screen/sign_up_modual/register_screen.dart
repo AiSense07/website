@@ -16,7 +16,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  bool agreeCheckboxValue = true;
+  bool agreeCheckboxValue = false;
 
   TextEditingController fnameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -252,7 +252,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       children: [
         Text(
           name,
-          style: const TextStyle(color: AppColor.primary, letterSpacing: 0, fontSize: 13),
+          style: const TextStyle(color: Colors.black, letterSpacing: 0, fontSize: 13),
         ),
         const SizedBox(height: 5),
         SizedBox(

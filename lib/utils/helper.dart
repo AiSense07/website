@@ -15,6 +15,13 @@ pushReplacement(BuildContext context, Widget destination) {
   );
 }
 
+push(BuildContext context, Widget destination) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => destination),
+  );
+}
+
 pop(BuildContext context) {
   Navigator.pop(context);
 }
@@ -182,3 +189,41 @@ List<Map<String, String>> desc = [
   },
 ];
 
+List<String> statesListTitles = [
+  "Maharashtra",
+  "Karnataka",
+  "Andhra Pradesh",
+  "Gujarat",
+  "Andaman and Nicobar Island (UT)",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chandigarh (UT)",
+  "Chhattisgarh",
+  "Dadra and Nagar Haveli (UT)",
+  "Daman and Diu (UT)",
+  "Delhi (NCT)",
+  "Goa",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jammu and Kashmir",
+  "Jharkhand",
+  "Kerala",
+  "Lakshadweep (UT)",
+  "Madhya Pradesh",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Puducherry (UT)",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal"
+];

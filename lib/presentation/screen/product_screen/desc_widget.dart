@@ -173,7 +173,7 @@ class _DescWidgetState extends State<DescWidget> {
               style: const TextStyle(
                 fontFamily: "pop",
                 fontWeight: FontWeight.bold,
-                color: AppColor.primary,
+                color: Colors.black,
                 fontSize: 16,
               ),
               children: [
@@ -184,7 +184,7 @@ class _DescWidgetState extends State<DescWidget> {
                   style: TextStyle(
                     fontFamily: "pop",
                     fontWeight: FontWeight.w100,
-                    color: AppColor.primary.withOpacity(0.8),
+                    color: Colors.black.withOpacity(0.8),
                     fontSize: 16,
                   ),
                 )
@@ -376,8 +376,8 @@ class _DescWidgetState extends State<DescWidget> {
         ),
         const SizedBox(width: 8),
         SizedBox(
-          width: contentSize(size, 500, sizes(size, size.width * 0.35, size.width * 0.85)),
-          child: Texts.headingText(text: text, color: AppColor.primary, fontSize: 15, maxLine: 10),
+          width: contentSize(size, 500, sizes(size, size.width * 0.35, size.width * 0.8)),
+          child: Texts.headingText(text: text, color: Colors.black, fontSize: 15, maxLine: 10),
         ),
       ],
     );

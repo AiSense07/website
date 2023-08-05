@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:three_connects/presentation/widgets/common_text.dart';
@@ -23,7 +25,6 @@ class ProductContainer extends StatefulWidget {
 }
 
 class _ProductContainerState extends State<ProductContainer> {
-
   int selectedIndex = -1;
 
   @override
@@ -31,7 +32,7 @@ class _ProductContainerState extends State<ProductContainer> {
     Size size = MediaQuery.of(context).size;
     return CustomInkWell(
       onTap: () {
-        context.beamToNamed("/Home?product=Product-name");
+        context.beamToNamed("/Home?product=${widget.index}");
       },
       onHover: (value) {
         setState(() {
@@ -58,13 +59,13 @@ class _ProductContainerState extends State<ProductContainer> {
               children: [
                 CustomNetworkImage(
                   src: product[widget.index],
-                  fit: BoxFit.cover,
-                  width: size500(size, 280, 180),
-                  height: size500(size, 260, 150),
+                  fit: BoxFit.contain,
+                  width: size500(size, 280, size.width > 350 ? 180 : size.width),
+                  height: size500(size, 260, size.width > 350 ? 150 : size.width * 0.6),
                   placeholder: Image.asset(
                     "assets/sabjiwaala.jpeg",
-                    width: size500(size, 280, 180),
-                    height: size500(size, 260, 150),
+                    width: size500(size, 280, size.width > 350 ? 180 : size.width),
+                    height: size500(size, 260, size.width > 350 ? 150 : size.width * 0.6),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -117,7 +118,7 @@ class _ProductContainerState extends State<ProductContainer> {
                     const RatingStar(rating: 3.5),
                     const SizedBox(width: 7),
                     SizedBox(
-                      width: size.width > 380 ? null : size.width * 0.15,
+                      width: size.width > 380 || size.width < 350 ? null : size.width * 0.1,
                       child: Texts.small13Text(
                         size: size,
                         text: "3.5 ( ${widget.index} )",
