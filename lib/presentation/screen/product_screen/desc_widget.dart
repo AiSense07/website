@@ -376,7 +376,7 @@ class _DescWidgetState extends State<DescWidget> {
         ),
         const SizedBox(width: 8),
         SizedBox(
-          width: contentSize(size, 500, sizes(size, size.width * 0.35, size.width * 0.85)),
+          width: contentSize(size, 500, sizes(size, size.width * 0.35, size.width * 0.8)),
           child: Texts.headingText(text: text, color: AppColor.primary, fontSize: 15, maxLine: 10),
         ),
       ],

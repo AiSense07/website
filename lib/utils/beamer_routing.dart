@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:three_connects/presentation/screen/cart_modual/edit_address.dart';
 import 'package:three_connects/presentation/screen/home_screen.dart';
 import 'package:three_connects/presentation/screen/product_list_screen.dart';
 import 'package:three_connects/presentation/screen/sign_up_modual/signup_screen.dart';
@@ -35,8 +36,12 @@ final routerDelegate = BeamerDelegate(
             const ProductList(path: Routes.design),
           ),
       '/Home?product=id': (context, state, data) => beamPage(
-            Routes.design,
+            Routes.product,
             ProductScreen(productId: state.queryParameters['product']!),
+          ),
+      '/${Routes.address}': (context, state, data) => beamPage(
+            Routes.address,
+            const EditAddress(addressID: "", address: "", landmark: "", tag: ""),
           ),
     },
   ),

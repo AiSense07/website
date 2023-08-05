@@ -9,6 +9,7 @@ import 'package:three_connects/presentation/widgets/product_container.dart';
 import 'package:three_connects/utils/app_color.dart';
 import '../widgets/appbar.dart';
 import '../widgets/custom_widgets.dart';
+import 'cart_modual/cart_screen.dart';
 
 class ProductList extends StatefulWidget {
   final String path;
@@ -30,6 +31,7 @@ class _ProductListState extends State<ProductList> {
     Size size = MediaQuery.of(context).size;
     log("==>>>> ${size.width}");
     return Scaffold(
+      endDrawer: const CartScreen(),
       body: ListView(
         children: [
           const CommonAppbar(),
@@ -57,7 +59,8 @@ class _ProductListState extends State<ProductList> {
                           ),
                         ),
                       SizedBox(
-                        width: contentSize(size, 900, size.width > 1000 ? size.width - 300 : size.width - 30),
+                        width: contentSize(
+                            size, 900, size.width > 1000 ? size.width - 300 : size.width - 30),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -92,7 +95,8 @@ class _ProductListState extends State<ProductList> {
                                     onTap: () {},
                                     child: Container(
                                       height: 40,
-                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                                      padding:
+                                          const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                                       decoration: BoxDecoration(
                                         color: Colors.transparent,
                                         border: Border.all(color: AppColor.primary),
@@ -106,7 +110,8 @@ class _ProductListState extends State<ProductList> {
                                           if (size.width > 310)
                                             Text(
                                               "Filter",
-                                              style: TextStyle(color: AppColor.primary, fontSize: 12),
+                                              style:
+                                                  TextStyle(color: AppColor.primary, fontSize: 12),
                                             ),
                                         ],
                                       ),
@@ -127,7 +132,8 @@ class _ProductListState extends State<ProductList> {
                                         border: Border.all(color: AppColor.primary),
                                       ),
                                       child: DropdownButton(
-                                          style: TextStyle(fontSize: 13, color: AppColor.primary),
+                                          style: const TextStyle(
+                                              fontSize: 13, color: AppColor.primary),
                                           underline: const SizedBox(),
                                           value: dropDown,
                                           isDense: false,
@@ -159,7 +165,8 @@ class _ProductListState extends State<ProductList> {
                               color: AppColor.primary,
                               margin: const EdgeInsets.only(top: 10, bottom: 20),
                               height: 1,
-                              width: contentSize(size, 900, size.width > 1000 ? size.width - 230 : size.width - 30),
+                              width: contentSize(size, 900,
+                                  size.width > 1000 ? size.width - 230 : size.width - 30),
                             ),
                             GridView.builder(
                               itemCount: 12,
@@ -173,16 +180,18 @@ class _ProductListState extends State<ProductList> {
                                         ? 2
                                         : 1,
                                 childAspectRatio: size.width > 1250
-                                    ? 0.68
+                                    ? 0.65
                                     : size.width > 1150
-                                        ? size.width * 0.00052
+                                        ? size.width * 0.00053
                                         : size.width > 1000
                                             ? size.width * 0.000505
                                             : size.width > 620
                                                 ? size.width * 0.00068
-                                                : size.width > 350
+                                                : size.width > 500
                                                     ? size.width * 0.001
-                                                    : size.width * 0.00194,
+                                                    : size.width > 350
+                                                        ? size.width * 0.0014
+                                                        : size.width * 0.0025,
                               ),
                               itemBuilder: (context, index) {
                                 return ProductContainer(index: index, path: widget.path);
@@ -192,7 +201,8 @@ class _ProductListState extends State<ProductList> {
                               color: AppColor.primary,
                               margin: const EdgeInsets.only(top: 20, bottom: 20),
                               height: 1,
-                              width: contentSize(size, 900, size.width > 1000 ? size.width - 230 : size.width - 30),
+                              width: contentSize(size, 900,
+                                  size.width > 1000 ? size.width - 230 : size.width - 30),
                             ),
                             NumberPaginator(
                               numberPages: (150 / 12).round(),

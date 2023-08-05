@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:three_connects/presentation/screen/cart_modual/cart_screen.dart';
 
 import 'package:three_connects/presentation/screen/custom_widgets/home_gridview.dart';
 import 'package:three_connects/presentation/widgets/appbar.dart';
@@ -46,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      endDrawer: const CartScreen(),
       floatingActionButton: isMax
           ? FloatingActionButton(
               backgroundColor: AppColor.primary,
@@ -134,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(
                   width: contentSize(size, 1250, size.width),
                   padding: EdgeInsets.symmetric(horizontal: sizes(size, 20, 15), vertical: 10),
-                  child: Text(
+                  child: const Text(
                     "Deals of the week",
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                   ),
@@ -169,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Subscribe now to stay informed and updated "
                           "about exclusive offers and new products.",
                           style: TextStyle(
@@ -194,13 +196,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 50,
                                   child: TextField(
                                     controller: controller,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: "Enter your email...",
                                       border: InputBorder.none,
                                       hintStyle: TextStyle(color: Colors.white),
                                       isDense: true,
                                       contentPadding:
-                                          const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                                     ),
                                   )),
                               Container(
@@ -216,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 child: Text(
                                   size.width > 500 ? "Subscribe" : "📨",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     color: AppColor.primary,
                                     fontWeight: FontWeight.bold,
@@ -238,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(
                   width: contentSize(size, 1250, size.width),
                   padding: EdgeInsets.symmetric(horizontal: sizes(size, 20, 15), vertical: 10),
-                  child: Text(
+                  child: const Text(
                     "New in the shop",
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                   ),
