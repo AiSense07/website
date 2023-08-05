@@ -1,6 +1,5 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-
 import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/presentation/widgets/rating_star.dart';
 import 'package:three_connects/utils/helper.dart';
@@ -24,6 +23,7 @@ class ProductContainer extends StatefulWidget {
 }
 
 class _ProductContainerState extends State<ProductContainer> {
+
   int selectedIndex = -1;
 
   @override
@@ -47,7 +47,8 @@ class _ProductContainerState extends State<ProductContainer> {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(color: selectedIndex == widget.index ? Colors.black26 : Colors.transparent),
+          border: Border.all(
+              color: selectedIndex == widget.index ? Colors.black26 : Colors.transparent),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,7 +60,7 @@ class _ProductContainerState extends State<ProductContainer> {
                   src: product[widget.index],
                   fit: BoxFit.cover,
                   width: size500(size, 280, 180),
-                  height: size500(size, 260, 150) ,
+                  height: size500(size, 260, 150),
                   placeholder: Image.asset(
                     "assets/sabjiwaala.jpeg",
                     width: size500(size, 280, 180),
@@ -86,13 +87,15 @@ class _ProductContainerState extends State<ProductContainer> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Container(
-                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                      decoration: BoxDecoration(
+                          color: Colors.white, borderRadius: BorderRadius.circular(5)),
                       padding: const EdgeInsets.all(2),
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          border: Border.all(color: widget.index % 3 == 0 ? Colors.orange : Colors.red),
+                          border:
+                              Border.all(color: widget.index % 3 == 0 ? Colors.orange : Colors.red),
                         ),
                         child: Texts.small13Text(
                             size: size,
@@ -130,11 +133,10 @@ class _ProductContainerState extends State<ProductContainer> {
                   fontSize: size.width > 615 ? 18 : size500(size, 19, 15),
                 ),
                 Texts.small13Text(
-                  text: "product small title",
-                  maxLine: 2,
-                  size: size,
-                  fontSize: size500(size, 14, 12)
-                ),
+                    text: "product small title",
+                    maxLine: 2,
+                    size: size,
+                    fontSize: size500(size, 14, 12)),
                 const SizedBox(height: 8),
                 Texts.small13Text(
                     size: size,

@@ -52,6 +52,7 @@ class Texts {
   static headingText({
     required String text,
     double? fontSize,
+    double? height,
     String? fontFamily,
     FontWeight? fontWeight,
     TextAlign? textAlign,
@@ -68,7 +69,7 @@ class Texts {
           color: color ?? AppColor.primary,
           fontWeight: fontWeight,
           fontSize: fontSize ?? 18,
-          height: 1.1,
+          height: height ?? 1.1,
         ),
       );
 

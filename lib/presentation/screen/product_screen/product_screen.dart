@@ -20,6 +20,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -108,8 +109,39 @@ class _ProductScreenState extends State<ProductScreen> {
                             ),
                           ),
                         ],
-                      )
+                      ),
                   ],
+                ),
+              ),
+              SizedBox(
+                width: size.width > 1150 ? 800 : size.width - 30,
+                child: ListView.builder(
+                  itemCount: desc.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(vertical: 25),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Texts.headingText(
+                            text: desc[index]['title'] ?? '',
+                            fontFamily: "bold",
+                          ),
+                          const SizedBox(height: 10),
+                          Texts.headingText(
+                            text: desc[index]['text'] ?? '',
+                            color: AppColor.primary,
+                            fontSize: 15,
+                            maxLine: 10,
+                            height: 1.5
+                          )
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
               const FooterBoard(false)

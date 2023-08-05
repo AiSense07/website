@@ -164,3 +164,21 @@ List<Map<String, String>> tech = [
     "text": "1,75 mm",
   },
 ];
+List<Map<String, String>> desc = [
+  {
+    "title": "Reduced plastic content",
+    "text": "PolyTerra PLA is a bioplastic 3D printing "
+        "filament in which organic materials have been "
+        "combined with PLA to reduce the plastic content "
+        "and develop a more environmentally friendly filament.",
+  },
+  {
+    "title": "Easy processing",
+    "text": "PolyTerra prints just like PLA, so no print settings need to be changed and the overhang and bridging functions can even outperform PLA. With a wide printing temperature range from 190 to 230 ° C, PolyTerra can be processed on any extrusion-based 3D printer.",
+  },
+  {
+    "title": "Versatile use",
+    "text": "The mechanical properties of PolyTerra offer a wide range of possible applications as the material is tougher than normal PLA and still retains good rigidity. Both figures and fixtures can be printed with excellent results.",
+  },
+];
+
