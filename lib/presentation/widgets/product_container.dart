@@ -26,6 +26,10 @@ class ProductContainer extends StatefulWidget {
 
 class _ProductContainerState extends State<ProductContainer> {
   int selectedIndex = -1;
+  bool btnSelect = false;
+
+  double elevation = 4.0;
+  double scale = 1.0;
 
   @override
   Widget build(BuildContext context) {
@@ -38,141 +42,152 @@ class _ProductContainerState extends State<ProductContainer> {
         setState(() {
           if (value) {
             selectedIndex = widget.index;
+            elevation = 2;
+            scale = 1.03;
           } else {
             selectedIndex = -1;
+            elevation = 4;
+            scale = 1.0;
           }
         });
       },
-      child: Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(
-              color: selectedIndex == widget.index ? Colors.black26 : Colors.transparent),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Stack(
+      child: Transform.scale(
+        scale: scale,
+        child: Material(
+          shadowColor: selectedIndex == widget.index ? Colors.black12 : Colors.transparent,
+          color: selectedIndex == widget.index ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+          elevation: elevation,
+          child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              border: Border.all(
+                color: selectedIndex == widget.index ? Colors.black26 : Colors.transparent,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                CustomNetworkImage(
-                  src: product[widget.index],
-                  fit: BoxFit.contain,
-                  width: size500(size, 280, size.width > 350 ? 180 : size.width),
-                  height: size500(size, 260, size.width > 350 ? 150 : size.width * 0.6),
-                  placeholder: Image.asset(
-                    "assets/sabjiwaala.jpeg",
-                    width: size500(size, 280, size.width > 350 ? 180 : size.width),
-                    height: size500(size, 260, size.width > 350 ? 150 : size.width * 0.6),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: CustomInkWell(
-                    onTap: () {},
-                    child: Container(
-                      margin: const EdgeInsets.all(5),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: AppColor.primary,
+                Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    CustomNetworkImage(
+                      src: product[widget.index],
+                      fit: BoxFit.contain,
+                      width: size500(size, 280, size.width > 350 ? 180 : size.width),
+                      height: size500(size, 260, size.width > 350 ? 150 : size.width * 0.6),
+                      placeholder: Image.asset(
+                        "assets/sabjiwaala.jpeg",
+                        width: size500(size, 280, size.width > 350 ? 180 : size.width),
+                        height: size500(size, 260, size.width > 350 ? 150 : size.width * 0.6),
+                        fit: BoxFit.fill,
                       ),
-                      child: const Icon(Icons.add_shopping_cart, color: Colors.white, size: 16),
                     ),
-                  ),
+                  ],
                 ),
-                if (widget.index % 3 != 1)
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(5)),
-                      padding: const EdgeInsets.all(2),
+                const SizedBox(height: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const RatingStar(rating: 3.5),
+                        const SizedBox(width: 7),
+                        SizedBox(
+                          width: size.width > 380 || size.width < 350 ? null : size.width * 0.1,
+                          child: Texts.small13Text(
+                            size: size,
+                            text: "3.5 ( ${widget.index} )",
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Texts.headingText(
+                      text: "Company Name big is there",
+                      fontWeight: FontWeight.w600,
+                      fontSize: size.width > 615 ? 18 : size500(size, 19, 15),
+                    ),
+                    Texts.small13Text(
+                        text: "product small title",
+                        maxLine: 2,
+                        size: size,
+                        fontSize: size500(size, 14, 12)),
+                    const SizedBox(height: 8),
+                    Texts.small13Text(
+                        size: size,
+                        text: "Product full description with all details of "
+                            "products and customer can easily understand",
+                        maxLine: 3,
+                        color: Colors.black54,
+                        fontSize: size500(size, 13, 10),
+                        fontWeight: FontWeight.w600),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Texts.headingText(
+                          text: "₹ 1200",
+                          fontWeight: FontWeight.bold,
+                          color: AppColor.btnColor,
+                          fontSize: size.width > 615 ? 18 : size500(size, 16, 13),
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          "₹ 1350",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontFamily: "pop",
+                            color: Colors.black54,
+                            fontSize: size.width > 615 ? 15 : size500(size, 13, 10),
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                      ],
+                    ),
+                    CustomInkWell(
+                      onTap: () {},
+                      onHover: (value) {
+                        setState(() {
+                          if (value) {
+                            btnSelect = value;
+                          } else {
+                            btnSelect = false;
+                          }
+                        });
+                      },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(top: 12),
+                        width: size.width,
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          border:
-                              Border.all(color: widget.index % 3 == 0 ? Colors.orange : Colors.red),
+                          border: Border.all(
+                            color: selectedIndex == widget.index ? Colors.transparent : Colors.black,
+                          ),
+                          color: selectedIndex != widget.index
+                              ? Colors.white
+                              : btnSelect
+                                  ? AppColor.btnColor
+                                  : AppColor.primary,
                         ),
                         child: Texts.small13Text(
-                            size: size,
-                            text: widget.index % 3 == 0 ? "Bestseller" : "-${widget.index * 3} %",
-                            color: widget.index % 3 == 0 ? Colors.orange : Colors.red,
-                            fontWeight: FontWeight.bold,
-                            fontSize: size.width > 500 ? 13 : 10),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const RatingStar(rating: 3.5),
-                    const SizedBox(width: 7),
-                    SizedBox(
-                      width: size.width > 380 || size.width < 350 ? null : size.width * 0.1,
-                      child: Texts.small13Text(
-                        size: size,
-                        text: "3.5 ( ${widget.index} )",
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Texts.headingText(
-                  text: "Company Name big is there",
-                  fontWeight: FontWeight.w600,
-                  fontSize: size.width > 615 ? 18 : size500(size, 19, 15),
-                ),
-                Texts.small13Text(
-                    text: "product small title",
-                    maxLine: 2,
-                    size: size,
-                    fontSize: size500(size, 14, 12)),
-                const SizedBox(height: 8),
-                Texts.small13Text(
-                    size: size,
-                    text: "Product full description with all details of "
-                        "products and customer can easily understand",
-                    maxLine: 3,
-                    color: Colors.black54,
-                    fontSize: size500(size, 13, 10),
-                    fontWeight: FontWeight.w600),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Texts.headingText(
-                      text: "₹ 1200",
-                      fontWeight: FontWeight.bold,
-                      color: AppColor.btnColor,
-                      fontSize: size.width > 615 ? 18 : size500(size, 16, 13),
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      "₹ 1350",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontFamily: "pop",
-                        color: Colors.black54,
-                        fontSize: size.width > 615 ? 15 : size500(size, 13, 10),
-                        decoration: TextDecoration.lineThrough,
+                          size: size,
+                          text: "Add to cart",
+                          color: selectedIndex != widget.index ? Colors.black : Colors.white,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

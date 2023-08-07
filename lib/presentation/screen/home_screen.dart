@@ -105,11 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   curve: Curves.linear,
                 );
               },
-              child:
-                  const Icon(Icons.arrow_upward_rounded, color: Colors.white),
+              child: const Icon(Icons.arrow_upward_rounded, color: Colors.white),
             )
           : const SizedBox(),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.background,
       body: SafeArea(
         child: RawKeyboardListener(
           onKey: _handleKeyEvent,
@@ -137,15 +136,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     items: [0, 1, 2].map(
                       (index) {
                         return Container(
-                          margin: const EdgeInsets.only(
-                              bottom: 5, right: 15, left: 15),
+                          margin: const EdgeInsets.only(bottom: 5, right: 15, left: 15),
                           width: size.width,
                           color: AppColor.background,
                           child: CacheImage(
                             height: sizes(size, 500, size.width * 0.7),
                             width: size.width,
-                            img:
-                                "https://www.3dnatives.com/en/wp-content/uploads/"
+                            img: "https://www.3dnatives.com/en/wp-content/uploads/"
                                 "sites/2/2021/06/filamentcove.jpeg",
                           ),
                         );
@@ -164,23 +161,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 10.0,
                           height: 10.0,
                           padding: const EdgeInsets.all(1),
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 4.0),
+                          margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 4.0),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.shade200,
                             border: Border.all(color: Colors.black26),
                             boxShadow: const [
-                              BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 2,
-                                  spreadRadius: 2)
+                              BoxShadow(color: Colors.black12, blurRadius: 2, spreadRadius: 2)
                             ],
                           ),
                           child: CircleAvatar(
-                            backgroundColor: _current == entry.key
-                                ? AppColor.primary
-                                : Colors.grey.shade200,
+                            backgroundColor:
+                                _current == entry.key ? AppColor.primary : Colors.grey.shade200,
                           ),
                         ),
                       );
@@ -193,13 +185,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: contentSize(size, 1250, size.width),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: sizes(size, 20, 15), vertical: 10),
-                    child: const Text(
-                      "Deals of the week !",
-                      style:
-                          TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+                    // width: contentSize(size, 1250, size.width),
+                    padding: EdgeInsets.symmetric(horizontal: sizes(size, 20, 15), vertical: 10),
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Expanded(child: Divider(color: Colors.black54, thickness: 2)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: sizes(size, 100, size500(size, 80, 40)),
+                          ),
+                          child: Text(
+                            "Deals of the week !",
+                            style: TextStyle(
+                                fontSize: sizes(size, 32, size500(size, 28, 26)),
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        const Expanded(child: Divider(color: Colors.black54, thickness: 2)),
+                      ],
                     ),
                   ),
                   const HomeGrid()
@@ -210,8 +215,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: AppColor.btnColor,
                 margin: EdgeInsets.symmetric(vertical: sizes(size, 60, 30)),
                 padding: EdgeInsets.symmetric(
-                  horizontal: contentSize(size, (size.width - 1250) / 2,
-                      sizes(size, 25, size.width > 450 ? 30 : 10)),
+                  horizontal: contentSize(
+                      size, (size.width - 1250) / 2, sizes(size, 25, size.width > 450 ? 30 : 10)),
                   vertical: sizes(size, 25, 15),
                 ),
                 child: Row(
@@ -228,12 +233,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     if (size.width > 450) SizedBox(width: sizes(size, 30, 15)),
                     SizedBox(
-                      width: sizes(
-                          size,
-                          500,
-                          size.width > 450
-                              ? size.width - 135
-                              : size.width - 25),
+                      width:
+                          sizes(size, 500, size.width > 450 ? size.width - 135 : size.width - 25),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -257,30 +258,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 SizedBox(
-                                    width: sizes(
-                                        size,
-                                        400,
-                                        size.width > 450
-                                            ? size.width - 250
-                                            : size.width - 70),
+                                    width: sizes(size, 400,
+                                        size.width > 450 ? size.width - 250 : size.width - 70),
                                     height: 50,
                                     child: TextField(
                                       controller: controller,
                                       decoration: const InputDecoration(
                                         hintText: "Enter your email...",
                                         border: InputBorder.none,
-                                        hintStyle:
-                                            TextStyle(color: Colors.white),
+                                        hintStyle: TextStyle(color: Colors.white),
                                         isDense: true,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 10, horizontal: 15),
+                                        contentPadding:
+                                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                                       ),
                                     )),
                                 Container(
                                   alignment: Alignment.center,
                                   height: 40,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
                                   decoration: const BoxDecoration(
                                     borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(6),
@@ -311,12 +306,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Container(
                     width: contentSize(size, 1250, size.width),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: sizes(size, 20, 15), vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: sizes(size, 20, 15), vertical: 10),
                     child: const Text(
                       "New Arrivals !",
-                      style:
-                          TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
                     ),
                   ),
                   const HomeGrid()

@@ -50,16 +50,17 @@ flutter:
   fonts:
     - family: light
       fonts:
-        - asset: assets/fonts/300.ttf
+        - asset: assets/fonts/Light.otf
+    - family: thin
+      fonts:
+        - asset: assets/fonts/Thin.otf
     - family: pop
       fonts:
-        - asset: assets/fonts/400.ttf
-#        - asset: assets/fonts/500.ttf
+        - asset: assets/fonts/Regular.otf
     - family: w600
       fonts:
-        - asset: assets/fonts/600.ttf
+        - asset: assets/fonts/Medium.otf
     - family: bold
       fonts:
-        - asset: assets/fonts/700.ttf
-#        - asset: assets/fonts/900.ttf
+        - asset: assets/fonts/bold.otf
 

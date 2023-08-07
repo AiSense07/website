@@ -40,67 +40,32 @@ class _HomeGridState extends State<HomeGrid> {
   bool isMax = false;
   bool isMin = true;
 
+  double elevation = 4.0;
+  double scale = 1.0;
+  Offset translate = Offset(0,0);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.width > 500 ? 950 : 680,
+      // height: size.width > 500 ? 950 : 680,
       width: contentSize(size, 1250, size.width),
-      child: Stack(
-        children: [
-          GridView.builder(
-            padding: EdgeInsets.symmetric(horizontal: size500(size, 25, 15)),
-            physics: const AlwaysScrollableScrollPhysics(),
-            controller: controller,
-            scrollDirection: Axis.horizontal,
-            itemCount: product.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: size.width > 500 ?1.55 : 1.8,
-              mainAxisSpacing: 15,
-              crossAxisSpacing: 20,
-            ),
-            itemBuilder: (context, index) {
-              return ProductContainer(index: index, path: '');
-            },
-          ),
-          if (!isMax)
-            Align(
-              alignment: Alignment.centerRight,
-              child: SlidingBtn(
-                  size: size,
-                  onTap: () {
-                    setState(() {
-                      scroll += size.width > 640 ? 630 : 315;
-                    });
-                    controller.animateTo(
-                      scroll,
-                      duration: const Duration(milliseconds: 350),
-                      curve: Curves.linear,
-                    );
-                  },
-                  icon: Icons.arrow_forward_ios_rounded),
-            ),
-          if (!isMin)
-            Align(
-              alignment: Alignment.centerLeft,
-              child: SlidingBtn(
-                size: size,
-                onTap: () {
-                  setState(() {
-                    scroll -= size.width > 640 ? 630 : 315;
-                  });
-                  controller.animateTo(
-                    scroll,
-                    duration: const Duration(milliseconds: 350),
-                    curve: Curves.linear,
-                  );
-                },
-                icon: Icons.arrow_back_ios_new,
-                isRight: true,
-              ),
-            )
-        ],
+      child: GridView.builder(
+        padding: EdgeInsets.symmetric(horizontal: size500(size, 25, 15)),
+        physics: const NeverScrollableScrollPhysics(),
+        controller: controller,
+        shrinkWrap: true,
+        // scrollDirection: Axis.horizontal,
+        itemCount: 4,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
+          childAspectRatio: size.width * 0.00039,
+          mainAxisSpacing: 15,
+          crossAxisSpacing: 20,
+        ),
+        itemBuilder: (context, index) {
+          return ProductContainer(index: index, path: '');
+        },
       ),
     );
   }
