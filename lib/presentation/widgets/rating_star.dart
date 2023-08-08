@@ -3,8 +3,9 @@ import 'package:three_connects/utils/app_color.dart';
 
 class RatingStar extends StatelessWidget {
   final double rating;
+  final double?   size;
 
-  const RatingStar({Key? key, required this.rating}) : super(key: key);
+  const RatingStar({Key? key, required this.rating, this.size}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class RatingStar extends StatelessWidget {
               ? Icons.star_half
               : Icons.star_border,
       color: AppColor.btnColor,
-      size: 18,
+      size: size ?? 18,
     );
   }
 }

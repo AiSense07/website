@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:three_connects/presentation/widgets/custom_btn.dart';
-import 'package:three_connects/utils/helper.dart';
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import '../../widgets/custom_widgets.dart';
 import '../../widgets/product_container.dart';
 
@@ -42,11 +41,12 @@ class _HomeGridState extends State<HomeGrid> {
 
   double elevation = 4.0;
   double scale = 1.0;
-  Offset translate = Offset(0,0);
+  Offset translate = const Offset(0, 0);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    log("${size.width}");
     return SizedBox(
       // height: size.width > 500 ? 950 : 680,
       width: contentSize(size, 1250, size.width),
@@ -58,10 +58,28 @@ class _HomeGridState extends State<HomeGrid> {
         // scrollDirection: Axis.horizontal,
         itemCount: 4,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-          childAspectRatio: size.width * 0.00039,
-          mainAxisSpacing: 15,
-          crossAxisSpacing: 20,
+          crossAxisCount: size.width > 900
+              ? 4
+              : size.width > 730
+                  ? 3
+                  : size.width > 320
+                      ? 2
+                      : 1,
+          childAspectRatio: contentSize(
+            size,
+            0.55,
+            size.width > 900
+                ? size.width * 0.00045
+                : size.width > 730
+                    ? size.width * 0.00057
+                    : size.width > 500
+                        ? size.width * 0.00088
+                        : size.width > 320
+                            ? size.width * 0.0012
+                            : size.width * 0.0022,
+          ),
+          mainAxisSpacing: contentSize(size, 15, 5),
+          crossAxisSpacing: contentSize(size, 20, 5),
         ),
         itemBuilder: (context, index) {
           return ProductContainer(index: index, path: '');

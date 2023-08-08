@@ -9,7 +9,9 @@ import 'package:three_connects/presentation/widgets/appbar.dart';
 import 'package:three_connects/presentation/widgets/cached_imge.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
 import 'package:three_connects/presentation/widgets/footer.dart';
-import 'package:three_connects/utils/app_image.dart';
+import 'package:three_connects/presentation/widgets/title.dart';
+import 'package:three_connects/presentation/widgets/view_all_btn.dart';
+import 'package:three_connects/utils/helper.dart';
 import '../../utils/app_color.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -181,138 +183,54 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               const SizedBox(height: 40),
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    // width: contentSize(size, 1250, size.width),
-                    padding: EdgeInsets.symmetric(horizontal: sizes(size, 20, 15), vertical: 10),
-                    margin: const EdgeInsets.only(bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Expanded(child: Divider(color: Colors.black54, thickness: 2)),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: sizes(size, 100, size500(size, 80, 40)),
-                          ),
-                          child: Text(
-                            "Deals of the week !",
-                            style: TextStyle(
-                                fontSize: sizes(size, 32, size500(size, 28, 26)),
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        const Expanded(child: Divider(color: Colors.black54, thickness: 2)),
-                      ],
-                    ),
-                  ),
-                  const HomeGrid()
+                  CommonTitle(title: "Deals of the week !"),
+                  ViewAllBtn(),
+                  HomeGrid(),
                 ],
               ),
-              Container(
-                width: size.width,
-                color: AppColor.btnColor,
-                margin: EdgeInsets.symmetric(vertical: sizes(size, 60, 30)),
-                padding: EdgeInsets.symmetric(
-                  horizontal: contentSize(
-                      size, (size.width - 1250) / 2, sizes(size, 25, size.width > 450 ? 30 : 10)),
-                  vertical: sizes(size, 25, 15),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (size.width > 450)
-                      CircleAvatar(
-                        radius: sizes(size, 50, 30),
-                        backgroundColor: Colors.white,
-                        child: Image.asset(
-                          AppImage.email,
-                          width: sizes(size, 60, 30),
-                        ),
-                      ),
-                    if (size.width > 450) SizedBox(width: sizes(size, 30, 15)),
-                    SizedBox(
-                      width:
-                          sizes(size, 500, size.width > 450 ? size.width - 135 : size.width - 25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Subscribe now to stay informed and updated "
-                            "about exclusive offers and new products.",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(top: 10),
-                            height: 40,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                SizedBox(
-                                    width: sizes(size, 400,
-                                        size.width > 450 ? size.width - 250 : size.width - 70),
-                                    height: 50,
-                                    child: TextField(
-                                      controller: controller,
-                                      decoration: const InputDecoration(
-                                        hintText: "Enter your email...",
-                                        border: InputBorder.none,
-                                        hintStyle: TextStyle(color: Colors.white),
-                                        isDense: true,
-                                        contentPadding:
-                                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                                      ),
-                                    )),
-                                Container(
-                                  alignment: Alignment.center,
-                                  height: 40,
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(6),
-                                      bottomRight: Radius.circular(6),
-                                    ),
-                                    color: Colors.white,
-                                  ),
-                                  child: Text(
-                                    size.width > 500 ? "Subscribe" : "📨",
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 100),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CommonTitle(title: "New Arrivals !"),
+                  ViewAllBtn(),
+                  HomeGrid(),
+                ],
               ),
+              const SizedBox(height: 100),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
+                  const CommonTitle(title: "Shop by Brand"),
+                  SizedBox(
                     width: contentSize(size, 1250, size.width),
-                    padding: EdgeInsets.symmetric(horizontal: sizes(size, 20, 15), vertical: 10),
-                    child: const Text(
-                      "New Arrivals !",
-                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+                    child: GridView.builder(
+                      padding: EdgeInsets.symmetric(horizontal: size500(size, 25, 15)),
+                      shrinkWrap: true,
+                      itemCount: brand.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: size.width > 1300
+                              ? 8
+                              : size.width > 1150
+                                  ? 7
+                                  : size.width > 750
+                                      ? 6
+                                      : size.width > 500
+                                          ? 5
+                                          : 3,
+                          crossAxisSpacing: 15,
+                          childAspectRatio: 1.2),
+                      itemBuilder: (context, index) {
+                        return CustomInkWell(
+                          onTap: (){},
+                          child: Image.network(brand[index]),
+                        );
+                      },
                     ),
                   ),
-                  const HomeGrid()
                 ],
               ),
               const SizedBox(height: 50),

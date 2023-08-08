@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/utils/app_color.dart';
 
+import '../../utils/app_image.dart';
 import '../../utils/helper.dart';
+import 'custom_widgets.dart';
 
 class FooterBoard extends StatefulWidget {
   final bool isHideFooter;
@@ -36,9 +38,11 @@ List<String> informationFooterList = [
 class _FooterBoardState extends State<FooterBoard> {
   int company = -1;
   int info = -1;
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return LayoutBuilder(
       builder: (context, constraints) {
         return Container(
@@ -53,8 +57,96 @@ class _FooterBoardState extends State<FooterBoard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 50),
-
+              Container(
+                width: size.width,
+                margin: const EdgeInsets.only(top: 25,bottom: 20),
+                padding: EdgeInsets.symmetric(
+                  horizontal: contentSize(
+                      size, (size.width - 1250) / 2, sizes(size, 25, size.width > 450 ? 30 : 10)),
+                  vertical: sizes(size, 25, 15),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (size.width > 450)
+                      CircleAvatar(
+                        radius: sizes(size, 50, 30),
+                        backgroundColor: Colors.white,
+                        child: Image.asset(
+                          AppImage.email,
+                          width: sizes(size, 60, 30),
+                        ),
+                      ),
+                    if (size.width > 450) SizedBox(width: sizes(size, 30, 15)),
+                    SizedBox(
+                      width:
+                      sizes(size, 500, size.width > 450 ? size.width - 135 : size.width - 25),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Subscribe now to stay informed and updated "
+                                "about exclusive offers and new products.",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            height: 40,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                    width: sizes(size, 400,
+                                        size.width > 450 ? size.width - 250 : size.width - 70),
+                                    height: 50,
+                                    child: TextField(
+                                      controller: controller,
+                                      decoration: const InputDecoration(
+                                        hintText: "Enter your email...",
+                                        border: InputBorder.none,
+                                        hintStyle: TextStyle(color: Colors.white),
+                                        isDense: true,
+                                        contentPadding:
+                                        EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                      ),
+                                    )),
+                                Container(
+                                  alignment: Alignment.center,
+                                  height: 40,
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(6),
+                                      bottomRight: Radius.circular(6),
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                  child: Text(
+                                    size.width > 500 ? "Subscribe" : "📨",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Text(
                 "Welcome to 3D Connects!",
                 textAlign: TextAlign.center,

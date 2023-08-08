@@ -132,6 +132,18 @@ List<String> color = [
   "https://c-3d.niceshops.com/upload/image/product/original/default/21693_66aea7ae.128x128.jpg",
   "https://c-3d.niceshops.com/upload/image/product/original/default/23619_411f64e4.128x128.jpg",
 ];
+List<String> brand = [
+  "https://diy3d.in/cdn/shop/files/Untitled_design_23_185x.png?v=1665140621",
+  "https://diy3d.in/cdn/shop/files/Untitled_design_22_185x.png?v=1665140565",
+  "https://diy3d.in/cdn/shop/files/Untitled_design_24_185x.png?v=1665140684",
+  "https://diy3d.in/cdn/shop/files/3_185x.png?v=1663738850",
+  "https://diy3d.in/cdn/shop/files/Untitled_design_19_185x.png?v=1665140303",
+  "https://diy3d.in/cdn/shop/files/Untitled_design_18_185x.png?v=1665140198",
+  "https://diy3d.in/cdn/shop/files/Untitled_design_25_185x.png?v=1665140831",
+  "https://diy3d.in/cdn/shop/files/Untitled_design_16_185x.png?v=1665139898",
+  "https://diy3d.in/cdn/shop/files/Untitled_design_17_185x.png?v=1665140062",
+  "https://diy3d.in/cdn/shop/files/Untitled_design_20_185x.png?v=1665140371",
+];
 
 List<Map<String, String>> tech = [
   {
@@ -181,11 +193,13 @@ List<Map<String, String>> desc = [
   },
   {
     "title": "Easy processing",
-    "text": "PolyTerra prints just like PLA, so no print settings need to be changed and the overhang and bridging functions can even outperform PLA. With a wide printing temperature range from 190 to 230 ° C, PolyTerra can be processed on any extrusion-based 3D printer.",
+    "text":
+        "PolyTerra prints just like PLA, so no print settings need to be changed and the overhang and bridging functions can even outperform PLA. With a wide printing temperature range from 190 to 230 ° C, PolyTerra can be processed on any extrusion-based 3D printer.",
   },
   {
     "title": "Versatile use",
-    "text": "The mechanical properties of PolyTerra offer a wide range of possible applications as the material is tougher than normal PLA and still retains good rigidity. Both figures and fixtures can be printed with excellent results.",
+    "text":
+        "The mechanical properties of PolyTerra offer a wide range of possible applications as the material is tougher than normal PLA and still retains good rigidity. Both figures and fixtures can be printed with excellent results.",
   },
 ];
 

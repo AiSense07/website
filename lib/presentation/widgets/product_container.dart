@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:three_connects/presentation/widgets/common_text.dart';
@@ -77,12 +75,12 @@ class _ProductContainerState extends State<ProductContainer> {
                     CustomNetworkImage(
                       src: product[widget.index],
                       fit: BoxFit.contain,
-                      width: size500(size, 280, size.width > 350 ? 180 : size.width),
-                      height: size500(size, 260, size.width > 350 ? 150 : size.width * 0.6),
+                      width: size500(size, 280, size.width > 320 ? 180 : size.width),
+                      height: size500(size, 260, size.width > 320 ? 150 : size.width * 0.6),
                       placeholder: Image.asset(
                         "assets/sabjiwaala.jpeg",
-                        width: size500(size, 280, size.width > 350 ? 180 : size.width),
-                        height: size500(size, 260, size.width > 350 ? 150 : size.width * 0.6),
+                        width: size500(size, 280, size.width > 320 ? 180 : size.width),
+                        height: size500(size, 260, size.width > 320 ? 150 : size.width * 0.6),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -94,13 +92,18 @@ class _ProductContainerState extends State<ProductContainer> {
                   children: [
                     Row(
                       children: [
-                        const RatingStar(rating: 3.5),
+                        if (size.width < 400 && size.width > 320)
+                          const Icon(Icons.star,color: AppColor.btnColor,size: 18)
+                        else
+                          RatingStar(
+                            rating: 3.5,
+                            size: (size.width < 440 && size.width > 320) ? 13.5 : 18,
+                          ),
                         const SizedBox(width: 7),
                         SizedBox(
-                          width: size.width > 380 || size.width < 350 ? null : size.width * 0.1,
                           child: Texts.small13Text(
                             size: size,
-                            text: "3.5 ( ${widget.index} )",
+                            text: "3.5 ( ${widget.index}000 )",
                             fontWeight: FontWeight.w800,
                           ),
                         ),
@@ -168,7 +171,8 @@ class _ProductContainerState extends State<ProductContainer> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
-                            color: selectedIndex == widget.index ? Colors.transparent : Colors.black,
+                            color:
+                                selectedIndex == widget.index ? Colors.transparent : Colors.black,
                           ),
                           color: selectedIndex != widget.index
                               ? Colors.white
