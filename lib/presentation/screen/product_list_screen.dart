@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:number_paginator/number_paginator.dart';
+import 'package:three_connects/presentation/widgets/enddrawer.dart';
 import 'package:three_connects/presentation/widgets/filter_container.dart';
 import 'package:three_connects/presentation/widgets/footer.dart';
 import 'package:three_connects/presentation/widgets/product_container.dart';
@@ -31,7 +32,7 @@ class _ProductListState extends State<ProductList> {
     Size size = MediaQuery.of(context).size;
     log("==>>>> ${size.width}");
     return Scaffold(
-      endDrawer: const CartScreen(),
+      endDrawer: const EndDrawer(),
       body: ListView(
         children: [
           const CommonAppbar(),

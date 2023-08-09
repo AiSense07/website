@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:three_connects/presentation/widgets/common_text.dart';
+import 'package:three_connects/presentation/widgets/custom_widgets.dart';
 import '../../../utils/app_color.dart';
 import '../../../utils/app_validators.dart';
 import '../../../utils/helper.dart';
@@ -18,10 +20,14 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   bool agreeCheckboxValue = false;
 
+  bool isVerify = false;
+
   TextEditingController fnameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController cityController = TextEditingController();
+  TextEditingController otp = TextEditingController();
   TextEditingController stateController = TextEditingController();
+  TextEditingController mobile = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -49,11 +55,74 @@ class _RegisterScreenState extends State<RegisterScreen> {
               textField(
                 controller: fnameController,
                 name: "Full Name",
+                validator: Validators.commonString
               ),
-              textField(
-                controller: emailController,
-                name: "Email",
+              Stack(
+                alignment: Alignment.topRight,
+                children: [
+                  textField(
+                    controller: emailController,
+                    name: "Email",
+                    keyboard: TextInputType.emailAddress,
+                    validator: Validators.email,
+                    pad: const EdgeInsets.only(left: 15, right: 65),
+                  ),
+                  CustomInkWell(
+                    onTap: () {
+                      setState(() {
+                        isVerify = true;
+                      });
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                      padding: const EdgeInsets.only(top: 38, right: 15, left: 15),
+                      child: Texts.small13Text(
+                          text: "Verify",
+                          size: size,
+                          fontWeight: FontWeight.bold,
+                          color: AppColor.btnColor),
+                    ),
+                  )
+                ],
               ),
+              if (isVerify)
+                textField(
+                  controller: otp,
+                  name: "Please enter the OTP received to "
+                      "your email id ${emailController.text}",
+                ),
+              const Text(
+                "Mobile number",
+                style: TextStyle(color: Colors.black, letterSpacing: 0, fontSize: 13),
+              ),
+              const SizedBox(height: 5),
+              Stack(
+                children: [
+                  SizedBox(
+                    child: TextFormField(
+                      controller: mobile,
+                      maxLength: 10,
+                      validator: Validators.phoneNumber,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                        hintText: '9123123123',
+                        prefixText: '       ',
+                        counterText: '',
+                        enabledBorder: border,
+                        errorBorder: border,
+                        focusedBorder: border,
+                        border: border,
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+                    child: Text("+91"),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10),
               if (size.width > 330)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -153,6 +222,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         if (!_formKey.currentState!.validate()) {
                           commonToast(context, "Please fix the errors above!!");
                           return;
+                        } else if (!isVerify) {
+                          commonToast(context, "Please verify Email");
+                          return;
+                        } else if (otp.text.isEmpty) {
+                          commonToast(context, "Please enter otp sent to your Email");
+                          return;
                         }
 
                         if (_formKey.currentState!.validate()) {
@@ -185,6 +260,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+
+  OutlineInputBorder border = OutlineInputBorder(
+    borderSide: const BorderSide(width: 1, color: AppColor.primary),
+    borderRadius: BorderRadius.circular(8),
+  );
 
   _showListState(BuildContext context) {
     showDialog(
@@ -245,6 +325,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     TextInputType? keyboard,
     Function? onTap,
     double? width,
+    EdgeInsets? pad,
+    String? Function(String?)? validator,
     Function(String value)? onChange,
   }) {
     return Column(
@@ -257,7 +339,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         const SizedBox(height: 5),
         SizedBox(
           width: width,
-          height: 45,
+          // height: 45,
           child: TextFormField(
             controller: controller,
             onTap: () {
@@ -273,26 +355,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             keyboardType: keyboard ?? TextInputType.name,
             inputFormatters: [if (name != "Email") UpperCaseTextFormatter()],
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+              contentPadding: pad ?? const EdgeInsets.symmetric(horizontal: 15),
               hintText: hint ?? '',
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 1, color: AppColor.primary),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 1, color: AppColor.primary),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 1, color: AppColor.primary),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              border: OutlineInputBorder(
-                borderSide: const BorderSide(width: 1, color: AppColor.primary),
-                borderRadius: BorderRadius.circular(8),
-              ),
+              enabledBorder: border,
+              errorBorder: border,
+              focusedBorder: border,
+              border: border,
             ),
-            validator: Validators.commonString,
+            validator: validator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
           ),
         ),

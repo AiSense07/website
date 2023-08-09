@@ -42,12 +42,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SizedBox(
-      height: size.height > 450 ? 432 : size.height * 0.7,
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10),
+          bottomLeft: Radius.circular(10),
+        ),
+      ),
       width: 450,
       child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                onPressed: () {
+                  pop(context);
+                },
+                icon: const Icon(
+                  Icons.close,
+                  color: AppColor.primary,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 15),
           Texts.headingText(
             text: "Welcome to 3D Connect!",
             fontWeight: FontWeight.bold,
@@ -66,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             maxLine: 10,
             color: Colors.black45,
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 25),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -152,7 +173,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  bool agreeCheckboxValue = true;
+  bool agreeCheckboxValue = false;
 
   Widget phoneNumberScreen() {
     return Column(

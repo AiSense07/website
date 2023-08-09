@@ -6,6 +6,7 @@ import 'package:three_connects/presentation/screen/product_screen/image_widget.d
 import 'package:three_connects/presentation/screen/product_screen/widgtes/tech_container.dart';
 import 'package:three_connects/presentation/widgets/appbar.dart';
 import 'package:three_connects/presentation/widgets/common_text.dart';
+import 'package:three_connects/presentation/widgets/enddrawer.dart';
 import 'package:three_connects/presentation/widgets/footer.dart';
 import 'package:three_connects/utils/app_color.dart';
 import 'package:three_connects/utils/helper.dart';
@@ -43,7 +44,7 @@ class _ProductScreenState extends State<ProductScreen> {
     Size size = MediaQuery.of(context).size;
     log("size width ${size.width}");
     return Scaffold(
-      endDrawer: const CartScreen(),
+      endDrawer: const EndDrawer(),
       body: isLoad
           ? const Center(child: CircularProgressIndicator())
           : SafeArea(

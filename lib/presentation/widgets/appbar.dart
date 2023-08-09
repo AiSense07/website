@@ -8,6 +8,7 @@ import 'package:three_connects/utils/app_color.dart';
 import 'package:three_connects/utils/app_image.dart';
 import 'package:three_connects/utils/helper.dart';
 import 'package:three_connects/utils/navigation_string.dart';
+import 'package:three_connects/utils/value_notifier.dart';
 
 class CommonAppbar extends StatefulWidget {
   final bool isShadow;
@@ -42,13 +43,14 @@ class _CommonAppbarState extends State<CommonAppbar> {
       children: [
         Container(
           width: size.width,
+          alignment: Alignment.center,
           color: AppColor.primary,
           padding: const EdgeInsets.all(8),
           child: Text(
-            "Welcome to 3D Connects & Get the best product",
+            "For Best offer Whatsapp on 1234567890.",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 10),
+            style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 12),
           ),
         ),
         Padding(
@@ -208,16 +210,18 @@ class _CommonAppbarState extends State<CommonAppbar> {
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                  contentPadding: EdgeInsets.zero,
-                  content: const SignUpScreen(),
-                );
-              },
-            );
+            isCart.value = false;
+            Scaffold.of(context).openEndDrawer();
+            // showDialog(
+            //   context: context,
+            //   builder: (context) {
+            //     return AlertDialog(
+            //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            //       contentPadding: EdgeInsets.zero,
+            //       content: const SignUpScreen(),
+            //     );
+            //   },
+            // );
             // context.beamToNamed("/${Routes.login}");
             onTap();
           },
@@ -245,6 +249,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
         const SizedBox(width: 8),
         IconButton(
           onPressed: () {
+            isCart.value = true;
             Scaffold.of(context).openEndDrawer();
           },
           icon: const Icon(Icons.shopping_cart_outlined),

@@ -26,7 +26,7 @@ class Validators {
   static String? commonString(String? text) {
     if (text != null) {
       if (text.isEmpty) {
-        return "This field must not be empty!";
+        return "Please enter your Full name";
       }
     }
     return null;

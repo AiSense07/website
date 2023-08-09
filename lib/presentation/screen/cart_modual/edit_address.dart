@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
+import 'package:three_connects/presentation/widgets/enddrawer.dart';
 import 'package:three_connects/utils/app_color.dart';
 import '../../../utils/helper.dart';
 import '../../widgets/appbar.dart';
@@ -64,7 +65,7 @@ class _EditAddressState extends State<EditAddress> {
     Size size = MediaQuery.of(context).size;
     log("${size.width}");
     return Scaffold(
-      endDrawer: const CartScreen(),
+      endDrawer: const EndDrawer(),
       body: SafeArea(
         child: Column(
           children: [

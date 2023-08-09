@@ -5,9 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:three_connects/presentation/screen/cart_modual/cart_screen.dart';
 
 import 'package:three_connects/presentation/screen/custom_widgets/home_gridview.dart';
+import 'package:three_connects/presentation/screen/sign_up_modual/signup_screen.dart';
 import 'package:three_connects/presentation/widgets/appbar.dart';
 import 'package:three_connects/presentation/widgets/cached_imge.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
+import 'package:three_connects/presentation/widgets/enddrawer.dart';
 import 'package:three_connects/presentation/widgets/footer.dart';
 import 'package:three_connects/presentation/widgets/title.dart';
 import 'package:three_connects/presentation/widgets/view_all_btn.dart';
@@ -96,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      endDrawer: const CartScreen(),
+      endDrawer: const EndDrawer(),
       floatingActionButton: isMax
           ? FloatingActionButton(
               backgroundColor: AppColor.primary,

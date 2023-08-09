@@ -30,6 +30,7 @@ void commonToast(BuildContext context, String msg, {Color? color}) {
   Fluttertoast.showToast(
       toastLength: Toast.LENGTH_LONG,
       msg: msg,
+      timeInSecForIosWeb: 2,
       backgroundColor: color ?? Colors.black,
       textColor: Colors.white);
 }
