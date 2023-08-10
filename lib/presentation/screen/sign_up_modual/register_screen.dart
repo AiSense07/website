@@ -7,6 +7,7 @@ import 'package:three_connects/presentation/widgets/custom_widgets.dart';
 import '../../../utils/app_color.dart';
 import '../../../utils/app_validators.dart';
 import '../../../utils/helper.dart';
+import '../../../utils/value_notifier.dart';
 
 class RegisterScreen extends StatefulWidget {
   final String mobile;
@@ -27,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController cityController = TextEditingController();
   TextEditingController otp = TextEditingController();
   TextEditingController stateController = TextEditingController();
-  TextEditingController mobile = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -53,10 +54,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 15),
               textField(
-                controller: fnameController,
-                name: "Full Name",
-                validator: Validators.commonString
-              ),
+                  controller: fnameController,
+                  name: "Full Name",
+                  validator: Validators.commonString),
               Stack(
                 alignment: Alignment.topRight,
                 children: [
@@ -69,9 +69,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   CustomInkWell(
                     onTap: () {
-                      setState(() {
-                        isVerify = true;
-                      });
+                      if (emailController.text.isNotEmpty) {
+                        setState(() {
+                          isVerify = true;
+                        });
+                      } else {
+                        commonToast(context, "PLease enter email address");
+                      }
                     },
                     child: Container(
                       color: Colors.transparent,
@@ -100,7 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   SizedBox(
                     child: TextFormField(
-                      controller: mobile,
+                      controller: mobileController,
                       maxLength: 10,
                       validator: Validators.phoneNumber,
                       keyboardType: TextInputType.number,
@@ -231,6 +235,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
 
                         if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            isOtp.value = true;
+                            mobile.value = mobileController.text;
+                          });
                           EasyLoading.show();
                         }
                       },
