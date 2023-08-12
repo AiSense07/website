@@ -8,6 +8,7 @@ import '../../../utils/app_color.dart';
 import '../../../utils/app_validators.dart';
 import '../../../utils/helper.dart';
 import '../../../utils/value_notifier.dart';
+import '../../widgets/text_input.dart';
 
 class RegisterScreen extends StatefulWidget {
   final String mobile;
@@ -21,12 +22,14 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   bool agreeCheckboxValue = false;
 
-  bool isVerify = false;
+  bool isEmailVerify = false;
+  bool isMobileVerify = false;
 
   TextEditingController fnameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController cityController = TextEditingController();
-  TextEditingController otp = TextEditingController();
+  TextEditingController emailOtp = TextEditingController();
+  TextEditingController mobileOtp = TextEditingController();
   TextEditingController stateController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
 
@@ -53,45 +56,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-              textField(
+              RegisterTextField(
                   controller: fnameController,
                   name: "Full Name",
                   validator: Validators.commonString),
               Stack(
                 alignment: Alignment.topRight,
                 children: [
-                  textField(
+                  RegisterTextField(
                     controller: emailController,
                     name: "Email",
+                    isEmail: true,
                     keyboard: TextInputType.emailAddress,
                     validator: Validators.email,
                     pad: const EdgeInsets.only(left: 15, right: 65),
                   ),
-                  CustomInkWell(
-                    onTap: () {
-                      if (emailController.text.isNotEmpty) {
+                  verify(
+                    size,
+                    () {
+                      final String? email = Validators.email(emailController.text);
+                      if (email == null) {
                         setState(() {
-                          isVerify = true;
+                          isEmailVerify = true;
                         });
                       } else {
-                        commonToast(context, "PLease enter email address");
+                        commonToast(context, email);
                       }
                     },
-                    child: Container(
-                      color: Colors.transparent,
-                      padding: const EdgeInsets.only(top: 38, right: 15, left: 15),
-                      child: Texts.small13Text(
-                          text: "Verify",
-                          size: size,
-                          fontWeight: FontWeight.bold,
-                          color: AppColor.btnColor),
-                    ),
+                    isVerify: isEmailVerify,
                   )
                 ],
               ),
-              if (isVerify)
-                textField(
-                  controller: otp,
+              if (isEmailVerify)
+                RegisterTextField(
+                  hint: "Email OTP",
+                  controller: emailOtp,
                   name: "Please enter the OTP received to "
                       "your email id ${emailController.text}",
                 ),
@@ -123,20 +122,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
                     child: Text("+91"),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: verify(size, () {
+                      if (mobileController.text.length == 10) {
+                        setState(() {
+                          isMobileVerify = true;
+                        });
+                      } else {
+                        commonToast(context, "PLease enter valid mobile no.");
+                      }
+                    }, pad: const EdgeInsets.only(top: 15, right: 15), isVerify: isMobileVerify),
                   )
                 ],
               ),
+              const SizedBox(height: 10),
+              if (isMobileVerify)
+                RegisterTextField(
+                  hint: "Mobile OTP",
+                  controller: mobileOtp,
+                  name: "Please enter the OTP received to "
+                      "your phone number ${mobileController.text}",
+                ),
               const SizedBox(height: 10),
               if (size.width > 330)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    textField(
+                    RegisterTextField(
                       width: size.width > 450 ? 180 : size.width * 0.3,
                       controller: cityController,
                       name: "City",
                     ),
-                    textField(
+                    RegisterTextField(
                         width: size.width > 450 ? 180 : size.width * 0.3,
                         controller: stateController,
                         name: "State",
@@ -149,11 +168,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    textField(
+                    RegisterTextField(
                       controller: cityController,
                       name: "City",
                     ),
-                    textField(
+                    RegisterTextField(
                         controller: stateController,
                         name: "State",
                         onTap: () {
@@ -226,11 +245,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         if (!_formKey.currentState!.validate()) {
                           commonToast(context, "Please fix the errors above!!");
                           return;
-                        } else if (!isVerify) {
+                        } else if (!isEmailVerify) {
                           commonToast(context, "Please verify Email");
                           return;
-                        } else if (otp.text.isEmpty) {
+                        } else if (emailOtp.text.isEmpty) {
                           commonToast(context, "Please enter otp sent to your Email");
+                          return;
+                        } else if (!isMobileVerify) {
+                          commonToast(context, "Please verify Mobile number");
+                          return;
+                        } else if (mobileOtp.text.isEmpty) {
+                          commonToast(context, "Please enter otp sent to your mobile number");
                           return;
                         }
 
@@ -268,11 +293,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-
-  OutlineInputBorder border = OutlineInputBorder(
-    borderSide: const BorderSide(width: 1, color: AppColor.primary),
-    borderRadius: BorderRadius.circular(8),
-  );
 
   _showListState(BuildContext context) {
     showDialog(
@@ -326,110 +346,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
   }
 
-  textField({
-    required TextEditingController controller,
-    String? hint,
-    required String name,
-    TextInputType? keyboard,
-    Function? onTap,
-    double? width,
-    EdgeInsets? pad,
-    String? Function(String?)? validator,
-    Function(String value)? onChange,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          name,
-          style: const TextStyle(color: Colors.black, letterSpacing: 0, fontSize: 13),
+  Widget verify(Size size, Function onTap, {EdgeInsets? pad, bool isVerify = false}) {
+    return CustomInkWell(
+      onTap: () => onTap(),
+      child: Container(
+        color: Colors.transparent,
+        padding: pad ?? const EdgeInsets.only(top: 38, right: 15, left: 15),
+        child: Texts.small13Text(
+          text: isVerify ? "Re-Verify" : "Verify",
+          size: size,
+          fontWeight: FontWeight.bold,
+          color: AppColor.btnColor,
         ),
-        const SizedBox(height: 5),
-        SizedBox(
-          width: width,
-          // height: 45,
-          child: TextFormField(
-            controller: controller,
-            onTap: () {
-              if (onTap != null) {
-                onTap();
-              }
-            },
-            onChanged: (String value) {
-              if (onChange != null) {
-                onChange(value);
-              }
-            },
-            keyboardType: keyboard ?? TextInputType.name,
-            inputFormatters: [if (name != "Email") UpperCaseTextFormatter()],
-            decoration: InputDecoration(
-              contentPadding: pad ?? const EdgeInsets.symmetric(horizontal: 15),
-              hintText: hint ?? '',
-              enabledBorder: border,
-              errorBorder: border,
-              focusedBorder: border,
-              border: border,
-            ),
-            validator: validator,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-          ),
-        ),
-        const SizedBox(height: 10),
-      ],
+      ),
     );
-  }
-
-  List<String> statesListTitles = [
-    "Maharashtra",
-    "Karnataka",
-    "Andhra Pradesh",
-    "Gujarat",
-    "Andaman and Nicobar Island (UT)",
-    "Arunachal Pradesh",
-    "Assam",
-    "Bihar",
-    "Chandigarh (UT)",
-    "Chhattisgarh",
-    "Dadra and Nagar Haveli (UT)",
-    "Daman and Diu (UT)",
-    "Delhi (NCT)",
-    "Goa",
-    "Haryana",
-    "Himachal Pradesh",
-    "Jammu and Kashmir",
-    "Jharkhand",
-    "Kerala",
-    "Lakshadweep (UT)",
-    "Madhya Pradesh",
-    "Manipur",
-    "Meghalaya",
-    "Mizoram",
-    "Nagaland",
-    "Odisha",
-    "Puducherry (UT)",
-    "Punjab",
-    "Rajasthan",
-    "Sikkim",
-    "Tamil Nadu",
-    "Telangana",
-    "Tripura",
-    "Uttar Pradesh",
-    "Uttarakhand",
-    "West Bengal"
-  ];
-}
-
-class UpperCaseTextFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    return TextEditingValue(
-      text: capitalize(newValue.text),
-      selection: newValue.selection,
-    );
-  }
-
-  String capitalize(String value) {
-    if (value.trim().isEmpty) return "";
-    return "${value[0].toUpperCase()}${value.substring(1).toLowerCase()}";
   }
 }

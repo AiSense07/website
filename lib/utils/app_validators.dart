@@ -11,13 +11,30 @@ class Validators {
   }
 
   static String? email(String? text) {
-    final RegExp regex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    final RegExp regex =
+        RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
     if (text != null) {
       final bool validEmail = regex.hasMatch(text);
       if (text.isEmpty) {
         return "Please enter your email address!";
       } else if (!validEmail) {
         return "Please enter valid email address!";
+      }
+    }
+    return null;
+  }
+
+  static String? pass(String? text) {
+    final RegExp regex =
+        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+    if (text != null) {
+      final bool validEmail = regex.hasMatch(text);
+      if (text.isEmpty) {
+        return "Please enter your password";
+      } else if (text.length < 8) {
+        return "Please enter at least 8 digit password";
+      } else if (!validEmail) {
+        return "Please enter valid password";
       }
     }
     return null;

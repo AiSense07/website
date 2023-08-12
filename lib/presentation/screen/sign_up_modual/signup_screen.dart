@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otp_timer_button/otp_timer_button.dart';
 import 'package:three_connects/presentation/screen/sign_up_modual/login_screen.dart';
-import 'package:three_connects/presentation/screen/sign_up_modual/otp_screen.dart';
+import 'package:three_connects/presentation/screen/sign_up_modual/set_pass_screen.dart';
 import 'package:three_connects/presentation/screen/sign_up_modual/register_screen.dart';
 import 'package:three_connects/presentation/widgets/common_text.dart';
 import 'package:three_connects/presentation/widgets/custom_widgets.dart';
@@ -89,63 +89,60 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ],
           ),
           ValueListenableBuilder(
-            valueListenable: isOtp,
-            builder: (context, otp,value) {
-              return Row(
-                children: [
-                  if (otp)
-                    CustomInkWell(
-                      onTap: () {
-                        setState(() {
-                          isOtp.value = false;
-                        });
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.only(right: 10),
-                        child: Icon(
-                          Icons.arrow_back_ios_new,
-                          color: AppColor.primary,
+              valueListenable: isOtp,
+              builder: (context, otp, value) {
+                return Row(
+                  children: [
+                    if (otp)
+                      CustomInkWell(
+                        onTap: () {
+                          setState(() {
+                            isOtp.value = false;
+                          });
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.only(right: 10),
+                          child: Icon(
+                            Icons.arrow_back_ios_new,
+                            color: AppColor.primary,
+                          ),
                         ),
                       ),
-                    ),
-                  if ((screen.value) != "Signup" || otp)
-                    Container(
-                      width: size.width > 450 ? 300 : size.width * 0.5,
-                      margin: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        !otp
-                            ? "Please enter mobile number to Login yourself."
-                            : "Please enter the OTP received to "
-                            "your mobile number +91 ${mobile.value}",
-                        textAlign: TextAlign.start,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: Colors.black45,
-                          letterSpacing: 0,
+                    if ((screen.value) != "Signup" || otp)
+                      Container(
+                        width: size.width > 450 ? 300 : size.width * 0.5,
+                        margin: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          !otp
+                              ? "Please enter mobile number to Login yourself."
+                              : "Please enter the 8 digit New Password to protect your account.",
+                          textAlign: TextAlign.start,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: Colors.black45,
+                            letterSpacing: 0,
+                          ),
                         ),
                       ),
-                    ),
-                ],
-              );
-            }
-          ),
+                  ],
+                );
+              }),
           const SizedBox(height: 15),
           ValueListenableBuilder(
-            valueListenable: isOtp,
-            builder: (context, value, _) {
-              return Container(
-                // height: isRegisterScreen ? 650 : 250,
-                width: 350,
-                decoration: const BoxDecoration(color: Colors.transparent),
-                child: (screen.value) == "Signup"
-                    ? value
-                        ? const OTPScreen()
-                        : const RegisterScreen(mobile: "mobile")
-                    : const LoginScreen(),
-              );
-            }
-          ),
+              valueListenable: isOtp,
+              builder: (context, value, _) {
+                return Container(
+                  // height: isRegisterScreen ? 650 : 250,
+                  width: 350,
+                  decoration: const BoxDecoration(color: Colors.transparent),
+                  child: (screen.value) == "Signup"
+                      ? value
+                          ? const SetPassScreen()
+                          : const RegisterScreen(mobile: "mobile")
+                      : const LoginScreen(),
+                );
+              }),
         ],
       ),
     );
