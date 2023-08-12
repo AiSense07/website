@@ -2,9 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/app_color.dart';
-import '../../../utils/app_validators.dart';
 import '../../../utils/helper.dart';
 import '../../widgets/custom_widgets.dart';
+import '../../widgets/text_input.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,7 +15,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController mobile = TextEditingController();
+  TextEditingController pass = TextEditingController();
   bool isMobileValid = false;
+  bool passHide = false;
 
   bool agreeCheckboxValue = false;
 
@@ -27,42 +29,31 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         textField(
           controller: mobile,
-          name: "mobile/email",
+          name: "Mobile/Email",
+          hint: "Please enter mobile no or email",
         ),
-        const Text(
-          "Please enter mobile no / email",
-          style: TextStyle(
-            color: Colors.black,
-            letterSpacing: 0,
-          ),
-        ),
-        const SizedBox(height: 5),
-        SizedBox(
-          height: 45,
-          child: TextFormField(
-            controller: mobile,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-              hintText: 'mobile/email',
-              counterText: '',
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 1, color: AppColor.primary),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 1, color: AppColor.primary),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 1, color: AppColor.primary),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              border: OutlineInputBorder(
-                borderSide: const BorderSide(width: 1, color: AppColor.primary),
-                borderRadius: BorderRadius.circular(8),
-              ),
+        Stack(
+          alignment: Alignment.topRight,
+          children: [
+            RegisterTextField(
+              isEmail: true,
+              controller: pass,
+              name: "Password",
+              obscureText: passHide,
+              hint: "Enter your password",
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(top: 28, right: 10),
+              child: IconButton(
+                onPressed: () {
+                  setState(() {
+                    passHide = !passHide;
+                  });
+                },
+                icon: Icon(passHide ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
+              ),
+            )
+          ],
         ),
         const SizedBox(height: 20),
         Row(

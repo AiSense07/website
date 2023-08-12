@@ -114,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         margin: const EdgeInsets.only(top: 10),
                         child: Text(
                           !otp
-                              ? "Please enter mobile number to Login yourself."
+                              ? "Please enter mobile number or email to Login yourself."
                               : "Please enter the 8 digit New Password to protect your account.",
                           textAlign: TextAlign.start,
                           style: const TextStyle(
@@ -133,7 +133,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               valueListenable: isOtp,
               builder: (context, value, _) {
                 return Container(
-                  // height: isRegisterScreen ? 650 : 250,
                   width: 350,
                   decoration: const BoxDecoration(color: Colors.transparent),
                   child: (screen.value) == "Signup"
