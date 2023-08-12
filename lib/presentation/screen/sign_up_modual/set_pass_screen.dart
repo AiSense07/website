@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otp_timer_button/otp_timer_button.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:three_connects/presentation/widgets/text_input.dart';
 import 'package:three_connects/utils/app_validators.dart';
-
 import '../../../utils/app_color.dart';
 import '../../../utils/helper.dart';
 import '../../widgets/custom_btn.dart';
@@ -36,51 +34,35 @@ class _SetPassScreenState extends State<SetPassScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Stack(
-          alignment: Alignment.topRight,
-          children: [
-            RegisterTextField(
-              controller: passController,
-              name: "New Password",
-              obscureText: passHide,
-              isEmail: true,
-              hint: "Enter 8 digit new password",
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 28, right: 10),
-              child: IconButton(
-                onPressed: () {
-                  setState(() {
-                    passHide = !passHide;
-                  });
-                },
-                icon: Icon(passHide ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
-              ),
-            )
-          ],
+        RegisterTextField(
+          controller: passController,
+          name: "New Password",
+          obscureText: passHide,
+          isEmail: true,
+          hint: "Enter 8 digit new password",
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                passHide = !passHide;
+              });
+            },
+            icon: Icon(passHide ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
+          ),
         ),
-        Stack(
-          alignment: Alignment.topRight,
-          children: [
-            RegisterTextField(
-              isEmail: true,
-              controller: rePassController,
-              name: "Confirm Password",
-              obscureText: rePassHide,
-              hint: "Re-enter your password",
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 28, right: 10),
-              child: IconButton(
-                onPressed: () {
-                  setState(() {
-                    rePassHide = !rePassHide;
-                  });
-                },
-                icon: Icon(rePassHide ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
-              ),
-            )
-          ],
+        RegisterTextField(
+          isEmail: true,
+          controller: rePassController,
+          name: "Confirm Password",
+          obscureText: rePassHide,
+          hint: "Re-enter your password",
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                rePassHide = !rePassHide;
+              });
+            },
+            icon: Icon(rePassHide ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
+          ),
         ),
         const SizedBox(height: 35),
         CustomBtn(

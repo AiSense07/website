@@ -78,6 +78,7 @@ class RegisterTextField extends StatelessWidget {
   final EdgeInsets? pad;
   final String? Function(String?)? validator;
   final Function(String value)? onChange;
+  final Widget? suffixIcon;
 
   const RegisterTextField({
     Key? key,
@@ -92,6 +93,7 @@ class RegisterTextField extends StatelessWidget {
     this.onChange,
     this.obscureText = false,
     this.isEmail = false,
+    this.suffixIcon,
   }) : super(key: key);
 
   @override
@@ -122,6 +124,7 @@ class RegisterTextField extends StatelessWidget {
             keyboardType: keyboard ?? TextInputType.name,
             inputFormatters: [if (!isEmail) UpperCaseTextFormatter()],
             decoration: InputDecoration(
+              suffixIcon: suffixIcon,
               contentPadding: pad ?? const EdgeInsets.symmetric(horizontal: 15),
               hintText: hint ?? '',
               enabledBorder: border,

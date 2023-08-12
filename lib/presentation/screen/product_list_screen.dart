@@ -1,8 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-
-import 'package:number_paginator/number_paginator.dart';
 import 'package:three_connects/presentation/widgets/enddrawer.dart';
 import 'package:three_connects/presentation/widgets/filter_container.dart';
 import 'package:three_connects/presentation/widgets/footer.dart';
@@ -10,7 +8,7 @@ import 'package:three_connects/presentation/widgets/product_container.dart';
 import 'package:three_connects/utils/app_color.dart';
 import '../widgets/appbar.dart';
 import '../widgets/custom_widgets.dart';
-import 'cart_modual/cart_screen.dart';
+import '../widgets/pagination.dart';
 
 class ProductList extends StatefulWidget {
   final String path;
@@ -23,14 +21,15 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
   String dropDown = "Relevance";
-  final NumberPaginatorController _controller = NumberPaginatorController();
+
+  // final NumberPaginatorController _controller = NumberPaginatorController();
 
   int initial = 1;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    log("==>>>> ${size.width}");
+    // log("==>>>> ${size.width}");
     return Scaffold(
       endDrawer: const EndDrawer(),
       body: ListView(
@@ -42,6 +41,28 @@ class _ProductListState extends State<ProductList> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
+                NumberPaginators(
+                  // by default, the paginator shows numbers as center content
+                  numberPages: 10,
+                  onPageChange: (int index) {
+                    setState(() {});
+                  },
+                  // initially selected index
+                  initialPage: 4,
+                  config: NumberPaginatorUIConfig(
+                    contentPadding: EdgeInsets.zero,
+                    mode: ContentDisplayMode.numbers,
+                    // default height is 48
+                    height: 40,
+                    // buttonShape: BeveledRectangleBorder(
+                    //   borderRadius: BorderRadius.circular(8),
+                    // ),
+                    buttonSelectedForegroundColor: Colors.yellow,
+                    buttonUnselectedForegroundColor: Colors.white,
+                    buttonUnselectedBackgroundColor: Colors.grey,
+                    buttonSelectedBackgroundColor: Colors.blueGrey,
+                  ),
+                ),
                 SizedBox(
                   width: contentSize(size, 1250, size.width),
                   child: Row(
@@ -68,7 +89,7 @@ class _ProductListState extends State<ProductList> {
                             if (size.width < 1000)
                               Text(
                                 "${widget.path}: 150 products",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
                                   fontSize: 15,
@@ -82,7 +103,7 @@ class _ProductListState extends State<ProductList> {
                                 if (size.width > 1000)
                                   Text(
                                     "${widget.path}: 150 products",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                       color: Colors.black,
                                       fontSize: 15,
@@ -109,10 +130,9 @@ class _ProductListState extends State<ProductList> {
                                           const Icon(Icons.filter_list_rounded, size: 18),
                                           if (size.width > 310) const SizedBox(width: 5),
                                           if (size.width > 310)
-                                            Text(
+                                            const Text(
                                               "Filter",
-                                              style:
-                                                  TextStyle(color: Colors.black, fontSize: 12),
+                                              style: TextStyle(color: Colors.black, fontSize: 12),
                                             ),
                                         ],
                                       ),
@@ -122,7 +142,7 @@ class _ProductListState extends State<ProductList> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     if (size.width > 310)
-                                      Text(
+                                      const Text(
                                         "Sort by ",
                                         style: TextStyle(color: Colors.black, fontSize: 12),
                                       ),
@@ -133,8 +153,7 @@ class _ProductListState extends State<ProductList> {
                                         border: Border.all(color: AppColor.primary),
                                       ),
                                       child: DropdownButton(
-                                          style: const TextStyle(
-                                              fontSize: 13, color: Colors.black),
+                                          style: const TextStyle(fontSize: 13, color: Colors.black),
                                           underline: const SizedBox(),
                                           value: dropDown,
                                           isDense: false,
@@ -177,22 +196,22 @@ class _ProductListState extends State<ProductList> {
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: size.width > 620
                                     ? 3
-                                    : size.width > 350
+                                    : size.width > 320
                                         ? 2
                                         : 1,
                                 childAspectRatio: size.width > 1250
-                                    ? 0.65
+                                    ? 0.58
                                     : size.width > 1150
-                                        ? size.width * 0.00053
+                                        ? size.width * 0.00048
                                         : size.width > 1000
-                                            ? size.width * 0.000505
+                                            ? size.width * 0.00045
                                             : size.width > 620
-                                                ? size.width * 0.00068
+                                                ? size.width * 0.0006
                                                 : size.width > 500
-                                                    ? size.width * 0.001
-                                                    : size.width > 350
-                                                        ? size.width * 0.0014
-                                                        : size.width * 0.0025,
+                                                    ? size.width * 0.0009
+                                                    : size.width > 320
+                                                        ? size.width * 0.0012
+                                                        : size.width * 0.0022,
                               ),
                               itemBuilder: (context, index) {
                                 return ProductContainer(index: index, path: widget.path);
@@ -205,16 +224,21 @@ class _ProductListState extends State<ProductList> {
                               width: contentSize(size, 900,
                                   size.width > 1000 ? size.width - 230 : size.width - 30),
                             ),
-                            NumberPaginator(
-                              numberPages: (150 / 12).round(),
-                              controller: _controller,
-                              initialPage: initial,
-                              onPageChange: (int index) {
-                                setState(() {
-                                  initial = index;
-                                });
-                              },
-                            ),
+                            SizedBox(
+                              height: 50,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: 13,
+                                scrollDirection: Axis.horizontal,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CircleAvatar(child: Text(index.toString())),
+                                  );
+                                },
+                              ),
+                            )
                           ],
                         ),
                       ),

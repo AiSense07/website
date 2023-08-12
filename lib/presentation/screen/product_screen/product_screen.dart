@@ -177,7 +177,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 15,bottom: 15),
                       width: contentSize(size, 1250, size.width),
                       alignment: Alignment.topLeft,
                       child: Texts.big26Text(

@@ -32,28 +32,20 @@ class _LoginScreenState extends State<LoginScreen> {
           name: "Mobile/Email",
           hint: "Please enter mobile no or email",
         ),
-        Stack(
-          alignment: Alignment.topRight,
-          children: [
-            RegisterTextField(
-              isEmail: true,
-              controller: pass,
-              name: "Password",
-              obscureText: passHide,
-              hint: "Enter your password",
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 28, right: 10),
-              child: IconButton(
-                onPressed: () {
-                  setState(() {
-                    passHide = !passHide;
-                  });
-                },
-                icon: Icon(passHide ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
-              ),
-            )
-          ],
+        RegisterTextField(
+          isEmail: true,
+          controller: pass,
+          name: "Password",
+          obscureText: passHide,
+          hint: "Enter your password",
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                passHide = !passHide;
+              });
+            },
+            icon: Icon(passHide ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
+          ),
         ),
         const SizedBox(height: 20),
         Row(

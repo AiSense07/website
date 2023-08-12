@@ -59,7 +59,7 @@ class _FooterBoardState extends State<FooterBoard> {
             children: [
               Container(
                 width: size.width,
-                margin: const EdgeInsets.only(top: 25,bottom: 20),
+                margin: const EdgeInsets.only(top: 25, bottom: 20),
                 padding: EdgeInsets.symmetric(
                   horizontal: contentSize(
                       size, (size.width - 1250) / 2, sizes(size, 25, size.width > 450 ? 30 : 10)),
@@ -70,23 +70,28 @@ class _FooterBoardState extends State<FooterBoard> {
                   children: [
                     if (size.width > 450)
                       CircleAvatar(
-                        radius: sizes(size, 50, 30),
+                        radius: size.width > 832 ? 50 : 30,
                         backgroundColor: Colors.white,
                         child: Image.asset(
                           AppImage.email,
-                          width: sizes(size, 60, 30),
+                          width: size.width > 832 ? 60 : 30,
                         ),
                       ),
                     if (size.width > 450) SizedBox(width: sizes(size, 30, 15)),
                     SizedBox(
-                      width:
-                      sizes(size, 500, size.width > 450 ? size.width - 135 : size.width - 25),
+                      width: size.width > 832
+                          ? 500
+                          : size.width > 650
+                              ? 400
+                              : size.width > 450
+                                  ? 300
+                                  : size.width - 60,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
                             "Subscribe now to stay informed and updated "
-                                "about exclusive offers and new products.",
+                            "about exclusive offers and new products.",
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
@@ -104,8 +109,13 @@ class _FooterBoardState extends State<FooterBoard> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 SizedBox(
-                                    width: sizes(size, 400,
-                                        size.width > 450 ? size.width - 250 : size.width - 70),
+                                    width: size.width > 832
+                                        ? 400
+                                        : size.width > 650
+                                            ? 300
+                                            : size.width > 450
+                                                ? 200
+                                                : size.width - 120,
                                     height: 50,
                                     child: TextField(
                                       controller: controller,
@@ -115,7 +125,7 @@ class _FooterBoardState extends State<FooterBoard> {
                                         hintStyle: TextStyle(color: Colors.white),
                                         isDense: true,
                                         contentPadding:
-                                        EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                                       ),
                                     )),
                                 Container(
@@ -160,11 +170,12 @@ class _FooterBoardState extends State<FooterBoard> {
               const SizedBox(height: 15),
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: responsiveBoolean(constraints, context)
-                        ? 20
-                        : constraints.maxWidth <= 900
-                            ? 50
-                            : MediaQuery.of(context).size.width * 0.1),
+                  horizontal: responsiveBoolean(constraints, context)
+                      ? 20
+                      : constraints.maxWidth <= 900
+                          ? 50
+                          : MediaQuery.of(context).size.width * 0.1,
+                ),
                 child: Text(
                   "We take pride in offering"
                   " a wide range of top-notch 3D printer parts, "
@@ -182,43 +193,9 @@ class _FooterBoardState extends State<FooterBoard> {
                 ),
               ),
               const SizedBox(height: 30),
-              /*  Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      // html.window.open("https://apps.apple.com/us/app/makeupcentral/id1640697780", "_blank");
-                    },
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      child: Container(
-                        height: 50,
-                        width: 140,
-                        color: Colors.black,
-                        child: Image.asset("assets/social/app.png"),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 27),
-                  InkWell(
-                    onTap: () {},
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      child: Container(
-                        height: 50,
-                        width: 140,
-                        color: Colors.black,
-                        child: Image.asset("assets/social/playstore.png"),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),*/
               widget.isHideFooter == true
                   ? const SizedBox(height: 1)
-                  : Container(height: 1.5, color: Color(0xFFEADACE)),
+                  : Container(height: 1.5, color: const Color(0xFFEADACE)),
               widget.isHideFooter == true ? const SizedBox(height: 1) : const SizedBox(height: 30),
               widget.isHideFooter == true
                   ? const SizedBox(height: 1)
