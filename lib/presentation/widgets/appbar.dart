@@ -110,7 +110,11 @@ class _CommonAppbarState extends State<CommonAppbar> {
   Widget textButton({required String page, required String text}) {
     return InkWell(
       onTap: () {
-        context.beamToNamed("/$page");
+        if (page == "/") {
+          context.beamToNamed("/$page");
+        } else {
+          context.beamToNamed("/$page?page=0");
+        }
       },
       onHover: (value) {
         if (value) {

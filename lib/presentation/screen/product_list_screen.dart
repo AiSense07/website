@@ -1,19 +1,24 @@
 import 'dart:developer';
 
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:three_connects/presentation/widgets/enddrawer.dart';
 import 'package:three_connects/presentation/widgets/filter_container.dart';
 import 'package:three_connects/presentation/widgets/footer.dart';
 import 'package:three_connects/presentation/widgets/product_container.dart';
 import 'package:three_connects/utils/app_color.dart';
+import 'package:three_connects/utils/helper.dart';
+import '../../utils/navigation_string.dart';
 import '../widgets/appbar.dart';
 import '../widgets/custom_widgets.dart';
 import '../widgets/pagination.dart';
 
 class ProductList extends StatefulWidget {
   final String path;
+  final String? cat;
+  final int? page;
 
-  const ProductList({Key? key, required this.path}) : super(key: key);
+  const ProductList({Key? key, required this.path, this.cat, this.page}) : super(key: key);
 
   @override
   State<ProductList> createState() => _ProductListState();
@@ -22,14 +27,12 @@ class ProductList extends StatefulWidget {
 class _ProductListState extends State<ProductList> {
   String dropDown = "Relevance";
 
-  // final NumberPaginatorController _controller = NumberPaginatorController();
-
   int initial = 1;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    // log("==>>>> ${size.width}");
+    log("message ${size.width}");
     return Scaffold(
       endDrawer: const EndDrawer(),
       body: ListView(
@@ -41,28 +44,6 @@ class _ProductListState extends State<ProductList> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                NumberPaginators(
-                  // by default, the paginator shows numbers as center content
-                  numberPages: 10,
-                  onPageChange: (int index) {
-                    setState(() {});
-                  },
-                  // initially selected index
-                  initialPage: 4,
-                  config: NumberPaginatorUIConfig(
-                    contentPadding: EdgeInsets.zero,
-                    mode: ContentDisplayMode.numbers,
-                    // default height is 48
-                    height: 40,
-                    // buttonShape: BeveledRectangleBorder(
-                    //   borderRadius: BorderRadius.circular(8),
-                    // ),
-                    buttonSelectedForegroundColor: Colors.yellow,
-                    buttonUnselectedForegroundColor: Colors.white,
-                    buttonUnselectedBackgroundColor: Colors.grey,
-                    buttonSelectedBackgroundColor: Colors.blueGrey,
-                  ),
-                ),
                 SizedBox(
                   width: contentSize(size, 1250, size.width),
                   child: Row(
@@ -86,6 +67,37 @@ class _ProductListState extends State<ProductList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            GridView.builder(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              itemCount:  spareCat.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: size.width > 950 ? 6 : 5,
+                                crossAxisSpacing: size.width > 950 ? 10 : 5,
+                                mainAxisSpacing: size.width > 950 ? 10 : 5,
+                                childAspectRatio: 0.68
+                              ),
+                              itemBuilder: (context, index) {
+                                return CustomInkWell(
+                                  onTap: (){},
+                                  child: Column(
+                                    children: [
+                                      Image.asset(spareCat[index]['img']??"") ,
+                                      Text(
+                                        spareCat[index]['name']??"",
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
                             if (size.width < 1000)
                               Text(
                                 "${widget.path}: 150 products",
@@ -100,6 +112,7 @@ class _ProductListState extends State<ProductList> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
                               children: [
+
                                 if (size.width > 1000)
                                   Text(
                                     "${widget.path}: 150 products",
@@ -224,21 +237,24 @@ class _ProductListState extends State<ProductList> {
                               width: contentSize(size, 900,
                                   size.width > 1000 ? size.width - 230 : size.width - 30),
                             ),
-                            SizedBox(
-                              height: 50,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: 13,
-                                scrollDirection: Axis.horizontal,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: CircleAvatar(child: Text(index.toString())),
-                                  );
-                                },
+                            NumberPaginators(
+                              numberPages: 10,
+                              onPageChange: (int index) {
+                                context
+                                    .beamToNamed("/${Routes.parts}?id=${widget.cat}&page=$index");
+                              },
+                              // initially selected index
+                              initialPage: widget.page ?? 0,
+                              config: const NumberPaginatorUIConfig(
+                                contentPadding: EdgeInsets.zero,
+                                mode: ContentDisplayMode.numbers,
+                                height: 40,
+                                buttonSelectedForegroundColor: Colors.white,
+                                buttonUnselectedForegroundColor: Colors.black,
+                                buttonUnselectedBackgroundColor: Colors.transparent,
+                                buttonSelectedBackgroundColor: AppColor.primary,
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),

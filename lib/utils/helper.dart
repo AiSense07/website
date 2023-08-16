@@ -242,3 +242,85 @@ List<String> statesListTitles = [
   "Uttarakhand",
   "West Bengal"
 ];
+
+List<Map<String, String>> spareCat = [
+  {
+    "name": "Belt & Pulley",
+    "img": "assets/spare/belt.png",
+  },
+  {
+    "name": "Extruder",
+    "img": "assets/spare/extruders.png",
+  },
+  {
+    "name": "Fan",
+    "img": "assets/spare/fan.png",
+  },
+  {
+    "name": "Flex Plates & Stickers",
+    "img": "assets/spare/bed.png",
+  },
+  {
+    "name": "Hotend",
+    "img": "assets/spare/hotend.png",
+  },
+  {
+    "name": "Motherboard & Driver",
+    "img": "assets/spare/motherboard.png",
+  },
+  {
+    "name": "Nozzle",
+    "img": "assets/spare/nozzel.png",
+  },
+  {
+    "name": "Stepper Motors",
+    "img": "assets/spare/motor.png",
+  },
+];
+
+List<Map<String, String>> modelCat = [
+  {
+    "name": "3D Printing",
+    "img": "",
+  },
+  {
+    "name": "Art",
+    "img": "",
+  },
+  {
+    "name": "Fashion",
+    "img": "",
+  },
+  {
+    "name": "Gadgets",
+    "img": "",
+  },
+  {
+    "name": "Household",
+    "img": "",
+  },
+  {
+    "name": "Learning",
+    "img": "",
+  },
+  {
+    "name": "Tools",
+    "img": "",
+  },
+  {
+    "name": "Toys & games",
+    "img": "",
+  },
+  {
+    "name": "Jewelry",
+    "img": "",
+  },
+  {
+    "name": "Architecture",
+    "img": "",
+  },
+  {
+    "name": "Other",
+    "img": "",
+  },
+];

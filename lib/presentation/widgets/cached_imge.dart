@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:three_connects/utils/app_image.dart';
 
 import 'loader/image_loader.dart';
 
@@ -20,7 +21,12 @@ class CacheImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return CachedNetworkImage(
+    return Image.asset(
+      AppImage.email,
+      height: height,
+      width: width,
+      fit: BoxFit.cover,
+    )/*CachedNetworkImage(
       imageUrl: img,
       height: height,
       width: width,
@@ -35,6 +41,6 @@ class CacheImage extends StatelessWidget {
           const Icon(
             Icons.image_not_supported_outlined,
           ),
-    );
+    )*/;
   }
 }

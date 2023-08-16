@@ -5,6 +5,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 void main() {
   setPathUrlStrategy();
+  // Beamer.setPathUrlStrategy();
   runApp(const MyApp());
 }
 

@@ -1,7 +1,9 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
 
 import '../../utils/app_color.dart';
+import '../../utils/navigation_string.dart';
 
 class FilterContainer extends StatefulWidget {
   const FilterContainer({Key? key}) : super(key: key);
@@ -49,7 +51,9 @@ class _FilterContainerState extends State<FilterContainer> {
                     hoverColor: Colors.transparent,
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () {},
+                    onTap: () {
+                      context.beamToNamed("/${Routes.parts}?id=$index&page=0");
+                    },
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 5),
                       child: Row(

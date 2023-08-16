@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:three_connects/presentation/widgets/custom_widgets.dart';
+import 'package:three_connects/utils/app_color.dart';
 
 enum ContentDisplayMode {
   hidden,
@@ -122,40 +124,44 @@ class NumberPaginatorsState extends State<NumberPaginators> {
         child: Row(
           mainAxisAlignment: widget.config.mainAxisAlignment,
           children: [
-            GestureDetector(
-              onTap: () {
+            icon(
+              () {
                 _controller.navigateToPage(0);
               },
-              child: const CircleAvatar(
-                radius: 15,
-                child: Icon(Icons.keyboard_double_arrow_left),
-              ),
+              Icons.keyboard_double_arrow_left,
             ),
-            GestureDetector(
-              onTap: _controller.currentPage > 0 ? _controller.prev : null,
-              child: const CircleAvatar(
-                radius: 15,
-                child: Icon(Icons.chevron_left),
-              ),
+            icon(
+              _controller.currentPage > 0 ? _controller.prev : () {},
+              Icons.chevron_left,
             ),
+            const SizedBox(width: 10),
             ..._buildCenterContent(),
-            GestureDetector(
-              onTap: _controller.currentPage < widget.numberPages - 1 ? _controller.next : null,
-              child: const CircleAvatar(
-                radius: 15,
-                child: Icon(Icons.chevron_right),
-              ),
+            const SizedBox(width: 10),
+            icon(
+              _controller.currentPage < widget.numberPages - 1 ? _controller.next : () {},
+              Icons.chevron_right,
             ),
-            GestureDetector(
-              onTap: () {
+            icon(
+              () {
                 _controller.navigateToPage(widget.numberPages - 1);
               },
-              child: const CircleAvatar(
-                radius: 15,
-                child: Icon(Icons.keyboard_double_arrow_right),
-              ),
+              Icons.keyboard_double_arrow_right_rounded,
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget icon(Function() onTap, IconData icon) {
+    return CustomInkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: CircleAvatar(
+          backgroundColor: AppColor.btnColor,
+          radius: 15,
+          child: Icon(icon, size: 18, color: Colors.white),
         ),
       ),
     );
@@ -281,30 +287,22 @@ class NumberContent extends StatelessWidget {
   Widget _buildPageButton(BuildContext context, int index) => PaginatorButton(
         onPressed: () => InheritedNumberPaginator.of(context).onPageChange?.call(index),
         selected: _selected(index),
-        child: AutoSizeText((index + 1).toString(), maxLines: 1, minFontSize: 6),
-      );
-
-  Widget _buildDots(BuildContext context) => AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          // padding: const EdgeInsets.all(4.0),
-          margin: const EdgeInsets.all(8.0),
-          alignment: Alignment.bottomCenter,
-          decoration: ShapeDecoration(
-            shape: InheritedNumberPaginator.of(context).config.buttonShape ?? const CircleBorder(),
-            color: InheritedNumberPaginator.of(context).config.buttonUnselectedBackgroundColor,
-          ),
-          child: AutoSizeText(
-            "...",
-            style: TextStyle(
-              color: InheritedNumberPaginator.of(context).config.buttonUnselectedForegroundColor ??
-                  Theme.of(context).colorScheme.secondary,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+        child: Text(
+          (index + 1).toString(),
+          maxLines: 1,
+          style: TextStyle(
+            fontSize: 13,
+            color: _foregroundColor(
+              context,
+              _selected(index),
             ),
           ),
         ),
       );
+
+  Color? _foregroundColor(BuildContext context, bool selected) => selected
+      ? (InheritedNumberPaginator.of(context).config.buttonSelectedForegroundColor ?? Colors.white)
+      : InheritedNumberPaginator.of(context).config.buttonUnselectedForegroundColor;
 
   /// Checks if pages don't fit in available spots and dots have to be shown.
   bool _backDotsShouldShow(BuildContext context, int availableSpots) =>
@@ -314,51 +312,6 @@ class NumberContent extends StatelessWidget {
   bool _frontDotsShouldShow(BuildContext context, int availableSpots) =>
       availableSpots < InheritedNumberPaginator.of(context).numberPages &&
       currentPage > availableSpots ~/ 2 - 1;
-
-  /// Checks if the given index is currently selected.
-  bool _selected(index) => index == currentPage;
-}
-
-class DropDownContent extends StatelessWidget {
-  final int currentPage;
-
-  const DropDownContent({
-    Key? key,
-    required this.currentPage,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButton<int>(
-      isExpanded: true,
-      value: currentPage,
-      selectedItemBuilder: (context) => List.generate(
-        InheritedNumberPaginator.of(context).numberPages,
-        (index) => DropdownMenuItem(
-          value: index,
-          child: Text(
-            (index + 1).toString(),
-          ),
-        ),
-      ),
-      items: List.generate(
-        InheritedNumberPaginator.of(context).numberPages,
-        (index) => DropdownMenuItem(
-          value: index,
-          child: Text(
-            (index + 1).toString(),
-            style: TextStyle(
-              color: _selected(index)
-                  ? InheritedNumberPaginator.of(context).config.buttonSelectedBackgroundColor ??
-                      Theme.of(context).colorScheme.secondary
-                  : null,
-            ),
-          ),
-        ),
-      ),
-      onChanged: (index) => InheritedNumberPaginator.of(context).onPageChange?.call(index ?? 0),
-    );
-  }
 
   /// Checks if the given index is currently selected.
   bool _selected(index) => index == currentPage;
@@ -384,31 +337,26 @@ class PaginatorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: TextButton(
-          onPressed: onPressed,
-          style: TextButton.styleFrom(
-            shape: InheritedNumberPaginator.of(context).config.buttonShape ?? const CircleBorder(),
+    return Padding(
+        padding: const EdgeInsets.all(0),
+        child: CustomInkWell(
+          onTap: (){
+            if(onPressed != null) {
+              onPressed!();
+            }
+          },
+          child: CircleAvatar(
+            radius: 15,
             backgroundColor: _backgroundColor(context, selected),
-            foregroundColor: _foregroundColor(context, selected),
+            child: child,
           ),
-          child: child,
-        ),
-      ),
-    );
+        ));
   }
 
   Color? _backgroundColor(BuildContext context, bool selected) => selected
       ? (InheritedNumberPaginator.of(context).config.buttonSelectedBackgroundColor ??
           Theme.of(context).colorScheme.secondary)
       : InheritedNumberPaginator.of(context).config.buttonUnselectedBackgroundColor;
-
-  Color? _foregroundColor(BuildContext context, bool selected) => selected
-      ? (InheritedNumberPaginator.of(context).config.buttonSelectedForegroundColor ?? Colors.white)
-      : InheritedNumberPaginator.of(context).config.buttonUnselectedForegroundColor;
 }
 
 class InheritedNumberPaginator extends InheritedWidget {

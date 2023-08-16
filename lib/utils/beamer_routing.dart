@@ -27,17 +27,23 @@ final routerDelegate = BeamerDelegate(
             Routes.filament,
             const ProductList(path: Routes.filament),
           ),
-      '/${Routes.parts}': (context, state, data) => beamPage(
-            Routes.parts,
-            const ProductList(path: Routes.parts),
+      '/${Routes.parts}?id=id&page=no': (context, state, data) {
+        return beamPage(
+          'category-${state.queryParameters['id']}-${state.queryParameters['page']}',
+          ProductList(
+            path: Routes.parts,
+            cat: state.queryParameters['id'],
+            page: int.parse(state.queryParameters['page'] ?? "0"),
           ),
+        );
+      },
       '/${Routes.design}': (context, state, data) => beamPage(
             Routes.design,
             const ProductList(path: Routes.design),
           ),
       '/Home?product=id': (context, state, data) => beamPage(
-            Routes.product,
-            ProductScreen(productId: state.queryParameters['product']!),
+            "${Routes.product}-${state.queryParameters['product']}",
+            ProductScreen(productId: state.queryParameters['product'] ?? ""),
           ),
       '/${Routes.address}': (context, state, data) => beamPage(
             Routes.address,
