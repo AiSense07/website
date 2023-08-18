@@ -26,7 +26,7 @@ class CacheImage extends StatelessWidget {
       height: height,
       width: width,
       fit: BoxFit.cover,
-    )/*CachedNetworkImage(
+    );CachedNetworkImage(
       imageUrl: img,
       height: height,
       width: width,
@@ -41,6 +41,6 @@ class CacheImage extends StatelessWidget {
           const Icon(
             Icons.image_not_supported_outlined,
           ),
-    )*/;
+    );
   }
 }

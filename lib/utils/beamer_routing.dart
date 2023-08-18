@@ -27,13 +27,15 @@ final routerDelegate = BeamerDelegate(
             Routes.filament,
             const ProductList(path: Routes.filament),
           ),
-      '/${Routes.parts}?id=id&page=no': (context, state, data) {
+      '/3d-printed-parts?category=cat&subcategory=subcat&manufacture=man&page=no':
+          (context, state, _) {
+        Map<String, dynamic> data = state.queryParameters;
         return beamPage(
-          'category-${state.queryParameters['id']}-${state.queryParameters['page']}',
+          'category-${data['subcategory']}-${data['page']}',
           ProductList(
             path: Routes.parts,
-            cat: state.queryParameters['id'],
-            page: int.parse(state.queryParameters['page'] ?? "0"),
+            cat: data['id'],
+            page: int.parse(data['page'] ?? "0"),
           ),
         );
       },
@@ -75,7 +77,7 @@ BeamPage beamPage(String path, Widget page) {
         Routes.filament,
         ProductScreen(productId: state.queryParameters['product'] ?? ""),
       ),
-      '/${Routes.parts}?product=id': (context, state, data) => beamPage(
+      '/3d-printed-parts?product=id': (context, state, data) => beamPage(
         Routes.parts,
         ProductScreen(productId: state.queryParameters['product'] ?? ""),
       ),

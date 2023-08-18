@@ -52,7 +52,7 @@ class _FilterContainerState extends State<FilterContainer> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () {
-                      context.beamToNamed("/${Routes.parts}?id=$index&page=0");
+                      context.beamToNamed("/3d-printed-parts?subcategory=$index&page=0");
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 5),

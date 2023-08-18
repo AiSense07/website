@@ -97,7 +97,7 @@ class _CommonAppbarState extends State<CommonAppbar> {
             scrollDirection: Axis.horizontal,
             children: [
               textButton(page: "/", text: "Home"),
-              textButton(page: Routes.parts, text: "3D Printed Part"),
+              textButton(page: "3d-printed-parts", text: "3D Printed Part"),
               textButton(page: Routes.design, text: "3D Model"),
               textButton(page: Routes.spare, text: "Spares"),
             ],
@@ -106,7 +106,6 @@ class _CommonAppbarState extends State<CommonAppbar> {
       ],
     );
   }
-
   Widget textButton({required String page, required String text}) {
     return InkWell(
       onTap: () {

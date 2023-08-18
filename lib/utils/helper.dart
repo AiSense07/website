@@ -257,7 +257,7 @@ List<Map<String, String>> spareCat = [
     "img": "assets/spare/fan.png",
   },
   {
-    "name": "Flex Plates & Stickers",
+    "name": "Build Surfaces",
     "img": "assets/spare/bed.png",
   },
   {
